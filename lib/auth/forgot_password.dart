@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:monopoli/onboard/carousal.dart';
+import 'package:monopoli/onboard/getStarted.dart';
 import '../theme/colors.dart';
 import '../theme/text_style.dart';
 import '../widgets/button/formbutton.dart';
@@ -91,7 +93,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   height: 30,
                 ),
                 GestureDetector(
-                  onTap: () => Navigator.pop(context),
+                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (_)=> GetStarted())),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

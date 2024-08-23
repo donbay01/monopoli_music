@@ -57,7 +57,7 @@ class _OnboardingCarouselState extends State<OnboardingCarousel> {
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.transparent,
-                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 100),
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 130),
                   shape: BeveledRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                       side: BorderSide(

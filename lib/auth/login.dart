@@ -44,16 +44,15 @@ class _LoginState extends State<Login> {
       child: Material(
         child: Container(
           decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/email.png')
-              )
-          ),
+              image: DecorationImage(image: AssetImage('assets/email.png'))),
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  SizedBox(height: 30,),
+                  SizedBox(
+                    height: 30,
+                  ),
                   Container(
                     height: MediaQuery.of(context).size.height * 0.1,
                     width: MediaQuery.of(context).size.width * 0.5,
@@ -61,12 +60,16 @@ class _LoginState extends State<Login> {
                       image: AssetImage('assets/appLogo.png'),
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Container(
                       height: MediaQuery.of(context).size.height * 0.2,
                       width: MediaQuery.of(context).size.width,
                       child: Image(image: AssetImage('assets/login.png'))),
-                  SizedBox(height: 70,),
+                  SizedBox(
+                    height: 70,
+                  ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -79,14 +82,14 @@ class _LoginState extends State<Login> {
                     prefixIcon: Icon(Icons.email_outlined),
                     suffixIcon: emailController.text.isEmpty
                         ? Container(
-                      width: 0,
-                    )
+                            width: 0,
+                          )
                         : IconButton(
-                      icon: const Icon(Icons.close),
-                      onPressed: () {
-                        emailController.clear();
-                      },
-                    ),
+                            icon: const Icon(Icons.close),
+                            onPressed: () {
+                              emailController.clear();
+                            },
+                          ),
                   ),
                   const SizedBox(
                     height: 20,
@@ -124,7 +127,6 @@ class _LoginState extends State<Login> {
                   const SizedBox(
                     height: 10,
                   ),
-
                   CustomButton(
                     function: () {
                       // Navigator.push(context, MaterialPageRoute(builder: (_)=> Homepage()));
@@ -145,8 +147,8 @@ class _LoginState extends State<Login> {
                         style: smallText(primaryWhite),
                       ),
                       TextButton(
-                        onPressed: () => Navigator.push(
-                            context, MaterialPageRoute(builder: (_) => Register())),
+                        onPressed: () => Navigator.push(context,
+                            MaterialPageRoute(builder: (_) => Register())),
                         child: Text(
                           'Register',
                           style: medium(),
