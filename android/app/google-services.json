@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "497042674110",
+    "project_id": "monopoli-music",
+    "storage_bucket": "monopoli-music.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:497042674110:android:3fd44899e049f0d2a5e9ef",
+        "android_client_info": {
+          "package_name": "com.monopolimusic.monopoliMusic"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "497042674110-mugjo9a11t7n22i3j2dff4g4tdkp6i82.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.monopolimusic.monopoliMusic",
+            "certificate_hash": "aa6dee3f9c261f1ac0fa4fac988c3bdf2656be43"
+          }
+        },
+        {
+          "client_id": "497042674110-dmfirlsj24o4ikpfi53l92v7i3eluis4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_T7EWiFTNS4_kcwkCKV8R7F2gjCZmWdQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "497042674110-dmfirlsj24o4ikpfi53l92v7i3eluis4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "497042674110-bub5bib5pka87pqdr3tpooo2cltgivd8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.monopolimusic.monopoliMusic"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

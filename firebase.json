@@ -1,0 +1,34 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "monopoli-music",
+          "appId": "1:497042674110:android:3fd44899e049f0d2a5e9ef",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "monopoli-music",
+          "appId": "1:497042674110:ios:2ece1ca5c30c72afa5e9ef",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "monopoli-music",
+          "configurations": {
+            "android": "1:497042674110:android:3fd44899e049f0d2a5e9ef",
+            "ios": "1:497042674110:ios:2ece1ca5c30c72afa5e9ef"
+          }
+        }
+      }
+    }
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  }
+}

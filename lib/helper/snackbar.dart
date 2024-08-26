@@ -3,8 +3,6 @@ import 'package:monopoli/theme/text_style.dart';
 
 import '../theme/colors.dart';
 
-
-
 class SnackbarHelper {
   static displayToastMessage({
     required BuildContext context,
