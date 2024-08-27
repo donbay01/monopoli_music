@@ -44,7 +44,7 @@ class _DashboardState extends State<Dashboard> {
           PersistentTabConfig(
             screen: const Library(),
             item: ItemConfig(
-                icon: const Icon(Icons.library_music,size: 30,),
+                icon: const Icon(Icons.library_music,size: 25,),
                 title: "Library",
                 textStyle: small(),
                 activeForegroundColor: purple
