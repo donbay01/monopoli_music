@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:monopoli/screens/auth/register.dart';
 import 'package:monopoli/helper/snackbar.dart';
 import 'package:monopoli/monopoli.dart';
+import 'package:monopoli/screens/dashboard/index.dart';
 import 'package:monopoli/services/auth.dart';
 import 'package:zap_sizer/zap_sizer.dart';
-
+import 'package:loader_overlay/loader_overlay.dart';
 import '../../theme/colors.dart';
 import '../../theme/text_style.dart';
 import '../../widgets/button/formbutton.dart';
@@ -143,18 +144,22 @@ class _LoginState extends State<Login> {
                   ),
                   CustomButton(
                     function: () async {
+                      context.loaderOverlay.show();
                       try {
                         await AuthService.login(
                           emailController.text,
                           passwordController.text,
                         );
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (_) => Homepage(),
-                        //   ),
-                        // );
+                        context.loaderOverlay.hide();
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => Dashboard(),
+                          ),
+                          (route) => false,
+                        );
                       } on FirebaseAuthException catch (e) {
+                        context.loaderOverlay.hide();
                         SnackbarHelper.displayToastMessage(
                           context: context,
                           message: e.message!,

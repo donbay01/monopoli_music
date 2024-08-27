@@ -7,6 +7,7 @@ import 'package:monopoli/theme/colors.dart';
 
 import '../../../helper/snackbar.dart';
 import '../../../services/auth.dart';
+import '../../dashboard/index.dart';
 import '../../onboard/getStarted.dart';
 import '../../../theme/text_style.dart';
 import '../../../widgets/button/genre_button.dart';
@@ -202,11 +203,13 @@ class _ArtistSelectionPageState extends State<ArtistSelectionPage> {
       child: Scaffold(
         body: Container(
           decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage(
-                    'assets/genre.png',
-                  ),
-                  fit: BoxFit.cover)),
+            image: DecorationImage(
+              image: AssetImage(
+                'assets/genre.png',
+              ),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -292,6 +295,14 @@ class _ArtistSelectionPageState extends State<ArtistSelectionPage> {
                         'favoriteArtists': selectedArtists,
                       });
                       context.loaderOverlay.hide();
+
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => Dashboard(),
+                        ),
+                        (route) => false,
+                      );
                     } on FirebaseAuthException catch (e) {
                       context.loaderOverlay.hide();
 

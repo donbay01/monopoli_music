@@ -63,7 +63,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
       Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(
-          builder: (context) => GenreSelectionPage(),
+          builder: (context) => const GenreSelectionPage(),
         ),
         (route) => false,
       );

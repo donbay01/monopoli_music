@@ -100,6 +100,7 @@ class _GetStartedState extends State<GetStarted> {
               PrimaryButton(
                 function: () async {
                   OAuthService.googleAuth(
+                    context: context,
                     completer: () {},
                   );
                 },
@@ -114,7 +115,9 @@ class _GetStartedState extends State<GetStarted> {
               ),
               PrimaryButton(
                 function: () {
-                  OAuthService.xAuth();
+                  OAuthService.xAuth(
+                    context: context,
+                  );
                 },
                 text: 'Continue with Twitter',
                 icon: Icon(
@@ -127,7 +130,7 @@ class _GetStartedState extends State<GetStarted> {
               ),
               PrimaryButton(
                 function: () {
-                  OAuthService.facebookAuth();
+                  OAuthService.facebookAuth(context: context);
                 },
                 text: 'Continue with Facebook',
                 icon: Icon(

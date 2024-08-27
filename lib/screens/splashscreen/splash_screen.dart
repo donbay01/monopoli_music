@@ -35,13 +35,14 @@ class _SplashScreenState extends State<SplashScreen> {
     return Container(
       color: darkGreen,
       child: Center(
-          child: Container(
-        height: MediaQuery.of(context).size.height * 0.3,
-        width: MediaQuery.of(context).size.width * 0.5,
-        child: Image(
-          image: AssetImage('assets/appLogo.png'),
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height * 0.3,
+          width: MediaQuery.of(context).size.width * 0.5,
+          child: const Image(
+            image: AssetImage('assets/appLogo.png'),
+          ),
         ),
-      )),
+      ),
     );
   }
 

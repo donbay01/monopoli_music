@@ -11,6 +11,8 @@ import '../../widgets/button/formbutton.dart';
 import '../../widgets/form/textfield.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
+import '../dashboard/index.dart';
+
 class Register extends StatefulWidget {
   const Register({super.key});
 
@@ -89,14 +91,8 @@ class _RegisterState extends State<Register> {
           builder: (_) => VerifyEmail(),
         ),
       );
-
-      // Navigator.of(context).push(
-      //   MaterialPageRoute(
-      //     builder: (_) => const Homepage(),
-      //   ),
-      // );
     } on FirebaseAuthException catch (e) {
-      // context.loaderOverlay.hide();
+      context.loaderOverlay.hide();
       SnackbarHelper.displayToastMessage(
         context: context,
         message: e.message!,

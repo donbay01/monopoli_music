@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gradient_borders/box_borders/gradient_box_border.dart';
 import 'package:monopoli/helper/snackbar.dart';
 import 'package:monopoli/screens/auth/forgot_password.dart';
+import 'package:monopoli/screens/dashboard/index.dart';
 import 'package:monopoli/screens/onboard/getStarted.dart';
 import 'package:monopoli/services/auth.dart';
 import 'package:monopoli/theme/colors.dart';
@@ -76,11 +77,12 @@ class _GenreSelectionPageState extends State<GenreSelectionPage> {
                     color: primaryWhite,
                   ),
                   onPressed: () {
-                    Navigator.push(
+                    Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => GetStarted(),
+                        builder: (_) => Dashboard(),
                       ),
+                      (route) => false,
                     );
                   },
                 ),
@@ -121,7 +123,8 @@ class _GenreSelectionPageState extends State<GenreSelectionPage> {
                             SnackBar(
                               content: Center(
                                 child: Text(
-                                    'You can select up to $maxSelection genres only.'),
+                                  'You can select up to $maxSelection genres only.',
+                                ),
                               ),
                             ),
                           );
