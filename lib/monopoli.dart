@@ -25,12 +25,12 @@ class _MonopoliState extends State<Monopoli> {
             debugShowCheckedModeBanner: false,
             title: 'Monopoli',
             theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
               useMaterial3: true,
             ),
             home: Stack(
               children: [
-                user == null ? const SplashScreen() : const Dashboard(),
+                user == null ? const SplashScreen() : Dashboard(),
                 const AuthPlayer(),
               ],
             ),
