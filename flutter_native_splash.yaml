@@ -3,4 +3,4 @@ flutter_native_splash:
   ios: true
   web: false
   color: "#131C25"
-  image: "assets/appLogo.png"
+  image: "assets/mainLogo.png"
