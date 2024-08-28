@@ -19,7 +19,6 @@ class FeaturedSongs extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
-
           if (snapshot.hasError) {
             return const Text(
               'An error occurred',
@@ -32,6 +31,7 @@ class FeaturedSongs extends StatelessWidget {
             shrinkWrap: true,
             itemCount: data.contents.totalCount,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+
               crossAxisCount: 2,
             ),
             itemBuilder: (context, index) {
@@ -42,8 +42,15 @@ class FeaturedSongs extends StatelessWidget {
                   context,
                   PlaylistScreen(playlist: a),
                 ),
-                child: Image.network(
-                  a.images.first.first.url,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Image.network(
+                      a.images.first.first.url,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               );
             },

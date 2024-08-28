@@ -65,8 +65,38 @@ class _SearchScreenState extends State<SearchScreen> {
                 TextFieldSearch(
                   label: 'Artists, Songs, Album and more',
                   controller: searchController,
+                  textStyle: mediumText(primaryWhite),
+                  decoration: InputDecoration(
+                    labelText: 'Artists, Songs, Album and more',
+                    labelStyle: medium(),
+                    hintText: 'Artists, Songs, Album and more',
+                    hintStyle: smallText(primaryWhite),
+                    filled: true,
+                    fillColor: Colors.transparent,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: const BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: const BorderSide(
+                        color: purple,
+                        width: 1.0,
+                      ),
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
+                      borderSide: const BorderSide(
+                        color: Colors.grey,
+                        width: 0.5,
+                      ),
+                    ),
+                  ),
                   future: () {
-                    // return fetchData();
+                    return fetchData();
                   },
                   getSelectedValue: (value) async {
                     print(
@@ -79,12 +109,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     );
                   },
                 ),
-                // CustomTextField(
-                //   controller: searchController,
-                //   label: 'Search',
-                //   hint: 'Artists, Songs, Album and more',
-                //   prefixIcon: Icon(Icons.search),
-                // ),
+
                 SizedBox(
                   height: 20,
                 ),

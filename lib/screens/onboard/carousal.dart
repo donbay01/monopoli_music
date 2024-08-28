@@ -33,18 +33,22 @@ class _OnboardingCarouselState extends State<OnboardingCarousel> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Container(
-                height: MediaQuery.of(context).size.height * 0.1,
-                width: MediaQuery.of(context).size.width * 0.5,
-                child: const Image(
-                  image: AssetImage('assets/appLogo.png'),
+              SlideInDown(
+                from: 90.h,
+                delay: const Duration(milliseconds: 1000),
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  child: const Image(
+                    image: AssetImage('assets/appLogo.png'),
+                  ),
                 ),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.4,
               ),
               Pulse(
-                delay: const Duration(milliseconds: 1600),
+                delay: const Duration(milliseconds: 1300),
                 child: Text(
                   'Music for the Soul.',
                   style: boldText(primaryWhite),
@@ -55,7 +59,7 @@ class _OnboardingCarouselState extends State<OnboardingCarousel> {
               ),
               SlideInUp(
                 from: 90.h,
-                delay: const Duration(milliseconds: 2300),
+                delay: const Duration(milliseconds: 1600),
                 child: Text(
                   'Enjoy the best songs from your\nfavourite artists, Tailor your playlist\n to your taste.',
                   style: mediumSemiBold(primaryWhite),
@@ -67,7 +71,7 @@ class _OnboardingCarouselState extends State<OnboardingCarousel> {
               ),
               SlideInUp(
                 from: 100.h,
-                delay: const Duration(milliseconds: 2730),
+                delay: const Duration(milliseconds: 1900),
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(
@@ -87,7 +91,7 @@ class _OnboardingCarouselState extends State<OnboardingCarousel> {
                         vertical: 15, horizontal: 130),
                     shape: BeveledRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
-                      side: const BorderSide(color: primaryWhite, width: 1),
+                      side: const BorderSide(color: purple, width: 1),
                     ),
                   ),
                 ),

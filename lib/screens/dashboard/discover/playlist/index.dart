@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:monopoli/models/home/top_content.dart';
 import 'package:monopoli/screens/player/index.dart';
 import 'package:monopoli/services/music.dart';
+import 'package:monopoli/theme/colors.dart';
+import 'package:monopoli/theme/text_style.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:zap_sizer/zap_sizer.dart';
 
@@ -16,8 +18,21 @@ class PlaylistScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: scaffoldBlack,
       appBar: AppBar(
-        title: Text(playlist.name),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.close,
+              color: primaryWhite,
+            )),
+        title: Text(
+          playlist.name,
+          style: mediumText(primaryWhite),
+        ),
+        backgroundColor: scaffoldBlack,
       ),
       body: FutureBuilder(
         future: MusicService.getPlayList(playlist.id),
@@ -48,7 +63,10 @@ class PlaylistScreen extends StatelessWidget {
                   );
                 },
                 // leading: Text(a!.album!.cover!.first!.url),
-                title: Text(a.name ?? 'ssaa'),
+                title: Text(
+                  a.name ?? 'ssaa',
+                  style: mediumText(primaryWhite),
+                ),
               );
             },
             separatorBuilder: (context, index) => SizedBox(

@@ -55,6 +55,7 @@ class Discover extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
+              Text('Trending Playlists',style: mediumSemiBold(primaryWhite),),
               const FeaturedSongs(),
             ],
           ),
