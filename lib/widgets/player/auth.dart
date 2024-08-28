@@ -27,17 +27,17 @@ class _AuthPlayerState extends State<AuthPlayer> with WidgetsBindingObserver {
     await RemoteConfigService.activate();
     var audioUrl = RemoteConfigService.config.getString('backgroundAudio');
 
-    await player.setUrl(
-      audioUrl,
-    );
-
-    await player.setVolume(0.11);
-
-    sub = AuthService.auth.authStateChanges().listen((user) {
+    sub = AuthService.auth.authStateChanges().listen((user) async {
       if (user != null) {
         player.stop();
       } else {
-        player.play();
+        await player.setUrl(
+          audioUrl,
+        );
+
+        await player.setVolume(0.11);
+
+        await player.play();
       }
     });
   }

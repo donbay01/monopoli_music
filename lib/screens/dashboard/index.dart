@@ -28,34 +28,42 @@ class _DashboardState extends State<Dashboard> {
           PersistentTabConfig(
             screen: Discover(),
             item: ItemConfig(
-                icon: const Icon(FontAwesomeIcons.broadcastTower,size: 25,),
-                title: "Discover",
-                textStyle: small(),
-                activeForegroundColor: purple),
+              icon: const Icon(
+                FontAwesomeIcons.broadcastTower,
+                size: 25,
+              ),
+              title: "Discover",
+              textStyle: small(),
+              activeForegroundColor: purple,
+            ),
           ),
           PersistentTabConfig(
             screen: SearchScreen(),
             item: ItemConfig(
-                icon: const Icon(FontAwesomeIcons.search,size: 25,),
-                title: "Search",
-                textStyle: small(),
-                activeForegroundColor: purple),
+              icon: const Icon(
+                FontAwesomeIcons.search,
+                size: 25,
+              ),
+              title: "Search",
+              textStyle: small(),
+              activeForegroundColor: purple,
+            ),
           ),
           PersistentTabConfig(
             screen: const Library(),
             item: ItemConfig(
-                icon: const Icon(Icons.library_music,size: 25,),
+                icon: const Icon(
+                  Icons.library_music,
+                  size: 25,
+                ),
                 title: "Library",
                 textStyle: small(),
-                activeForegroundColor: purple
-            ),
+                activeForegroundColor: purple),
           ),
         ],
         navBarBuilder: (navBarConfig) => Style7BottomNavBar(
           navBarConfig: navBarConfig,
-          navBarDecoration: NavBarDecoration(
-            color: primaryBlack
-          ),
+          navBarDecoration: NavBarDecoration(color: primaryBlack),
         ),
       ),
     );

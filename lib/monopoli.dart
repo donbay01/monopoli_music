@@ -30,7 +30,7 @@ class _MonopoliState extends State<Monopoli> {
             ),
             home: Stack(
               children: [
-                user == null ? const SplashScreen() : Dashboard(),
+                user == null ? const SplashScreen() : const Dashboard(),
                 const AuthPlayer(),
               ],
             ),
