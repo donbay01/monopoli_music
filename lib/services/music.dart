@@ -11,7 +11,7 @@ const baseURL = 'https://spotify-scraper.p.rapidapi.com/v1';
 const headers = {
   'Content-Type': 'application/json',
   'x-rapidapi-key':
-      'c1c65af7fcmshd340a89789b9f3ep1375eajsn2e78e22d8e84', //'0dec7e90f4msh1c806f9ede307efp1eeba2jsn9f6cade779d1',
+      'a317b8b4c8mshd4dbc5fa0caf658p1335d4jsn5ba5d44faa36', //'0dec7e90f4msh1c806f9ede307efp1eeba2jsn9f6cade779d1',
   'x-rapidapi-host': 'spotify-scraper.p.rapidapi.com',
 };
 

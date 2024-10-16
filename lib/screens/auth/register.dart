@@ -111,6 +111,7 @@ class _RegisterState extends State<Register> {
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/email.png'),
+              fit: BoxFit.cover
             ),
           ),
           child: Padding(

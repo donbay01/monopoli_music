@@ -6,7 +6,7 @@
     </queries>
    
     <application
-        android:label="monopoli"
+        android:label="Desthim Music"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 

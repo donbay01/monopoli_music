@@ -127,7 +127,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
               ),
               Center(
                 child: Text(
-                  'A verification email has been sent to your email, Kindly check your mail and verify your account to continue.',
+                  'A verification link has been sent to your email, Kindly check your mail and verify your account to continue.',
                   style: small(),
                   textAlign: TextAlign.center,
                 ),
