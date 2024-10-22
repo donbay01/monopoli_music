@@ -12,9 +12,9 @@ class Library extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var tags = [ 'Playlist','Liked Songs ', 'Downloaded', 'Shared'];
-    return  Container(
-      color: scaffoldBlack,
-      child: Padding(
+    return  Scaffold(
+      backgroundColor: scaffoldBlack,
+      body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [

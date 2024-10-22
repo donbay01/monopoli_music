@@ -112,7 +112,7 @@ class _ArtistSelectionPageState extends State<ArtistSelectionPage> {
           crossAxisCount: 3,
           mainAxisSpacing: 20.0,
           crossAxisSpacing: 20.0,
-          childAspectRatio: 5 / 3),
+          childAspectRatio: 3 / 3),
       itemBuilder: (context, index) {
         final artist = topArtists[index];
         final isSelected = selectedArtists.contains(artist);
@@ -121,12 +121,8 @@ class _ArtistSelectionPageState extends State<ArtistSelectionPage> {
           onTap: () => toggleSelection(artist),
           child: Container(
             decoration: BoxDecoration(
-              color: isSelected ? purple : Colors.transparent,
-              borderRadius: BorderRadius.circular(8.0),
-              border: GradientBoxBorder(
-                gradient: LinearGradient(colors: [purple, primaryWhite]),
-                width: 1,
-              ),
+              shape: BoxShape.circle,
+              color: isSelected ? purple : Color(0xFF695ECB).withOpacity(0.1),
             ),
             // color: isSelected ? purple : Colors.transparent,
             child: Center(
@@ -201,45 +197,33 @@ class _ArtistSelectionPageState extends State<ArtistSelectionPage> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Color(0xFF0D0D0D),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              FontAwesomeIcons.arrowLeft,
+              color: primaryWhite,
+            ),
+          ),
+          title: Text('Select your favourite artists',style: mediumSemiBold(primaryWhite),),
+        ),
         body: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage(
-                'assets/genre.png',
+                'assets/onboarding.png',
               ),
               fit: BoxFit.cover,
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(15.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: 50,
-                ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: IconButton(
-                    icon: Icon(
-                      FontAwesomeIcons.arrowLeft,
-                      color: primaryWhite,
-                    ),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'Select your favourite artists',
-                  style: mediumSemiBold(primaryWhite),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
                 Text(
                   'You may select three (3) genres that matches your taste',
                   style: smallText(primaryWhite),
@@ -276,17 +260,15 @@ class _ArtistSelectionPageState extends State<ArtistSelectionPage> {
                   onChanged: onSearchChanged,
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 30,
                 ),
                 buildSelectedArtists(),
-                SizedBox(height: 16.0),
                 buildArtistGrid(),
-                SizedBox(height: 16.0),
-                Expanded(child: buildSearchResults()),
+                buildSearchResults(),
                 GenreButton(
                   child: Text(
                     'Next',
-                    style: mediumBold(primaryWhite),
+                    style: mediumBold(primaryBlack),
                   ),
                   function: () async {
                     try {
@@ -313,7 +295,18 @@ class _ArtistSelectionPageState extends State<ArtistSelectionPage> {
                     }
                   },
                 ),
-                SizedBox(height: 30.0),
+                SizedBox(
+                  height: 10,
+                ),
+                TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Skip',
+                      style: mediumBold(purple),
+                    )),
+                SizedBox(
+                  height: 20,
+                )
               ],
             ),
           ),

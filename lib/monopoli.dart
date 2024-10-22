@@ -23,7 +23,7 @@ class _MonopoliState extends State<Monopoli> {
         builder: (context, constraints) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Monopoli',
+            title: 'DestHim',
             theme: ThemeData(
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
               useMaterial3: true,
@@ -31,7 +31,7 @@ class _MonopoliState extends State<Monopoli> {
             home: Stack(
               children: [
                 user == null ? const SplashScreen() : const Dashboard(),
-                const AuthPlayer(),
+                // const AuthPlayer(),
               ],
             ),
           );

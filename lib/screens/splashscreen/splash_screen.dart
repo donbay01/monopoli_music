@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:monopoli/theme/colors.dart';
-import '../onboard/carousal.dart';
+import '../onboard/onboard.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     _timer = Timer(
-      const Duration(seconds: 1),
+      const Duration(seconds: 2),
       () => Navigator.of(context).push(
         _createRoute(),
       ),

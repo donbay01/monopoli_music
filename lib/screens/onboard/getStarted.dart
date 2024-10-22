@@ -27,7 +27,7 @@ class _GetStartedState extends State<GetStarted> {
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-              'assets/getstarted.png',
+              'assets/onboarding.png',
             ),
             fit: BoxFit.cover,
           ),
@@ -38,32 +38,33 @@ class _GetStartedState extends State<GetStarted> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 100,
+                height: 15.h,
+                width: 40.w,
+                child:  Image(
+                  image: AssetImage('assets/volume.png'),
+                ),
+              ),
+              SizedBox(
+                height: 50,
                 width: 200,
                 child: const Image(
                   image: AssetImage('assets/appLogo.png'),
                 ),
               ),
-              SizedBox(
-                height: 15.h,
-                width: 40.w,
-                child: const Image(
-                  image: AssetImage('assets/volume.png'),
-                ),
-              ),
-              Pulse(
-                delay: const Duration(milliseconds: 500),
-                child: Text(
-                  'Over 1000+\nMusic online',
-                  style: boldText(primaryWhite),
-                ),
-              ),
-              const SizedBox(
+              SizedBox(height: 100,),
+              // Pulse(
+              //   delay: const Duration(milliseconds: 500),
+              //   child: Text(
+              //     'Over 1000+\nMusic online',
+              //     style: boldText(primaryWhite),
+              //   ),
+              // ),
+               SizedBox(
                 height: 20,
               ),
               SlideInRight(
                 from: 90.h,
-                delay: const Duration(milliseconds: 600),
+                delay: const Duration(milliseconds: 100),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -107,7 +108,7 @@ class _GetStartedState extends State<GetStarted> {
               ),
               SlideInLeft(
                 from: 90.h,
-                delay: const Duration(milliseconds: 900),
+                delay: const Duration(milliseconds: 100),
                 child: PrimaryButton(
                   function: () async {
                     OAuthService.googleAuth(
@@ -123,92 +124,106 @@ class _GetStartedState extends State<GetStarted> {
                 ),
               ),
               const SizedBox(
-                height: 20,
+                height: 80,
               ),
-              SlideInRight(
-                from: 90.h,
-                delay: const Duration(milliseconds: 1200),
-                child: PrimaryButton(
-                  function: () {
-                    // OAuthService.xAuth(
-                    //   context: context,
-                    // );
-                  },
-                  text: 'Continue with Twitter',
-                  icon: Icon(
-                    FontAwesomeIcons.xTwitter,
-                    color: Colors.white,
+              // SlideInRight(
+              //   from: 90.h,
+              //   delay: const Duration(milliseconds: 1200),
+              //   child: PrimaryButton(
+              //     function: () {
+              //       // OAuthService.xAuth(
+              //       //   context: context,
+              //       // );
+              //     },
+              //     text: 'Continue with Twitter',
+              //     icon: Icon(
+              //       FontAwesomeIcons.xTwitter,
+              //       color: Colors.white,
+              //     ),
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
+              // SlideInLeft(
+              //   from: 90.h,
+              //   delay: const Duration(milliseconds: 1500),
+              //   child: PrimaryButton(
+              //     function: () {
+              //       OAuthService.facebookAuth(context: context);
+              //     },
+              //     text: 'Continue with Facebook',
+              //     icon: Icon(
+              //       FontAwesomeIcons.facebook,
+              //       color: Colors.blue,
+              //     ),
+              //   ),
+              // ),
+              // const SizedBox(
+              //   height: 40,
+              // ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Already have an account?',
+                    style: mediumText(primaryWhite),
                   ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              SlideInLeft(
-                from: 90.h,
-                delay: const Duration(milliseconds: 1500),
-                child: PrimaryButton(
-                  function: () {
-                    OAuthService.facebookAuth(context: context);
-                  },
-                  text: 'Continue with Facebook',
-                  icon: Icon(
-                    FontAwesomeIcons.facebook,
-                    color: Colors.blue,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              Text(
-                'Already have an account?',
-                style: mediumText(primaryWhite),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              SlideInUp(
-                from: 90.h,
-                delay: const Duration(milliseconds: 1000),
-                child: GestureDetector(
-                  onTap: () {
+                  SizedBox(width: 10,),
+                  TextButton(onPressed: (){
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (_) => const Login(),
                       ),
                     );
-                  },
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.06,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      border: const GradientBoxBorder(
-                        gradient: LinearGradient(colors: [purple, primaryWhite]),
-                        width: 2,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(
-                          FontAwesomeIcons.signIn,
-                          color: primaryWhite,
-                        ),
-                        const SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          'Log in',
-                          style: mediumText(primaryWhite),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                  }, child: Text('Log in'))
+                ],
               ),
+              const SizedBox(
+                height: 10,
+              ),
+              // SlideInUp(
+              //   from: 90.h,
+              //   delay: const Duration(milliseconds: 1000),
+              //   child: GestureDetector(
+              //     onTap: () {
+              //       Navigator.push(
+              //         context,
+              //         MaterialPageRoute(
+              //           builder: (_) => const Login(),
+              //         ),
+              //       );
+              //     },
+              //     child: Container(
+              //       height: MediaQuery.of(context).size.height * 0.06,
+              //       width: MediaQuery.of(context).size.width,
+              //       decoration: BoxDecoration(
+              //         border: const GradientBoxBorder(
+              //           gradient: LinearGradient(colors: [purple, primaryWhite]),
+              //           width: 2,
+              //         ),
+              //         borderRadius: BorderRadius.circular(20),
+              //       ),
+              //       child: Row(
+              //         mainAxisAlignment: MainAxisAlignment.center,
+              //         children: [
+              //           const Icon(
+              //             FontAwesomeIcons.signIn,
+              //             color: primaryWhite,
+              //           ),
+              //           const SizedBox(
+              //             width: 20,
+              //           ),
+              //           Text(
+              //             'Log in',
+              //             style: mediumText(primaryWhite),
+              //           )
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
 
             ],
           ),

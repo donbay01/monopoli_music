@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:monopoli/helper/snackbar.dart';
-import 'package:monopoli/screens/onboard/carousal.dart';
+import 'package:monopoli/screens/onboard/onboard.dart';
 import 'package:monopoli/services/auth.dart';
 import 'package:monopoli/theme/colors.dart';
 import 'package:monopoli/theme/text_style.dart';

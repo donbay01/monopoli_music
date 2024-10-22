@@ -5,16 +5,21 @@ import 'package:monopoli/theme/text_style.dart';
 import 'package:monopoli/widgets/user/avatar.dart';
 import 'package:zap_sizer/zap_sizer.dart';
 
-class Discover extends StatelessWidget {
+class Discover extends StatefulWidget {
   const Discover({super.key});
 
+  @override
+  State<Discover> createState() => _DiscoverState();
+}
+
+class _DiscoverState extends State<Discover> {
   @override
   Widget build(BuildContext context) {
     var tags = ['All', 'Afrobeats', 'Gospel', 'Hip/Hop'];
 
-    return Container(
-      color: scaffoldBlack,
-      child: Padding(
+    return Scaffold(
+      backgroundColor: scaffoldBlack,
+      body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: SingleChildScrollView(
           physics: const NeverScrollableScrollPhysics(),
@@ -56,7 +61,7 @@ class Discover extends StatelessWidget {
                 height: 10,
               ),
               Text('Trending Playlists',style: mediumSemiBold(primaryWhite),),
-              const FeaturedSongs(),
+              // const FeaturedSongs(),
             ],
           ),
         ),

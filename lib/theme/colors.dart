@@ -10,4 +10,4 @@ const darkPurple = Color(0XFF342F65);
 const iconPurple = Color(0XFF9747FF);
 const purple = Color(0XFF695ECB);
 const scaffoldBlack = Color(0XFF151515);
-const darkGreen = Color(0xFF131C25);
+const darkGreen = Color(0xFF0D0D0D);

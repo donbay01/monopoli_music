@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:monopoli/helper/snackbar.dart';
 import 'package:monopoli/screens/auth/login.dart';
-import 'package:monopoli/screens/onboard/carousal.dart';
+import 'package:monopoli/screens/onboard/onboard.dart';
 import 'package:monopoli/services/auth.dart';
 
 import '../genre/index.dart';
@@ -97,7 +97,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/emailverify.png'),
+            image: AssetImage('assets/onboarding.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -105,6 +105,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
           padding: const EdgeInsets.all(15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
+
             children: [
               const SizedBox(
                 height: 70,
@@ -123,12 +124,12 @@ class _VerifyEmailState extends State<VerifyEmail> {
                   width: MediaQuery.of(context).size.width,
                   child: Image(image: AssetImage('assets/verify.png'))),
               const SizedBox(
-                height: 20,
+                height: 100,
               ),
               Center(
                 child: Text(
                   'A verification link has been sent to your email, Kindly check your mail and verify your account to continue.',
-                  style: small(),
+                  style: smallText(primaryWhite),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -138,7 +139,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
               Center(
                 child: Text(
                   "Didn't receive an email?",
-                  style: mediumText(primaryWhite),
+                  style: mediumText(Colors.blueGrey),
                   textAlign: TextAlign.center,
                 ),
               ),
@@ -148,7 +149,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
               Center(
                 child: Text(
                   'Check your spam or junk. It goes there sometimes!',
-                  style: smallText(primaryWhite),
+                  style: smallText(Colors.blueGrey),
                   textAlign: TextAlign.center,
                 ),
               ),

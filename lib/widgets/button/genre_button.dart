@@ -12,7 +12,7 @@ class GenreButton extends StatelessWidget {
     super.key,
     required this.child,
     this.function,
-    this.color = Colors.transparent,
+    this.color = primaryWhite,
   });
 
   @override
@@ -27,7 +27,7 @@ class GenreButton extends StatelessWidget {
         },
         style: ElevatedButton.styleFrom(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(25),
+            borderRadius: BorderRadius.circular(10),
             side: BorderSide(
               color: primaryWhite, width: 1
             )

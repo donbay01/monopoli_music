@@ -6,6 +6,7 @@ import 'package:monopoli/screens/onboard/getStarted.dart';
 import 'package:monopoli/theme/text_style.dart';
 import 'package:zap_sizer/main.dart';
 import '../../../theme/colors.dart';
+import '../../components/onboarding_carousel/carousel.dart';
 
 class OnboardingCarousel extends StatefulWidget {
   const OnboardingCarousel({super.key});
@@ -35,7 +36,7 @@ class _OnboardingCarouselState extends State<OnboardingCarousel> {
             children: [
               SlideInDown(
                 from: 90.h,
-                delay: const Duration(milliseconds: 1000),
+                delay: const Duration(milliseconds: 100),
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.1,
                   width: MediaQuery.of(context).size.width * 0.5,
@@ -45,33 +46,18 @@ class _OnboardingCarouselState extends State<OnboardingCarousel> {
                 ),
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.4,
+                height: MediaQuery.of(context).size.height * 0.1,
               ),
               Pulse(
-                delay: const Duration(milliseconds: 1300),
-                child: Text(
-                  'Music for the Soul.',
-                  style: boldText(primaryWhite),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              SlideInUp(
-                from: 90.h,
-                delay: const Duration(milliseconds: 1600),
-                child: Text(
-                  'Enjoy the best songs from your\nfavourite artists, Tailor your playlist\n to your taste.',
-                  style: mediumSemiBold(primaryWhite),
-                  textAlign: TextAlign.center,
-                ),
+                delay: const Duration(milliseconds: 100),
+                child: Carousel()
               ),
               const SizedBox(
                 height: 60,
               ),
               SlideInUp(
                 from: 100.h,
-                delay: const Duration(milliseconds: 1900),
+                delay: const Duration(milliseconds: 500),
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(

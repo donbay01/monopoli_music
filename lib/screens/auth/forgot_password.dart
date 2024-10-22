@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:monopoli/screens/onboard/carousal.dart';
+import 'package:monopoli/screens/onboard/onboard.dart';
 import 'package:monopoli/screens/onboard/getStarted.dart';
 import 'package:monopoli/services/auth.dart';
 import '../../helper/snackbar.dart';
@@ -55,7 +55,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         body: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/emailverify.png'),
+              image: AssetImage('assets/onboarding.png'),
               fit: BoxFit.cover,
             ),
           ),
@@ -86,10 +86,11 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   height: 50,
                 ),
                 CustomButton(
+                  color: primaryWhite,
                   function: () => reset(),
                   child: Text(
                     'Reset Password',
-                    style: mediumBold(primaryWhite),
+                    style: mediumBold(primaryBlack),
                   ),
                 ),
                 const SizedBox(

@@ -38,9 +38,9 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
-      child: Container(
-        color: scaffoldBlack,
-        child: Padding(
+      child: Scaffold(
+        backgroundColor: scaffoldBlack,
+        body: Padding(
           padding: EdgeInsets.all(20),
           child: SingleChildScrollView(
             child: Column(
@@ -53,10 +53,6 @@ class _SearchScreenState extends State<SearchScreen> {
                       'Search',
                       style: largeText(primaryWhite),
                     ),
-                    CircleAvatar(
-                      radius: 22,
-                      backgroundImage: AssetImage('assets/logoCircle.png'),
-                    )
                   ],
                 ),
                 SizedBox(
@@ -96,20 +92,19 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   ),
                   future: () {
-                    return fetchData();
+                    // return fetchData();
                   },
                   getSelectedValue: (value) async {
-                    print(
-                      value,
-                    );
-                    var audio = await MusicService.getTrackURL(value);
-                    pushScreenWithoutNavBar(
-                      context,
-                      AppPlayer(audio: audio),
-                    );
+                    // print(
+                    //   value,
+                    // );
+                    // var audio = await MusicService.getTrackURL(value);
+                    // pushScreenWithoutNavBar(
+                    //   context,
+                    //   AppPlayer(audio: audio),
+                    // );
                   },
                 ),
-
                 SizedBox(
                   height: 20,
                 ),

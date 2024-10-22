@@ -55,7 +55,7 @@ class _GenreSelectionPageState extends State<GenreSelectionPage> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage(
-              'assets/genre.png',
+              'assets/onboarding.png',
             ),
             fit: BoxFit.cover,
           ),
@@ -92,21 +92,20 @@ class _GenreSelectionPageState extends State<GenreSelectionPage> {
                 style: mediumSemiBold(primaryWhite),
               ),
               SizedBox(
-                height: 20,
+                height: 10,
               ),
               Text(
                 'You may select three (3) genres that matches your taste',
                 style: smallText(primaryWhite),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 50.0),
               Expanded(
                 child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3, // 3 columns
                     mainAxisSpacing: 20.0,
                     crossAxisSpacing: 20.0,
-                    childAspectRatio: 5 / 3,
+                    childAspectRatio: 3 / 3,
                   ),
                   itemCount: genres.length,
                   itemBuilder: (context, index) {
@@ -119,28 +118,16 @@ class _GenreSelectionPageState extends State<GenreSelectionPage> {
                             selectedGenres[genre] = !selectedGenres[genre]!;
                           });
                         } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Center(
-                                child: Text(
-                                  'You can select up to $maxSelection genres only.',
-                                ),
-                              ),
-                            ),
-                          );
+                          SnackbarHelper.displayToastMessage(context: context,
+                              message: 'You can only select up to $maxSelection genres.');
                         }
                       },
                       child: Container(
                         decoration: BoxDecoration(
+                          shape: BoxShape.circle,
                           color: selectedGenres[genre]!
                               ? purple
-                              : Colors.transparent,
-                          borderRadius: BorderRadius.circular(8.0),
-                          border: GradientBoxBorder(
-                            gradient:
-                                LinearGradient(colors: [purple, primaryWhite]),
-                            width: 1,
-                          ),
+                              : Color(0xFF695ECB).withOpacity(0.1),
                         ),
                         child: Center(
                           child: Text(
@@ -156,7 +143,7 @@ class _GenreSelectionPageState extends State<GenreSelectionPage> {
               GenreButton(
                 child: Text(
                   'Next',
-                  style: mediumBold(primaryWhite),
+                  style: mediumBold(primaryBlack),
                 ),
                 function: () async {
                   try {
@@ -183,7 +170,9 @@ class _GenreSelectionPageState extends State<GenreSelectionPage> {
                   }
                 },
               ),
-              SizedBox(height: 40.0),
+              SizedBox(height: 10.0),
+              TextButton(onPressed: (){}, child: Text('Skip',style: mediumBold(purple),)),
+              SizedBox(height: 70.0),
             ],
           ),
         ),

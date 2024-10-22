@@ -29,7 +29,7 @@ class _DashboardState extends State<Dashboard> {
             screen: Discover(),
             item: ItemConfig(
               icon: const Icon(
-                FontAwesomeIcons.broadcastTower,
+                Icons.broadcast_on_personal_rounded,
                 size: 25,
               ),
               title: "Discover",
