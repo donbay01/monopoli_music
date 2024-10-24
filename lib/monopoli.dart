@@ -3,6 +3,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:monopoli/screens/dashboard/index.dart';
 import 'package:monopoli/screens/splashscreen/splash_screen.dart';
 import 'package:monopoli/services/auth.dart';
+import 'package:monopoli/theme/colors.dart';
 import 'package:monopoli/widgets/player/auth.dart';
 import 'package:zap_sizer/zap_sizer.dart';
 
@@ -25,7 +26,7 @@ class _MonopoliState extends State<Monopoli> {
             debugShowCheckedModeBanner: false,
             title: 'DestHim',
             theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: Colors.purple),
+              colorScheme: ColorScheme.fromSeed(seedColor: purple),
               useMaterial3: true,
             ),
             home: Stack(

@@ -19,52 +19,49 @@ class Dashboard extends StatefulWidget {
 class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      bottom: false,
-      child: PersistentTabView(
-        navBarHeight: 65,
-        backgroundColor: primaryBlack,
-        tabs: [
-          PersistentTabConfig(
-            screen: Discover(),
-            item: ItemConfig(
-              icon: const Icon(
-                Icons.broadcast_on_personal_rounded,
-                size: 25,
-              ),
-              title: "Discover",
-              textStyle: small(),
-              activeForegroundColor: purple,
+    return PersistentTabView(
+      navBarHeight: 65,
+      backgroundColor: primaryBlack,
+      tabs: [
+        PersistentTabConfig(
+          screen: Discover(),
+          item: ItemConfig(
+            icon: const Icon(
+              Icons.broadcast_on_personal_rounded,
+              size: 25,
             ),
+            title: "Discover",
+            textStyle: small(),
+            activeForegroundColor: purple,
           ),
-          PersistentTabConfig(
-            screen: SearchScreen(),
-            item: ItemConfig(
-              icon: const Icon(
-                FontAwesomeIcons.search,
-                size: 25,
-              ),
-              title: "Search",
-              textStyle: small(),
-              activeForegroundColor: purple,
-            ),
-          ),
-          PersistentTabConfig(
-            screen: const Library(),
-            item: ItemConfig(
-                icon: const Icon(
-                  Icons.library_music,
-                  size: 25,
-                ),
-                title: "Library",
-                textStyle: small(),
-                activeForegroundColor: purple),
-          ),
-        ],
-        navBarBuilder: (navBarConfig) => Style7BottomNavBar(
-          navBarConfig: navBarConfig,
-          navBarDecoration: NavBarDecoration(color: primaryBlack),
         ),
+        PersistentTabConfig(
+          screen: SearchScreen(),
+          item: ItemConfig(
+            icon: const Icon(
+              FontAwesomeIcons.search,
+              size: 25,
+            ),
+            title: "Search",
+            textStyle: small(),
+            activeForegroundColor: purple,
+          ),
+        ),
+        PersistentTabConfig(
+          screen: const Library(),
+          item: ItemConfig(
+              icon: const Icon(
+                Icons.library_music,
+                size: 25,
+              ),
+              title: "Library",
+              textStyle: small(),
+              activeForegroundColor: purple),
+        ),
+      ],
+      navBarBuilder: (navBarConfig) => Style7BottomNavBar(
+        navBarConfig: navBarConfig,
+        navBarDecoration: NavBarDecoration(color: primaryBlack),
       ),
     );
   }
