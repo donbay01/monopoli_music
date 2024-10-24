@@ -124,7 +124,7 @@ class _DiscoverState extends State<Discover> {
                                               ),
                                               Text(
                                                 'Burna Boy',
-                                                style: smallBold(grey),
+                                                style: smallText(grey),
                                               )
                                             ],
                                           )
@@ -230,7 +230,7 @@ class _DiscoverState extends State<Discover> {
                                           ),
                                           Text(
                                             'Asake & Central Cee',
-                                            style: smallBold(grey),
+                                            style: smallText(grey),
                                           )
                                         ],
                                       )
@@ -275,7 +275,7 @@ class _DiscoverState extends State<Discover> {
                                           ),
                                           Text(
                                             '21 Savage',
-                                            style: smallBold(grey),
+                                            style: smallText(grey),
                                           )
                                         ],
                                       )
@@ -319,7 +319,7 @@ class _DiscoverState extends State<Discover> {
                                           ),
                                           Text(
                                             'Burna Boy',
-                                            style: smallBold(grey),
+                                            style: smallText(grey),
                                           )
                                         ],
                                       )
@@ -450,7 +450,7 @@ class _DiscoverState extends State<Discover> {
                                           ),
                                           Text(
                                             'Burna Boy',
-                                            style: smallBold(grey),
+                                            style: smallText(grey),
                                           )
                                         ],
                                       )
@@ -539,7 +539,7 @@ class _DiscoverState extends State<Discover> {
                                           ),
                                           Text(
                                             'Asake & Central Cee',
-                                            style: smallBold(grey),
+                                            style: smallText(grey),
                                           )
                                         ],
                                       )
@@ -584,7 +584,7 @@ class _DiscoverState extends State<Discover> {
                                           ),
                                           Text(
                                             '21 Savage',
-                                            style: smallBold(grey),
+                                            style: smallText(grey),
                                           )
                                         ],
                                       )
@@ -628,7 +628,7 @@ class _DiscoverState extends State<Discover> {
                                           ),
                                           Text(
                                             'Burna Boy',
-                                            style: smallBold(grey),
+                                            style: smallText(grey),
                                           )
                                         ],
                                       )

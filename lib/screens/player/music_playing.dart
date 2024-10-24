@@ -129,7 +129,7 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
                       Navigator.pop(context);
                     },
                     icon: Icon(
-                      FontAwesomeIcons.close,
+                      FontAwesomeIcons.windowMinimize,
                       color: primaryWhite,
                     )),
                 SizedBox(
