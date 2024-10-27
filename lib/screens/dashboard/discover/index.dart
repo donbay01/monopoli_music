@@ -93,14 +93,14 @@ class _DiscoverState extends State<Discover> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: 40,
+                height: 50,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'Discover',
-                    style: boldText(primaryWhite),
+                    style: largeText(primaryWhite),
                   ),
                   const UserAvatar(),
                 ],
@@ -135,7 +135,7 @@ class _DiscoverState extends State<Discover> {
                                 children: [
                                   Text(
                                     'Top Music',
-                                    style: largeText(primaryWhite),
+                                    style: mediumSemiBold(primaryWhite),
                                   ),
                                   TextButton(
                                       onPressed: () {},
@@ -263,8 +263,8 @@ class _DiscoverState extends State<Discover> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    'Made For You',
-                                    style: largeText(primaryWhite),
+                                    'Hot Releases',
+                                    style: mediumSemiBold(primaryWhite),
                                   ),
                                   TextButton(
                                       onPressed: () {},
