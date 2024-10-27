@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:monopoli/screens/auth/register.dart';
 import 'package:monopoli/helper/snackbar.dart';
-import 'package:monopoli/monopoli.dart';
 import 'package:monopoli/screens/dashboard/index.dart';
 import 'package:monopoli/services/auth.dart';
 import 'package:zap_sizer/zap_sizer.dart';

@@ -15,6 +15,70 @@ class Discover extends StatefulWidget {
   State<Discover> createState() => _DiscoverState();
 }
 
+class Song {
+  final String title;
+  final String artist;
+  final String duration;
+  final String imagePath;
+
+  Song(
+      {required this.title,
+      required this.artist,
+      required this.duration,
+      required this.imagePath});
+}
+
+final List<Song> songs = [
+  Song(
+    title: 'Higher',
+    artist: 'Burna',
+    duration: '3:45',
+    imagePath: 'assets/burna.png',
+  ),
+  Song(
+    title: 'Feel',
+    artist: 'Davido',
+    duration: '4:12',
+    imagePath: 'assets/davido.png',
+  ),
+  Song(
+    title: 'Wave',
+    artist: 'Asake',
+    duration: '2:58',
+    imagePath: 'assets/asake.png',
+  ),
+  Song(
+    title: 'Higher',
+    artist: 'Burna',
+    duration: '3:45',
+    imagePath: 'assets/city.png',
+  ),
+  Song(
+    title: 'Wildest dream',
+    artist: '21 Savage',
+    duration: '4:12',
+    imagePath: 'assets/savage.png',
+  ),
+  Song(
+    title: 'Juju',
+    artist: 'Asake',
+    duration: '2:58',
+    imagePath: 'assets/album1.png',
+  ),
+  Song(
+    title: 'Higher',
+    artist: 'Burna',
+    duration: '3:45',
+    imagePath: 'assets/album2.png',
+  ),
+  Song(
+    title: 'Feel',
+    artist: 'Davido',
+    duration: '4:12',
+    imagePath: 'assets/album3.png',
+  ),
+];
+
 class _DiscoverState extends State<Discover> {
   @override
   Widget build(BuildContext context) {
@@ -50,7 +114,7 @@ class _DiscoverState extends State<Discover> {
                 child: Row(
                   children: [
                     Container(
-                      height: height * 0.45,
+                      height: height * 0.5,
                       width: width * 0.8,
                       decoration: BoxDecoration(
                           gradient: LinearGradient(
@@ -61,7 +125,7 @@ class _DiscoverState extends State<Discover> {
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: SingleChildScrollView(
-                          scrollDirection: Axis.vertical,
+                          // scrollDirection: Axis.vertical,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
@@ -81,305 +145,95 @@ class _DiscoverState extends State<Discover> {
                                       ))
                                 ],
                               ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              GestureDetector(
-                                onTap: (){
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) => MusicPlayerPage(
-                                            imagePath: 'assets/burnaplay.png',
-                                            musicTitle: 'Higher',
-                                            artistName: 'Burna Boy',
-                                          )));
-                                },
-                                child: Container(
-                                  color: Colors.transparent,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
+                              Container(
+                                height: height * 0.4,
+                                width: width,
+                                child: ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  itemCount: songs.length,
+                                  scrollDirection: Axis.vertical,
+                                  itemBuilder: (context, index) {
+                                    final song = songs[index];
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 10.0),
+                                      child: Column(
                                         children: [
-                                          Container(
-                                            height: 50,
-                                            width: 50,
-                                            child: Image(
-                                              image: AssetImage('assets/burna.png'),
-                                              fit: BoxFit.contain,
+                                          GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (_) =>
+                                                          MusicPlayerPage(
+                                                            imagePath:
+                                                                song.imagePath,
+                                                            musicTitle:
+                                                                song.title,
+                                                            artistName:
+                                                                song.artist,
+                                                          )));
+                                            },
+                                            child: Container(
+                                              color: Colors.transparent,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.0),
+                                                        child: Image.asset(
+                                                          song.imagePath,
+                                                          height: 50,
+                                                          width: 50,
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            song.title,
+                                                            style: mediumBold(
+                                                                primaryWhite),
+                                                          ),
+                                                          Text(
+                                                            song.artist,
+                                                            style:
+                                                                smallText(grey),
+                                                          )
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                  IconButton(
+                                                      onPressed: () {
+                                                        // _showSongDetails(context, song);
+                                                      },
+                                                      icon: Icon(
+                                                        FontAwesomeIcons
+                                                            .ellipsisVertical,
+                                                        color: primaryWhite,
+                                                      ))
+                                                ],
+                                              ),
                                             ),
                                           ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Higher',
-                                                style: mediumBold(primaryWhite),
-                                              ),
-                                              Text(
-                                                'Burna Boy',
-                                                style: smallText(grey),
-                                              )
-                                            ],
-                                          )
                                         ],
                                       ),
-                                      IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            FontAwesomeIcons.ellipsisVertical,
-                                            color: primaryWhite,
-                                          ))
-                                    ],
-                                  ),
+                                    );
+                                  },
                                 ),
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              GestureDetector(
-                                onTap: (){
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) => MusicPlayerPage(
-                                            imagePath: 'assets/davidoplay.png',
-                                            musicTitle: 'Feel',
-                                            artistName: 'Davido',
-                                          )));
-                                },
-                                child: Container(
-                                  color: Colors.transparent,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Container(
-                                            height: 50,
-                                            width: 50,
-                                            child: Image(
-                                              image:
-                                                  AssetImage('assets/davido.png'),
-                                              fit: BoxFit.contain,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                'Feel',
-                                                style: mediumBold(primaryWhite),
-                                              ),
-                                              Text(
-                                                'Davido',
-                                                style: smallText(grey),
-                                              )
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                      IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            FontAwesomeIcons.ellipsisVertical,
-                                            color: primaryWhite,
-                                          ))
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        height: 50,
-                                        width: 50,
-                                        child: Image(
-                                          image: AssetImage('assets/asake.png'),
-                                          fit: BoxFit.contain,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Wave',
-                                            style: mediumBold(primaryWhite),
-                                          ),
-                                          Text(
-                                            'Asake & Central Cee',
-                                            style: smallText(grey),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        FontAwesomeIcons.ellipsisVertical,
-                                        color: primaryWhite,
-                                      ))
-                                ],
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        height: 50,
-                                        width: 50,
-                                        child: Image(
-                                          image:
-                                              AssetImage('assets/savage.png'),
-                                          fit: BoxFit.contain,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Wildest Dream',
-                                            style: mediumBold(primaryWhite),
-                                          ),
-                                          Text(
-                                            '21 Savage',
-                                            style: smallText(grey),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        FontAwesomeIcons.ellipsisVertical,
-                                        color: primaryWhite,
-                                      ))
-                                ],
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        height: 50,
-                                        width: 50,
-                                        child: Image(
-                                          image: AssetImage('assets/city.png'),
-                                          fit: BoxFit.contain,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'City Boys',
-                                            style: mediumBold(primaryWhite),
-                                          ),
-                                          Text(
-                                            'Burna Boy',
-                                            style: smallText(grey),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        FontAwesomeIcons.ellipsisVertical,
-                                        color: primaryWhite,
-                                      ))
-                                ],
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        height: 50,
-                                        width: 50,
-                                        child: Image(
-                                          image:
-                                              AssetImage('assets/davido.png'),
-                                          fit: BoxFit.contain,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Unavailable',
-                                            style: mediumBold(primaryWhite),
-                                          ),
-                                          Text(
-                                            'Davido',
-                                            style: smallText(grey),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        FontAwesomeIcons.ellipsisVertical,
-                                        color: primaryWhite,
-                                      ))
-                                ],
-                              ),
-                              SizedBox(
-                                height: 15,
                               ),
                             ],
                           ),
@@ -390,7 +244,7 @@ class _DiscoverState extends State<Discover> {
                       width: 20,
                     ),
                     Container(
-                      height: height * 0.45,
+                      height: height * 0.5,
                       width: width * 0.75,
                       decoration: BoxDecoration(
                           gradient: LinearGradient(
@@ -423,272 +277,95 @@ class _DiscoverState extends State<Discover> {
                               SizedBox(
                                 height: 20,
                               ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        height: 50,
-                                        width: 50,
-                                        child: Image(
-                                          image: AssetImage('assets/burna.png'),
-                                          fit: BoxFit.contain,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                              Container(
+                                height: height * 0.4,
+                                width: width,
+                                child: ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  itemCount: songs.length,
+                                  scrollDirection: Axis.vertical,
+                                  itemBuilder: (context, index) {
+                                    final song = songs[index];
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 10.0),
+                                      child: Column(
                                         children: [
-                                          Text(
-                                            'Higher',
-                                            style: mediumBold(primaryWhite),
+                                          GestureDetector(
+                                            onTap: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (_) =>
+                                                          MusicPlayerPage(
+                                                            imagePath:
+                                                                'assets/burnaplay.png',
+                                                            musicTitle:
+                                                                'Higher',
+                                                            artistName:
+                                                                'Burna Boy',
+                                                          )));
+                                            },
+                                            child: Container(
+                                              color: Colors.transparent,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.0),
+                                                        child: Image.asset(
+                                                          song.imagePath,
+                                                          height: 50,
+                                                          width: 50,
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Text(
+                                                            song.title,
+                                                            style: mediumBold(
+                                                                primaryWhite),
+                                                          ),
+                                                          Text(
+                                                            song.artist,
+                                                            style:
+                                                                smallText(grey),
+                                                          )
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                  IconButton(
+                                                      onPressed: () {
+                                                        // _showSongDetails(context, song);
+                                                      },
+                                                      icon: Icon(
+                                                        FontAwesomeIcons
+                                                            .ellipsisVertical,
+                                                        color: primaryWhite,
+                                                      ))
+                                                ],
+                                              ),
+                                            ),
                                           ),
-                                          Text(
-                                            'Burna Boy',
-                                            style: smallText(grey),
-                                          )
                                         ],
-                                      )
-                                    ],
-                                  ),
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        FontAwesomeIcons.ellipsisVertical,
-                                        color: primaryWhite,
-                                      ))
-                                ],
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        height: 50,
-                                        width: 50,
-                                        child: Image(
-                                          image:
-                                              AssetImage('assets/davido.png'),
-                                          fit: BoxFit.contain,
-                                        ),
                                       ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Feel',
-                                            style: mediumBold(primaryWhite),
-                                          ),
-                                          Text(
-                                            'Davido',
-                                            style: smallText(grey),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        FontAwesomeIcons.ellipsisVertical,
-                                        color: primaryWhite,
-                                      ))
-                                ],
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        height: 50,
-                                        width: 50,
-                                        child: Image(
-                                          image: AssetImage('assets/asake.png'),
-                                          fit: BoxFit.contain,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Wave',
-                                            style: mediumBold(primaryWhite),
-                                          ),
-                                          Text(
-                                            'Asake & Central Cee',
-                                            style: smallText(grey),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        FontAwesomeIcons.ellipsisVertical,
-                                        color: primaryWhite,
-                                      ))
-                                ],
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        height: 50,
-                                        width: 50,
-                                        child: Image(
-                                          image:
-                                              AssetImage('assets/savage.png'),
-                                          fit: BoxFit.contain,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Wildest Dream',
-                                            style: mediumBold(primaryWhite),
-                                          ),
-                                          Text(
-                                            '21 Savage',
-                                            style: smallText(grey),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        FontAwesomeIcons.ellipsisVertical,
-                                        color: primaryWhite,
-                                      ))
-                                ],
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        height: 50,
-                                        width: 50,
-                                        child: Image(
-                                          image: AssetImage('assets/city.png'),
-                                          fit: BoxFit.contain,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'City Boys',
-                                            style: mediumBold(primaryWhite),
-                                          ),
-                                          Text(
-                                            'Burna Boy',
-                                            style: smallText(grey),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        FontAwesomeIcons.ellipsisVertical,
-                                        color: primaryWhite,
-                                      ))
-                                ],
-                              ),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Container(
-                                        height: 50,
-                                        width: 50,
-                                        child: Image(
-                                          image:
-                                              AssetImage('assets/davido.png'),
-                                          fit: BoxFit.contain,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'Unavailable',
-                                            style: mediumBold(primaryWhite),
-                                          ),
-                                          Text(
-                                            'Davido',
-                                            style: smallText(grey),
-                                          )
-                                        ],
-                                      )
-                                    ],
-                                  ),
-                                  IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        FontAwesomeIcons.ellipsisVertical,
-                                        color: primaryWhite,
-                                      ))
-                                ],
-                              ),
-                              SizedBox(
-                                height: 15,
+                                    );
+                                  },
+                                ),
                               ),
                             ],
                           ),
@@ -718,10 +395,10 @@ class _DiscoverState extends State<Discover> {
                             context,
                             MaterialPageRoute(
                                 builder: (_) => MusicPlayerPage(
-                                  imagePath: 'assets/album1.png',
-                                  musicTitle: 'Wave',
-                                  artistName: 'Asake',
-                                )));
+                                      imagePath: 'assets/album1.png',
+                                      musicTitle: 'Wave',
+                                      artistName: 'Asake',
+                                    )));
                       },
                       child: Container(
                         height: height * 0.2,
@@ -744,10 +421,10 @@ class _DiscoverState extends State<Discover> {
                             context,
                             MaterialPageRoute(
                                 builder: (_) => MusicPlayerPage(
-                                  imagePath: 'assets/album2.png',
-                                  musicTitle: 'Wave',
-                                  artistName: 'Asake',
-                                )));
+                                      imagePath: 'assets/album2.png',
+                                      musicTitle: 'Wave',
+                                      artistName: 'Asake',
+                                    )));
                       },
                       child: Container(
                         height: height * 0.2,
@@ -770,10 +447,10 @@ class _DiscoverState extends State<Discover> {
                             context,
                             MaterialPageRoute(
                                 builder: (_) => MusicPlayerPage(
-                                  imagePath: 'assets/album3.png',
-                                  musicTitle: 'Wave',
-                                  artistName: 'Asake',
-                                )));
+                                      imagePath: 'assets/album3.png',
+                                      musicTitle: 'Wave',
+                                      artistName: 'Asake',
+                                    )));
                       },
                       child: Container(
                         height: height * 0.2,

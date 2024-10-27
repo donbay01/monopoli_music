@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:monopoli/screens/dashboard/discover/index.dart';
 import 'package:monopoli/screens/dashboard/library/index.dart';
+import 'package:monopoli/screens/dashboard/myLibrary.dart';
 import 'package:monopoli/screens/dashboard/search/index.dart';
 import 'package:monopoli/services/music.dart';
 import 'package:monopoli/theme/colors.dart';
@@ -48,7 +49,7 @@ class _DashboardState extends State<Dashboard> {
           ),
         ),
         PersistentTabConfig(
-          screen: const Library(),
+          screen: const Mylibrary(),
           item: ItemConfig(
               icon: const Icon(
                 Icons.library_music,

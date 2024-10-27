@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:monopoli/theme/colors.dart';
 import 'package:monopoli/theme/text_style.dart';
 

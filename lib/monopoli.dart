@@ -4,7 +4,6 @@ import 'package:monopoli/screens/dashboard/index.dart';
 import 'package:monopoli/screens/splashscreen/splash_screen.dart';
 import 'package:monopoli/services/auth.dart';
 import 'package:monopoli/theme/colors.dart';
-import 'package:monopoli/widgets/player/auth.dart';
 import 'package:zap_sizer/zap_sizer.dart';
 
 class Monopoli extends StatefulWidget {

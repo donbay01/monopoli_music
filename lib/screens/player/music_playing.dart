@@ -15,7 +15,8 @@ class MusicPlayerPage extends StatefulWidget {
   MusicPlayerPage(
       {required this.imagePath,
       required this.musicTitle,
-      required this.artistName});
+      required this.artistName
+      });
 
   @override
   _MusicPlayerPageState createState() => _MusicPlayerPageState();
