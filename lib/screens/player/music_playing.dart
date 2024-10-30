@@ -145,7 +145,7 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
                     togglePlayer();
                   },
                   icon: Icon(
-                    FontAwesomeIcons.windowMinimize,
+                    Icons.arrow_back_ios_new_outlined,
                     color: primaryWhite,
                   )),
               SizedBox(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:monopoli/screens/albums/index.dart';
 import 'package:monopoli/screens/player/music_playing.dart';
 import 'package:monopoli/theme/colors.dart';
 import 'package:monopoli/theme/text_style.dart';
@@ -386,97 +387,7 @@ class _DiscoverState extends ConsumerState<Discover>
                 'Trending Album',
                 style: mediumSemiBold(primaryWhite),
               ),
-              SizedBox(
-                height: 20,
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => MusicPlayerPage(
-                                      imagePath: 'assets/album1.png',
-                                      musicTitle: 'Wave',
-                                      artistName: 'Asake',
-                                    )));
-                      },
-                      child: Container(
-                        height: height * 0.2,
-                        width: width * 0.4,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Image(
-                          image: AssetImage('assets/album1.png'),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => MusicPlayerPage(
-                                      imagePath: 'assets/album2.png',
-                                      musicTitle: 'Wave',
-                                      artistName: 'Asake',
-                                    )));
-                      },
-                      child: Container(
-                        height: height * 0.2,
-                        width: width * 0.4,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Image(
-                          image: AssetImage('assets/album2.png'),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => MusicPlayerPage(
-                                      imagePath: 'assets/album3.png',
-                                      musicTitle: 'Wave',
-                                      artistName: 'Asake',
-                                    )));
-                      },
-                      child: Container(
-                        height: height * 0.2,
-                        width: width * 0.4,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Image(
-                          image: AssetImage('assets/album3.png'),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 150,
-              ),
+              AlbumListScreen(),
             ],
           ),
         ),
