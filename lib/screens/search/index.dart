@@ -1,6 +1,8 @@
 import 'dart:convert';
-
+import 'dart:io';
+import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
+import 'package:monopoli/helper/snackbar.dart';
 import 'package:monopoli/screens/player/index.dart';
 import 'package:monopoli/screens/search/gridview.dart';
 import 'package:monopoli/services/music.dart';
@@ -11,6 +13,9 @@ import 'package:monopoli/widgets/user/avatar.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:textfield_search/textfield_search.dart';
 import 'package:zap_sizer/zap_sizer.dart';
+
+import '../../models/audio/track.dart';
+import '../player/music_playing.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -23,10 +28,18 @@ class _SearchScreenState extends State<SearchScreen> {
   TextEditingController searchController = TextEditingController();
 
   Future<List> fetchData() async {
-    String _inputText = searchController.text;
-    var res = await MusicService.search(_inputText);
+    try {
+      String _inputText = searchController.text;
+      var res = await MusicService.search(_inputText);
 
-    return res.tracks!.items.map((a) => a.name).toList();
+      return res.tracks!.items;
+    } on HttpException catch (e) {
+      SnackbarHelper.displayToastMessage(
+        context: context,
+        message: e.message,
+      );
+      return [];
+    }
   }
 
   @override
@@ -49,7 +62,9 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 50,),
+                SizedBox(
+                  height: 50,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -96,17 +111,19 @@ class _SearchScreenState extends State<SearchScreen> {
                     ),
                   ),
                   future: () {
-                    // return fetchData();
+                    return fetchData();
                   },
-                  getSelectedValue: (value) async {
-                    // print(
-                    //   value,
-                    // );
-                    // var audio = await MusicService.getTrackURL(value);
-                    // pushScreenWithoutNavBar(
-                    //   context,
-                    //   AppPlayer(audio: audio),
-                    // );
+                  getSelectedValue: (Track value) async {
+                    context.loaderOverlay.show();
+                    var audio = await MusicService.getTrackURL(value.id);
+                    context.loaderOverlay.hide();
+                    pushScreenWithoutNavBar(
+                      context,
+                      MusicPlayerPage(
+                        audio: audio,
+                        track: value,
+                      ),
+                    );
                   },
                 ),
                 SizedBox(
@@ -119,10 +136,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 SizedBox(
                   height: 20,
                 ),
-                Container(
-                    height: height,
-                    width: width,
-                    child: GenreGridPage()),
+                Container(height: height, width: width, child: GenreGridPage()),
               ],
             ),
           ),

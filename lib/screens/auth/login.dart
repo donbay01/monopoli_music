@@ -58,7 +58,7 @@ class _LoginState extends State<Login> {
               ),
             ),
             child: Padding(
-              padding:  EdgeInsets.all(15.0),
+              padding: EdgeInsets.all(15.0),
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,

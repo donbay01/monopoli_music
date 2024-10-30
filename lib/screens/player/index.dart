@@ -93,9 +93,11 @@ class AppPlayerState extends State<AppPlayer> with WidgetsBindingObserver {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          leading: IconButton(onPressed: (){
-            Navigator.pop(context);
-          }, icon: Icon(Icons.close)),
+          leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.close)),
         ),
         body: SafeArea(
           child: Column(

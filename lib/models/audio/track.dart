@@ -24,6 +24,7 @@ class Track {
   final String type;
   final String id;
   final String name;
+  final String label;
   final String shareUrl;
   final bool explicit;
   final int durationMs;
@@ -41,6 +42,7 @@ class Track {
     required this.durationText,
     required this.artists,
     required this.album,
+    required this.label,
   });
 
   factory Track.fromJson(Map<String, dynamic> json) => _$TrackFromJson(json);

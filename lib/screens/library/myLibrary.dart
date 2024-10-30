@@ -171,14 +171,16 @@ class _MylibraryState extends ConsumerState<Mylibrary> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => MusicPlayerPage(
-                                          imagePath: 'assets/burnaplay.png',
-                                          musicTitle: 'Higher',
-                                          artistName: 'Burna Boy',
-                                        )));
+                            // Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (_) => MusicPlayerPage(
+                            //       imagePath: 'assets/burnaplay.png',
+                            //       musicTitle: 'Higher',
+                            //       artistName: 'Burna Boy',
+                            //     ),
+                            //   ),
+                            // );
                           },
                           child: Container(
                             color: Colors.transparent,

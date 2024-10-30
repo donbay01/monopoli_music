@@ -22,6 +22,7 @@ Track _$TrackFromJson(Map<String, dynamic> json) => Track(
       type: json['type'] as String,
       id: json['id'] as String,
       name: json['name'] as String,
+      label: '${json['name']} - (${json['artists'][0]['name']})',
       shareUrl: json['shareUrl'] as String,
       explicit: json['explicit'] as bool,
       durationMs: (json['durationMs'] as num).toInt(),
@@ -35,6 +36,8 @@ Track _$TrackFromJson(Map<String, dynamic> json) => Track(
 Map<String, dynamic> _$TrackToJson(Track instance) => <String, dynamic>{
       'type': instance.type,
       'id': instance.id,
+      'label': '${instance.name} - (${instance.artists.first.name})',
+      'value': instance.id,
       'name': instance.name,
       'shareUrl': instance.shareUrl,
       'explicit': instance.explicit,

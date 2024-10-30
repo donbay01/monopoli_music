@@ -80,7 +80,7 @@ final List<Song> songs = [
 ];
 
 class _DiscoverState extends ConsumerState<Discover>
-    with TickerProviderStateMixin{
+    with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -104,7 +104,7 @@ class _DiscoverState extends ConsumerState<Discover>
                     'Discover',
                     style: largeText(primaryWhite),
                   ),
-                   UserAvatar(
+                  UserAvatar(
                     user: user,
                   ),
                 ],
@@ -165,18 +165,18 @@ class _DiscoverState extends ConsumerState<Discover>
                                         children: [
                                           GestureDetector(
                                             onTap: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (_) =>
-                                                          MusicPlayerPage(
-                                                            imagePath:
-                                                                song.imagePath,
-                                                            musicTitle:
-                                                                song.title,
-                                                            artistName:
-                                                                song.artist,
-                                                          )));
+                                              // Navigator.push(
+                                              //     context,
+                                              //     MaterialPageRoute(
+                                              //         builder: (_) =>
+                                              //             MusicPlayerPage(
+                                              //               imagePath:
+                                              //                   song.imagePath,
+                                              //               musicTitle:
+                                              //                   song.title,
+                                              //               artistName:
+                                              //                   song.artist,
+                                              //             )));
                                             },
                                             child: Container(
                                               color: Colors.transparent,
@@ -222,7 +222,8 @@ class _DiscoverState extends ConsumerState<Discover>
                                                   ),
                                                   IconButton(
                                                       onPressed: () {
-                                                        _showSongDetails(context, song);
+                                                        _showSongDetails(
+                                                            context, song);
                                                       },
                                                       icon: Icon(
                                                         FontAwesomeIcons
@@ -297,18 +298,18 @@ class _DiscoverState extends ConsumerState<Discover>
                                         children: [
                                           GestureDetector(
                                             onTap: () {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (_) =>
-                                                          MusicPlayerPage(
-                                                            imagePath:
-                                                                'assets/burnaplay.png',
-                                                            musicTitle:
-                                                                'Higher',
-                                                            artistName:
-                                                                'Burna Boy',
-                                                          )));
+                                              // Navigator.push(
+                                              //     context,
+                                              //     MaterialPageRoute(
+                                              //         builder: (_) =>
+                                              //             MusicPlayerPage(
+                                              //               imagePath:
+                                              //                   'assets/burnaplay.png',
+                                              //               musicTitle:
+                                              //                   'Higher',
+                                              //               artistName:
+                                              //                   'Burna Boy',
+                                              //             )));
                                             },
                                             child: Container(
                                               color: Colors.transparent,
@@ -395,14 +396,14 @@ class _DiscoverState extends ConsumerState<Discover>
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => MusicPlayerPage(
-                                      imagePath: 'assets/album1.png',
-                                      musicTitle: 'Wave',
-                                      artistName: 'Asake',
-                                    )));
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (_) => MusicPlayerPage(
+                        //               imagePath: 'assets/album1.png',
+                        //               musicTitle: 'Wave',
+                        //               artistName: 'Asake',
+                        //             )));
                       },
                       child: Container(
                         height: height * 0.2,
@@ -421,14 +422,14 @@ class _DiscoverState extends ConsumerState<Discover>
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => MusicPlayerPage(
-                                      imagePath: 'assets/album2.png',
-                                      musicTitle: 'Wave',
-                                      artistName: 'Asake',
-                                    )));
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (_) => MusicPlayerPage(
+                        //               imagePath: 'assets/album2.png',
+                        //               musicTitle: 'Wave',
+                        //               artistName: 'Asake',
+                        //             )));
                       },
                       child: Container(
                         height: height * 0.2,
@@ -447,14 +448,14 @@ class _DiscoverState extends ConsumerState<Discover>
                     ),
                     GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => MusicPlayerPage(
-                                      imagePath: 'assets/album3.png',
-                                      musicTitle: 'Wave',
-                                      artistName: 'Asake',
-                                    )));
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (_) => MusicPlayerPage(
+                        //               imagePath: 'assets/album3.png',
+                        //               musicTitle: 'Wave',
+                        //               artistName: 'Asake',
+                        //             )));
                       },
                       child: Container(
                         height: height * 0.2,

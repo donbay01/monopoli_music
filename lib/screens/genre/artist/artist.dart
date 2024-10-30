@@ -208,7 +208,10 @@ class _ArtistSelectionPageState extends State<ArtistSelectionPage> {
               color: primaryWhite,
             ),
           ),
-          title: Text('Select your favourite artists',style: mediumSemiBold(primaryWhite),),
+          title: Text(
+            'Select your favourite artists',
+            style: mediumSemiBold(primaryWhite),
+          ),
         ),
         body: Container(
           decoration: BoxDecoration(
@@ -221,93 +224,95 @@ class _ArtistSelectionPageState extends State<ArtistSelectionPage> {
           ),
           child: Padding(
             padding: const EdgeInsets.all(15.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'You may select three (3) genres that matches your taste',
-                  style: smallText(primaryWhite),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                TextField(
-                  controller: searchController,
-                  style: mediumText(primaryWhite),
-                  decoration: InputDecoration(
-                    labelText: 'Search for artists',
-                    labelStyle: smallText(primaryWhite),
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: primaryWhite,
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: const BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20),
-                      borderSide: const BorderSide(
-                        color: purple,
-                        width: 1.0,
-                      ),
-                    ),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'You may select three (3) genres that matches your taste',
+                    style: smallText(primaryWhite),
+                    textAlign: TextAlign.center,
                   ),
-                  onChanged: onSearchChanged,
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                buildSelectedArtists(),
-                buildArtistGrid(),
-                buildSearchResults(),
-                GenreButton(
-                  child: Text(
-                    'Next',
-                    style: mediumBold(primaryBlack),
+                  SizedBox(
+                    height: 20,
                   ),
-                  function: () async {
-                    try {
-                      context.loaderOverlay.show();
-                      await AuthService.updateUser({
-                        'favoriteArtists': selectedArtists,
-                      });
-                      context.loaderOverlay.hide();
-
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => Dashboard(),
+                  TextField(
+                    controller: searchController,
+                    style: mediumText(primaryWhite),
+                    decoration: InputDecoration(
+                      labelText: 'Search for artists',
+                      labelStyle: smallText(primaryWhite),
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: primaryWhite,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: const BorderSide(
+                          color: Colors.grey,
+                          width: 0.5,
                         ),
-                        (route) => false,
-                      );
-                    } on FirebaseAuthException catch (e) {
-                      context.loaderOverlay.hide();
-
-                      SnackbarHelper.displayToastMessage(
-                        context: context,
-                        message: e.message!,
-                      );
-                    }
-                  },
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextButton(
-                    onPressed: () {},
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        borderSide: const BorderSide(
+                          color: purple,
+                          width: 1.0,
+                        ),
+                      ),
+                    ),
+                    onChanged: onSearchChanged,
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  buildSelectedArtists(),
+                  buildArtistGrid(),
+                  buildSearchResults(),
+                  GenreButton(
                     child: Text(
-                      'Skip',
-                      style: mediumBold(purple),
-                    )),
-                SizedBox(
-                  height: 20,
-                )
-              ],
+                      'Next',
+                      style: mediumBold(primaryBlack),
+                    ),
+                    function: () async {
+                      try {
+                        context.loaderOverlay.show();
+                        await AuthService.updateUser({
+                          'favoriteArtists': selectedArtists,
+                        });
+                        context.loaderOverlay.hide();
+
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => Dashboard(),
+                          ),
+                          (route) => false,
+                        );
+                      } on FirebaseAuthException catch (e) {
+                        context.loaderOverlay.hide();
+
+                        SnackbarHelper.displayToastMessage(
+                          context: context,
+                          message: e.message!,
+                        );
+                      }
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        'Skip',
+                        style: mediumBold(purple),
+                      )),
+                  SizedBox(
+                    height: 20,
+                  )
+                ],
+              ),
             ),
           ),
         ),
