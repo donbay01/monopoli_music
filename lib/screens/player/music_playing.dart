@@ -182,6 +182,7 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
                 height: 50,
               ),
               IconButton(
+<<<<<<< HEAD
                 onPressed: () {
                   togglePlayer();
                 },
@@ -190,6 +191,15 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
                   color: primaryWhite,
                 ),
               ),
+=======
+                  onPressed: () {
+                    togglePlayer();
+                  },
+                  icon: Icon(
+                    Icons.arrow_back_ios_new_outlined,
+                    color: primaryWhite,
+                  )),
+>>>>>>> 646bee90b28c6469d094a8a5804653e0bca36662
               SizedBox(
                 height: 40,
               ),

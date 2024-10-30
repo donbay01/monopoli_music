@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:monopoli/screens/albums/index.dart';
 import 'package:monopoli/screens/player/music_playing.dart';
 import 'package:monopoli/theme/colors.dart';
 import 'package:monopoli/theme/text_style.dart';
@@ -387,6 +388,7 @@ class _DiscoverState extends ConsumerState<Discover>
                 'Trending Album',
                 style: mediumSemiBold(primaryWhite),
               ),
+<<<<<<< HEAD
               SizedBox(
                 height: 20,
               ),
@@ -478,6 +480,9 @@ class _DiscoverState extends ConsumerState<Discover>
               SizedBox(
                 height: 150,
               ),
+=======
+              AlbumListScreen(),
+>>>>>>> 646bee90b28c6469d094a8a5804653e0bca36662
             ],
           ),
         ),
