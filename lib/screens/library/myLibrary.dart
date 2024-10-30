@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:monopoli/theme/colors.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:zap_sizer/zap_sizer.dart';
 
+import '../../providers/user_provider.dart';
 import '../../theme/text_style.dart';
 import '../../widgets/user/avatar.dart';
 import '../player/music_playing.dart';
 
-class Mylibrary extends StatefulWidget {
+class Mylibrary extends ConsumerStatefulWidget {
   const Mylibrary({super.key});
 
   @override
-  State<Mylibrary> createState() => _MylibraryState();
+  ConsumerState<Mylibrary> createState() => _MylibraryState();
 }
 
 class Song {
@@ -79,7 +81,7 @@ final List<Song> songs = [
   ),
 ];
 
-class _MylibraryState extends State<Mylibrary> {
+class _MylibraryState extends ConsumerState<Mylibrary> {
   String selectedText = 'Playlist';
   final List<String> items = [
     'Playlist',
@@ -92,6 +94,7 @@ class _MylibraryState extends State<Mylibrary> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    var user = ref.watch(userProvider);
     return Scaffold(
       backgroundColor: scaffoldBlack,
       body: Padding(
@@ -109,7 +112,9 @@ class _MylibraryState extends State<Mylibrary> {
                   'Library',
                   style: largeText(primaryWhite),
                 ),
-                UserAvatar()
+                UserAvatar(
+                  user: user,
+                )
               ],
             ),
             SizedBox(
@@ -307,45 +312,81 @@ class _MylibraryState extends State<Mylibrary> {
                     height: 50,
                   ),
                   GestureDetector(
-                    onTap: (){},
+                    onTap: () {},
                     child: Row(
                       children: [
-                        Icon(Icons.playlist_add,color: primaryWhite,size: 30,),
-                        SizedBox(width: 20,),
-                        Text('Add to playlist',style: mediumBold(primaryWhite),)
+                        Icon(
+                          Icons.playlist_add,
+                          color: primaryWhite,
+                          size: 30,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          'Add to playlist',
+                          style: mediumBold(primaryWhite),
+                        )
                       ],
                     ),
                   ),
                   SizedBox(height: 20),
                   GestureDetector(
-                    onTap: (){},
+                    onTap: () {},
                     child: Row(
                       children: [
-                        Icon(Icons.remove,color: primaryWhite,size: 30,),
-                        SizedBox(width: 20,),
-                        Text('Remove from library',style: mediumBold(primaryWhite),)
+                        Icon(
+                          Icons.remove,
+                          color: primaryWhite,
+                          size: 30,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          'Remove from library',
+                          style: mediumBold(primaryWhite),
+                        )
                       ],
                     ),
                   ),
                   SizedBox(height: 20),
                   GestureDetector(
-                    onTap: (){},
+                    onTap: () {},
                     child: Row(
                       children: [
-                        Icon(Icons.download_for_offline_outlined,color: primaryWhite,size: 30,),
-                        SizedBox(width: 20,),
-                        Text('Download',style: mediumBold(primaryWhite),)
+                        Icon(
+                          Icons.download_for_offline_outlined,
+                          color: primaryWhite,
+                          size: 30,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          'Download',
+                          style: mediumBold(primaryWhite),
+                        )
                       ],
                     ),
                   ),
                   SizedBox(height: 20),
                   GestureDetector(
-                    onTap: (){},
+                    onTap: () {},
                     child: Row(
                       children: [
-                        Icon(Icons.ios_share,color: primaryWhite,size: 30,),
-                        SizedBox(width: 20,),
-                        Text('Share',style: mediumBold(primaryWhite),)
+                        Icon(
+                          Icons.ios_share,
+                          color: primaryWhite,
+                          size: 30,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          'Share',
+                          style: mediumBold(primaryWhite),
+                        )
                       ],
                     ),
                   ),

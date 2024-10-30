@@ -24,7 +24,7 @@ class Slider2 extends StatelessWidget {
             height: 30,
           ),
           Text(
-            'Listen to your\nFavorite artist non-stop',
+            'Listen to your\nfavorite artist non-stop',
             style: largeText(primaryWhite),
             textAlign: TextAlign.start,
           )

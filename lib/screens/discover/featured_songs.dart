@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:monopoli/screens/dashboard/discover/playlist/index.dart';
+import 'package:monopoli/screens/discover/playlist/index.dart';
 import 'package:monopoli/services/music.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:zap_sizer/zap_sizer.dart';

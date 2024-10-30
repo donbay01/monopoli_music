@@ -48,8 +48,8 @@ class _OnboardingCarouselState extends State<OnboardingCarousel> {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.1,
               ),
-              Pulse(
-                delay: const Duration(milliseconds: 100),
+              SlideInRight(
+                delay: const Duration(milliseconds: 200),
                 child: Carousel()
               ),
               const SizedBox(
@@ -57,7 +57,7 @@ class _OnboardingCarouselState extends State<OnboardingCarousel> {
               ),
               SlideInUp(
                 from: 100.h,
-                delay: const Duration(milliseconds: 500),
+                delay: const Duration(milliseconds: 300),
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.push(

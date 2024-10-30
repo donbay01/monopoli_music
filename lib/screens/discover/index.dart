@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:monopoli/screens/dashboard/discover/featured_songs.dart';
+import 'package:monopoli/screens/player/music_playing.dart';
 import 'package:monopoli/theme/colors.dart';
 import 'package:monopoli/theme/text_style.dart';
 import 'package:monopoli/widgets/user/avatar.dart';
 import 'package:zap_sizer/zap_sizer.dart';
+import '../../../providers/user_provider.dart';
 
-import '../../player/music_playing.dart';
-
-class Discover extends StatefulWidget {
+class Discover extends ConsumerStatefulWidget {
   const Discover({super.key});
 
   @override
-  State<Discover> createState() => _DiscoverState();
+  ConsumerState<Discover> createState() => _DiscoverState();
 }
 
 class Song {
@@ -79,11 +79,13 @@ final List<Song> songs = [
   ),
 ];
 
-class _DiscoverState extends State<Discover> {
+class _DiscoverState extends ConsumerState<Discover>
+    with TickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    var user = ref.watch(userProvider);
     return Scaffold(
       backgroundColor: scaffoldBlack,
       body: Padding(
@@ -102,7 +104,9 @@ class _DiscoverState extends State<Discover> {
                     'Discover',
                     style: largeText(primaryWhite),
                   ),
-                  const UserAvatar(),
+                   UserAvatar(
+                    user: user,
+                  ),
                 ],
               ),
               // const FeaturedSongs(),
@@ -218,7 +222,7 @@ class _DiscoverState extends State<Discover> {
                                                   ),
                                                   IconButton(
                                                       onPressed: () {
-                                                        // _showSongDetails(context, song);
+                                                        _showSongDetails(context, song);
                                                       },
                                                       icon: Icon(
                                                         FontAwesomeIcons
@@ -477,6 +481,164 @@ class _DiscoverState extends State<Discover> {
           ),
         ),
       ),
+    );
+  }
+
+  void _showSongDetails(BuildContext context, Song song) {
+    showModalBottomSheet(
+      backgroundColor: Colors.grey[900],
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+      ),
+      builder: (context) {
+        var height = MediaQuery.of(context).size.height;
+        var width = MediaQuery.of(context).size.width;
+        return Container(
+          height: height * 0.6,
+          width: width,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: Image.asset(
+                              song.imagePath,
+                              height: 70,
+                              width: 70,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                song.title,
+                                style: mediumBold(primaryWhite),
+                              ),
+                              Text(
+                                song.artist,
+                                style: smallText(grey),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(
+                            Icons.clear,
+                            color: primaryWhite,
+                          ))
+                    ],
+                  ),
+                  Divider(
+                    color: grey,
+                    height: 50,
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.playlist_add,
+                          color: primaryWhite,
+                          size: 30,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          'Add to playlist',
+                          style: mediumBold(primaryWhite),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.remove,
+                          color: primaryWhite,
+                          size: 30,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          'Remove from library',
+                          style: mediumBold(primaryWhite),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.download_for_offline_outlined,
+                          color: primaryWhite,
+                          size: 30,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          'Download',
+                          style: mediumBold(primaryWhite),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.ios_share,
+                          color: primaryWhite,
+                          size: 30,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          'Share',
+                          style: mediumBold(primaryWhite),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 100),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

@@ -37,6 +37,11 @@ class AuthService {
     return cred;
   }
 
+  static Future<void> deleteAccount() {
+    var user = getUser()!;
+    return user.delete();
+  }
+
   static Future<void> resetPassword(String email) =>
       auth.sendPasswordResetEmail(email: email);
 

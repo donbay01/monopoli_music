@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:monopoli/screens/player/index.dart';
+import 'package:monopoli/screens/search/gridview.dart';
 import 'package:monopoli/services/music.dart';
 import 'package:monopoli/theme/colors.dart';
 import 'package:monopoli/theme/text_style.dart';
@@ -36,6 +37,8 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -116,6 +119,10 @@ class _SearchScreenState extends State<SearchScreen> {
                 SizedBox(
                   height: 20,
                 ),
+                Container(
+                    height: height,
+                    width: width,
+                    child: GenreGridPage()),
               ],
             ),
           ),
