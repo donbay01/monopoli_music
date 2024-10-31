@@ -2,19 +2,19 @@ import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:monopoli/models/audio/track.dart';
+import 'package:monopoli/providers/player.dart';
 import 'package:monopoli/screens/discover/index.dart';
 import 'package:monopoli/theme/colors.dart';
 import 'package:monopoli/theme/text_style.dart';
 import 'package:palette_generator/palette_generator.dart';
-
 import '../../models/audio/index.dart';
 
-class MusicPlayerPage extends StatefulWidget {
+class MusicPlayerPage extends ConsumerStatefulWidget {
   final Track track;
   final AudioApiResponse audio;
 
@@ -27,14 +27,14 @@ class MusicPlayerPage extends StatefulWidget {
   _MusicPlayerPageState createState() => _MusicPlayerPageState();
 }
 
-class _MusicPlayerPageState extends State<MusicPlayerPage> {
+class _MusicPlayerPageState extends ConsumerState<MusicPlayerPage> {
   Color? dominantColor;
   Color? vibrantColor;
 
   Timer? timer;
   bool _isFavorited = false;
 
-  AudioPlayer _audioPlayer = AudioPlayer();
+  late AudioPlayer _audioPlayer;
   late Duration totalTime = Duration.zero;
   late Duration currentTime = Duration.zero;
   bool isMinimized = false;
@@ -57,13 +57,22 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
           ),
         ),
       );
-      totalTime = _audioPlayer.duration ?? Duration.zero;
-      setState(() {});
+
+      _audioPlayer.durationStream.listen((duration) {
+        if (duration != null) {
+          setState(() {
+            totalTime = duration;
+          });
+        }
+      });
+
       _audioPlayer.positionStream.listen((position) {
         setState(() {
           currentTime = position;
         });
       });
+
+      togglePlayPause();
     } catch (e) {
       print("Error loading audio: $e");
     }
@@ -71,10 +80,17 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
 
   @override
   void initState() {
-    setupAudioPlayer();
+    totalTime = Duration(
+      milliseconds: widget.audio.youtubeVideo.audio.first.durationMs,
+    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _audioPlayer = ref.read(player);
+      setupAudioPlayer();
+      _updateBackgroundColors();
+      ref.read(audioProvider.notifier).state = widget.audio;
+      ref.read(trackProvider.notifier).state = widget.track;
+    });
     super.initState();
-    _updateBackgroundColors();
-    startTimer();
   }
 
   void togglePlayer() {
@@ -86,7 +102,7 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
   @override
   void dispose() {
     _audioPlayer.dispose();
-    timer?.cancel(); // Cancel the timer when the widget is disposed
+    timer?.cancel();
     super.dispose();
   }
 
@@ -96,29 +112,7 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
     });
   }
 
-  void startTimer() {
-    timer = Timer.periodic(Duration(seconds: 1), (timer) {
-      if (currentTime < totalTime) {
-        setState(() {
-          currentTime += Duration(seconds: 1);
-        });
-      } else {
-        timer.cancel();
-      }
-    });
-  }
-
   void togglePlayPause() {
-    // if (isPlaying) {
-    //   timer?.cancel(); // Pause the timer if playing
-    // } else {
-    //   startTimer(); // Start the timer if paused
-    // }
-
-    // setState(() {
-    //   isPlaying = !isPlaying; // Toggle play/pause state
-    // });
-
     setState(() {
       isPlaying = !isPlaying;
     });
@@ -182,16 +176,6 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
                 height: 50,
               ),
               IconButton(
-<<<<<<< HEAD
-                onPressed: () {
-                  togglePlayer();
-                },
-                icon: Icon(
-                  FontAwesomeIcons.windowMinimize,
-                  color: primaryWhite,
-                ),
-              ),
-=======
                   onPressed: () {
                     togglePlayer();
                   },
@@ -199,25 +183,19 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
                     Icons.arrow_back_ios_new_outlined,
                     color: primaryWhite,
                   )),
->>>>>>> 646bee90b28c6469d094a8a5804653e0bca36662
               SizedBox(
                 height: 40,
               ),
               // Music Image (Asset Image)
-              CachedNetworkImage(
-                imageUrl: widget.track.album.cover!.first.url,
-                width: width * 0.7,
-                height: height * 0.3,
-                fit: BoxFit.cover,
+              Center(
+                child: CachedNetworkImage(
+                  imageUrl: widget.track.album.cover!.last.url,
+                  width: width * 0.7,
+                  height: height * 0.3,
+                  fit: BoxFit.cover,
+                ),
               ),
-              // Center(
-              //   child: Image.asset(
-              //     widget.imagePath,
-              //     width: width * 0.7,
-              //     height: height * 0.3,
-              //     fit: BoxFit.cover,
-              //   ),
-              // ),
+
               const SizedBox(height: 30),
               // Music Title and Artist
               Row(
@@ -230,8 +208,10 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
                         widget.track.name,
                         style: largeText(primaryWhite),
                       ),
-                      Text(widget.track.artists.first.name,
-                          style: mediumText(grey)),
+                      Text(
+                        widget.track.artists.first.name,
+                        style: mediumText(grey),
+                      ),
                     ],
                   ),
                   IconButton(
@@ -351,8 +331,11 @@ class _MusicPlayerPageState extends State<MusicPlayerPage> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               if (widget.track.album.cover != null) ...[
-                CachedNetworkImage(
-                  imageUrl: widget.track.album.cover!.first.url,
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(32),
+                  child: CachedNetworkImage(
+                    imageUrl: widget.track.album.cover!.first.url,
+                  ),
                 ),
               ],
               // CircleAvatar(

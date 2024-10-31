@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:monopoli/providers/player.dart';
 import 'package:monopoli/screens/discover/index.dart';
 import 'package:monopoli/screens/library/myLibrary.dart';
 import 'package:monopoli/screens/search/index.dart';
@@ -18,6 +19,12 @@ class Dashboard extends ConsumerStatefulWidget {
 }
 
 class _DashboardState extends ConsumerState<Dashboard> {
+  @override
+  void dispose() {
+    ref.read(player).dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return PersistentTabView(

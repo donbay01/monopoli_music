@@ -53,7 +53,6 @@ class AlbumListScreen extends StatelessWidget {
   }
 }
 
-
 class SongListScreen extends StatelessWidget {
   final Album album;
 
@@ -65,16 +64,28 @@ class SongListScreen extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: scaffoldBlack,
-      appBar: AppBar(leading:IconButton(onPressed: (){
-        Navigator.pop(context);
-      }, icon: Icon(Icons.arrow_back_ios_new_outlined,color: primaryWhite,)) ,title: Text(album.title,style: mediumSemiBold(primaryWhite),),backgroundColor: Colors.transparent,),
+      appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back_ios_new_outlined,
+              color: primaryWhite,
+            )),
+        title: Text(
+          album.title,
+          style: mediumSemiBold(primaryWhite),
+        ),
+        backgroundColor: Colors.transparent,
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.only(left:20.0,right:20,top: 20),
+                padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
                 child: Image.asset(
                   album.imageAssetPath,
                   width: width * 5,
@@ -86,19 +97,15 @@ class SongListScreen extends StatelessWidget {
               Column(
                 children: album.songs.map((song) {
                   return GestureDetector(
-                    onTap: (){
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) =>
-                                  MusicPlayerPage(
-                                    imagePath:
-                                    song.imageUrl,
-                                    musicTitle:
-                                    song.title,
-                                    artistName:
-                                    song.artist,
-                                  )));
+                    onTap: () {
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (_) => MusicPlayerPage(
+                      //               imagePath: song.imageUrl,
+                      //               musicTitle: song.title,
+                      //               artistName: song.artist,
+                      //             )));
                     },
                     child: ListTile(
                       leading: Image.asset(
@@ -107,13 +114,21 @@ class SongListScreen extends StatelessWidget {
                         height: 50,
                         fit: BoxFit.cover,
                       ),
-                      title: Text(song.title,style: mediumBold(primaryWhite),),
-                      subtitle: Text(song.artist,style: mediumText(grey),),
+                      title: Text(
+                        song.title,
+                        style: mediumBold(primaryWhite),
+                      ),
+                      subtitle: Text(
+                        song.artist,
+                        style: mediumText(grey),
+                      ),
                     ),
                   );
                 }).toList(),
               ),
-              SizedBox(height: 200,),
+              SizedBox(
+                height: 200,
+              ),
             ],
           ),
         ),
