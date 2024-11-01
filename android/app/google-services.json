@@ -7,17 +7,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:497042674110:android:3fd44899e049f0d2a5e9ef",
+        "mobilesdk_app_id": "1:497042674110:android:b38cce0e184abf34a5e9ef",
         "android_client_info": {
-          "package_name": "com.monopolimusic.monopoliMusic"
+          "package_name": "com.desthim.Desthim"
         }
       },
       "oauth_client": [
         {
-          "client_id": "497042674110-mugjo9a11t7n22i3j2dff4g4tdkp6i82.apps.googleusercontent.com",
+          "client_id": "497042674110-82umtjd0kpmtgn2jfd86op5dqar2jjie.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.monopolimusic.monopoliMusic",
+            "package_name": "com.desthim.Desthim",
             "certificate_hash": "aa6dee3f9c261f1ac0fa4fac988c3bdf2656be43"
           }
         },

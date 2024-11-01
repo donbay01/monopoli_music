@@ -5,6 +5,7 @@ import 'package:monopoli/screens/albums/index.dart';
 import 'package:monopoli/screens/player/music_playing.dart';
 import 'package:monopoli/theme/colors.dart';
 import 'package:monopoli/theme/text_style.dart';
+import 'package:monopoli/widgets/sheet/player.dart';
 import 'package:monopoli/widgets/user/avatar.dart';
 import 'package:zap_sizer/zap_sizer.dart';
 import '../../../providers/user_provider.dart';

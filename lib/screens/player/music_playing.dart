@@ -31,54 +31,31 @@ class _MusicPlayerPageState extends ConsumerState<MusicPlayerPage> {
   Color? dominantColor;
   Color? vibrantColor;
 
-  Timer? timer;
   bool _isFavorited = false;
 
   late AudioPlayer _audioPlayer;
   late Duration totalTime = Duration.zero;
   late Duration currentTime = Duration.zero;
-  bool isMinimized = false;
   bool isPlaying = false;
 
   void setupAudioPlayer() async {
-    try {
-      await _audioPlayer.setAudioSource(
-        AudioSource.uri(
-          Uri.parse(
-            widget.audio.youtubeVideo.audio.first.url,
-          ),
-          tag: MediaItem(
-            id: widget.track.id,
-            album: widget.track.album.name,
-            title: widget.track.name,
-            displayTitle: widget.track.name,
-            artist: widget.track.artists.first.name,
-            artUri: Uri.parse(
-              widget.track.album.cover!.last.url,
-            ),
-            genre: widget.track.type,
-          ),
-        ),
-      );
-
+    if (!isPlaying) {
       togglePlayPause();
-
-      _audioPlayer.durationStream.listen((duration) {
-        if (duration != null) {
-          setState(() {
-            totalTime = duration;
-          });
-        }
-      });
-
-      _audioPlayer.positionStream.listen((position) {
-        setState(() {
-          currentTime = position;
-        });
-      });
-    } catch (e) {
-      print("Error loading audio: $e");
     }
+
+    _audioPlayer.durationStream.listen((duration) {
+      if (duration != null) {
+        setState(() {
+          totalTime = duration;
+        });
+      }
+    });
+
+    _audioPlayer.positionStream.listen((position) {
+      setState(() {
+        currentTime = position;
+      });
+    });
   }
 
   @override
@@ -88,6 +65,7 @@ class _MusicPlayerPageState extends ConsumerState<MusicPlayerPage> {
     );
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _audioPlayer = ref.read(player);
+      isPlaying = _audioPlayer.playing;
       setupAudioPlayer();
       _updateBackgroundColors();
       ref.read(audioProvider.notifier).state = widget.audio;
@@ -96,22 +74,9 @@ class _MusicPlayerPageState extends ConsumerState<MusicPlayerPage> {
     super.initState();
   }
 
-  void togglePlayer() {
-    setState(() {
-      isMinimized = !isMinimized;
-    });
-  }
-
-  @override
-  void dispose() {
-    _audioPlayer.dispose();
-    timer?.cancel();
-    super.dispose();
-  }
-
   void _toggleFavorite() {
     setState(() {
-      _isFavorited = !_isFavorited; // Toggle the state
+      _isFavorited = !_isFavorited;
     });
   }
 
@@ -145,8 +110,7 @@ class _MusicPlayerPageState extends ConsumerState<MusicPlayerPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      body: isMinimized ? Discover() : buildFullPlayer(),
-      bottomNavigationBar: isMinimized ? buildBottomMiniPlayer() : null,
+      body: buildFullPlayer(),
     );
   }
 
@@ -178,24 +142,25 @@ class _MusicPlayerPageState extends ConsumerState<MusicPlayerPage> {
               SizedBox(
                 height: 50,
               ),
-              IconButton(
-                  onPressed: () {
-                    togglePlayer();
-                  },
-                  icon: Icon(
-                    Icons.arrow_back_ios_new_outlined,
-                    color: primaryWhite,
-                  )),
-              SizedBox(
-                height: 40,
-              ),
-              // Music Image (Asset Image)
+              // IconButton(
+              //   onPressed: () {},
+              //   icon: Icon(
+              //     Icons.arrow_back_ios_new_outlined,
+              //     color: primaryWhite,
+              //   ),
+              // ),
+              // SizedBox(
+              //   height: 40,
+              // ),
               Center(
-                child: CachedNetworkImage(
-                  imageUrl: widget.track.album.cover!.last.url,
-                  width: width * 0.7,
-                  height: height * 0.3,
-                  fit: BoxFit.cover,
+                child: Hero(
+                  tag: Key(widget.track.id),
+                  child: CachedNetworkImage(
+                    imageUrl: widget.track.album.cover!.last.url,
+                    width: width * 0.7,
+                    height: height * 0.3,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
 
@@ -300,69 +265,6 @@ class _MusicPlayerPageState extends ConsumerState<MusicPlayerPage> {
                       color: Colors.white,
                       size: 25,
                     ),
-                    onPressed: () {},
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget buildMiniPlayer() {
-    return Center(
-      child: ElevatedButton(
-        onPressed: togglePlayer,
-        child: Text("Open Full Player"),
-      ),
-    );
-  }
-
-  Widget buildBottomMiniPlayer() {
-    return BottomAppBar(
-      color: Colors.transparent,
-      child: GestureDetector(
-        onTap: togglePlayer,
-        child: Container(
-          color: Colors.grey[900],
-          padding: EdgeInsets.symmetric(
-            horizontal: 20,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              if (widget.track.album.cover != null) ...[
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(32),
-                  child: CachedNetworkImage(
-                    imageUrl: widget.track.album.cover!.first.url,
-                  ),
-                ),
-              ],
-              // CircleAvatar(
-              //   backgroundImage: AssetImage(widget.imagePath),
-              // ),
-              Row(
-                children: [
-                  IconButton(
-                    icon: Icon(
-                      isPlaying
-                          ? FontAwesomeIcons.pause
-                          : FontAwesomeIcons
-                              .play, // Toggle between play and pause
-                      color: Colors.white,
-                      size: 25,
-                    ),
-                    onPressed: togglePlayPause,
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  IconButton(
-                    icon: Icon(FontAwesomeIcons.forward,
-                        color: Colors.white, size: 25),
                     onPressed: () {},
                   ),
                 ],

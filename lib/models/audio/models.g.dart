@@ -7,7 +7,7 @@ part of 'models.dart';
 // **************************************************************************
 
 ResponseData _$ResponseDataFromJson(Map<String, dynamic> json) => ResponseData(
-      status: json['status'] as bool,
+      status: (json['status'] ?? false) as bool,
       errorId: json['errorId'] as String,
       albums: json['albums'] == null
           ? null

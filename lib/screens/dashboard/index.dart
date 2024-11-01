@@ -10,6 +10,7 @@ import 'package:monopoli/screens/search/index.dart';
 import 'package:monopoli/services/music.dart';
 import 'package:monopoli/theme/colors.dart';
 import 'package:monopoli/theme/text_style.dart';
+import 'package:monopoli/widgets/sheet/player.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
 class Dashboard extends ConsumerStatefulWidget {
@@ -23,6 +24,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return PersistentTabView(
+      navBarOverlap: NavBarOverlap.custom(),
       navBarHeight: 65,
       backgroundColor: primaryBlack,
       tabs: [
@@ -74,9 +76,10 @@ class _DashboardState extends ConsumerState<Dashboard> {
               activeForegroundColor: purple),
         ),
       ],
+      floatingActionButton: const MusicPlayerSheet(),
       navBarBuilder: (navBarConfig) => Style7BottomNavBar(
         navBarConfig: navBarConfig,
-        navBarDecoration: NavBarDecoration(color: primaryBlack),
+        navBarDecoration: const NavBarDecoration(color: primaryBlack),
       ),
     );
   }

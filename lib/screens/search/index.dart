@@ -1,21 +1,8 @@
-import 'dart:convert';
-import 'dart:io';
-import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter/material.dart';
-import 'package:monopoli/helper/snackbar.dart';
-import 'package:monopoli/screens/player/index.dart';
 import 'package:monopoli/screens/search/gridview.dart';
-import 'package:monopoli/services/music.dart';
 import 'package:monopoli/theme/colors.dart';
 import 'package:monopoli/theme/text_style.dart';
-import 'package:monopoli/widgets/form/textfield.dart';
-import 'package:monopoli/widgets/user/avatar.dart';
-import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
-import 'package:textfield_search/textfield_search.dart';
-import 'package:zap_sizer/zap_sizer.dart';
-
-import '../../models/audio/track.dart';
-import '../player/music_playing.dart';
+import 'package:monopoli/widgets/sheet/search.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -25,33 +12,11 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  TextEditingController searchController = TextEditingController();
-
-  Future<List> fetchData() async {
-    try {
-      String _inputText = searchController.text;
-      var res = await MusicService.search(_inputText);
-
-      return res.tracks!.items;
-    } on HttpException catch (e) {
-      SnackbarHelper.displayToastMessage(
-        context: context,
-        message: e.message,
-      );
-      return [];
-    }
-  }
-
-  @override
-  void dispose() {
-    searchController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -77,10 +42,19 @@ class _SearchScreenState extends State<SearchScreen> {
                 SizedBox(
                   height: 40,
                 ),
-                TextFieldSearch(
-                  label: 'Artists, Songs, Album and more',
-                  controller: searchController,
-                  textStyle: mediumText(primaryWhite),
+                TextField(
+                  readOnly: true,
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: context,
+                      useSafeArea: true,
+                      useRootNavigator: true,
+                      isScrollControlled: true,
+                      builder: (_) => const SearchSheet(),
+                    );
+                  },
+                  // label: 'Artists, Songs, Album and more',
+                  // textStyle: mediumText(primaryWhite),
                   decoration: InputDecoration(
                     labelText: 'Artists, Songs, Album and more',
                     labelStyle: medium(),
@@ -110,21 +84,6 @@ class _SearchScreenState extends State<SearchScreen> {
                       ),
                     ),
                   ),
-                  future: () {
-                    return fetchData();
-                  },
-                  getSelectedValue: (Track value) async {
-                    context.loaderOverlay.show();
-                    var audio = await MusicService.getTrackURL(value.id);
-                    context.loaderOverlay.hide();
-                    pushScreenWithoutNavBar(
-                      context,
-                      MusicPlayerPage(
-                        audio: audio,
-                        track: value,
-                      ),
-                    );
-                  },
                 ),
                 SizedBox(
                   height: 20,
@@ -136,7 +95,11 @@ class _SearchScreenState extends State<SearchScreen> {
                 SizedBox(
                   height: 20,
                 ),
-                Container(height: height, width: width, child: GenreGridPage()),
+                Container(
+                  height: height,
+                  width: width,
+                  child: GenreGridPage(),
+                ),
               ],
             ),
           ),
