@@ -67,13 +67,14 @@ class _DashboardState extends ConsumerState<Dashboard> {
         PersistentTabConfig(
           screen: const Mylibrary(),
           item: ItemConfig(
-              icon: const Icon(
-                Icons.library_music,
-                size: 25,
-              ),
-              title: "Library",
-              textStyle: small(),
-              activeForegroundColor: purple),
+            icon: const Icon(
+              Icons.library_music,
+              size: 25,
+            ),
+            title: "Library",
+            textStyle: small(),
+            activeForegroundColor: purple,
+          ),
         ),
       ],
       floatingActionButton: const MusicPlayerSheet(),
