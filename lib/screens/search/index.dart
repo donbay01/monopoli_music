@@ -130,7 +130,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   height: 20,
                 ),
                 Text(
-                  'Recommendations',
+                  'Browse Categories',
                   style: mediumSemiBold(primaryWhite),
                 ),
                 SizedBox(
