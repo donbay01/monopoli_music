@@ -1,19 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:monopoli/providers/player.dart';
 import 'package:monopoli/screens/dashboard/index.dart';
 import 'package:monopoli/screens/splashscreen/splash_screen.dart';
 import 'package:monopoli/services/auth.dart';
 import 'package:monopoli/theme/colors.dart';
 import 'package:zap_sizer/zap_sizer.dart';
 
-class Monopoli extends StatefulWidget {
+class Monopoli extends ConsumerStatefulWidget {
   const Monopoli({super.key});
 
   @override
-  State<Monopoli> createState() => _MonopoliState();
+  ConsumerState<Monopoli> createState() => _MonopoliState();
 }
 
-class _MonopoliState extends State<Monopoli> {
+class _MonopoliState extends ConsumerState<Monopoli> {
+  @override
+  void dispose() {
+    ref.read(player).dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     var user = AuthService.getUser();

@@ -20,12 +20,6 @@ class Dashboard extends ConsumerStatefulWidget {
 
 class _DashboardState extends ConsumerState<Dashboard> {
   @override
-  void dispose() {
-    ref.read(player).dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return PersistentTabView(
       navBarHeight: 65,

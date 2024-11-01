@@ -51,12 +51,17 @@ class _MusicPlayerPageState extends ConsumerState<MusicPlayerPage> {
             id: widget.track.id,
             album: widget.track.album.name,
             title: widget.track.name,
+            displayTitle: widget.track.name,
+            artist: widget.track.artists.first.name,
             artUri: Uri.parse(
-              widget.track.album.cover!.first.url,
+              widget.track.album.cover!.last.url,
             ),
+            genre: widget.track.type,
           ),
         ),
       );
+
+      togglePlayPause();
 
       _audioPlayer.durationStream.listen((duration) {
         if (duration != null) {
@@ -71,8 +76,6 @@ class _MusicPlayerPageState extends ConsumerState<MusicPlayerPage> {
           currentTime = position;
         });
       });
-
-      togglePlayPause();
     } catch (e) {
       print("Error loading audio: $e");
     }

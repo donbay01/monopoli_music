@@ -17,7 +17,7 @@ void main() async {
     androidNotificationOngoing: true,
   );
   runApp(
-    ProviderScope(
+    const ProviderScope(
       child: Monopoli(),
     ),
   );
