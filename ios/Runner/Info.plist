@@ -18,7 +18,9 @@
 	<array>
 		<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	</array>
-	<key>NSMicrophoneUsageDescription</key>
+	<key>LSMinimumSystemVersion</key>
+	<string>13.0.0</string>
+    <key>NSMicrophoneUsageDescription</key>
 	<string>Desthim needs access to your microphone to play and listen to music</string>
 	<key>CFBundleName</key>
 	<string>monopoli_music</string>
