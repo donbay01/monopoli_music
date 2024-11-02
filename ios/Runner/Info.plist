@@ -7,7 +7,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
-	<string>Monopoli Music</string>
+	<string>Desthim Music</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -18,6 +18,8 @@
 	<array>
 		<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	</array>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Desthim needs access to your microphone to play and listen to music</string>
 	<key>CFBundleName</key>
 	<string>monopoli_music</string>
 	<key>CFBundlePackageType</key>
