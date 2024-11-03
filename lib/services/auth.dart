@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:twitter_login/twitter_login.dart';
+// import 'package:twitter_login/twitter_login.dart';
 
 class AuthService {
   static var auth = FirebaseAuth.instance;
@@ -85,22 +85,22 @@ class AuthService {
     return auth.signInWithCredential(facebookAuthCredential);
   }
 
-  static Future<UserCredential> signInWithTwitter() async {
-    final twitterLogin = TwitterLogin(
-      apiKey: 'NHNfZVRsdjl6RnNqMk5vdjBDazI6MTpjaQ',
-      apiSecretKey: 'BX0Tgpi8iOHzXiQSxWDcn-FZPmGIvJTZFURNFhLDBasnIxhJXZ',
-      redirectURI: 'https://monopoli-music.firebaseapp.com/__/auth/handler',
-    );
-
-    final authResult = await twitterLogin.login();
-
-    final twitterAuthCredential = TwitterAuthProvider.credential(
-      accessToken: authResult.authToken!,
-      secret: authResult.authTokenSecret!,
-    );
-
-    return await auth.signInWithCredential(twitterAuthCredential);
-  }
+  // static Future<UserCredential> signInWithTwitter() async {
+  //   final twitterLogin = TwitterLogin(
+  //     apiKey: 'NHNfZVRsdjl6RnNqMk5vdjBDazI6MTpjaQ',
+  //     apiSecretKey: 'BX0Tgpi8iOHzXiQSxWDcn-FZPmGIvJTZFURNFhLDBasnIxhJXZ',
+  //     redirectURI: 'https://monopoli-music.firebaseapp.com/__/auth/handler',
+  //   );
+  //
+  //   final authResult = await twitterLogin.login();
+  //
+  //   final twitterAuthCredential = TwitterAuthProvider.credential(
+  //     accessToken: authResult.authToken!,
+  //     secret: authResult.authTokenSecret!,
+  //   );
+  //
+  //   return await auth.signInWithCredential(twitterAuthCredential);
+  // }
 
   static Future<void> createAccount({
     required User user,

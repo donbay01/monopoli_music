@@ -97,7 +97,7 @@ class _MylibraryState extends ConsumerState<Mylibrary> {
     return Scaffold(
       backgroundColor: scaffoldBlack,
       body: Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -233,9 +233,6 @@ class _MylibraryState extends ConsumerState<Mylibrary> {
                   );
                 },
               ),
-            ),
-            SizedBox(
-              height: 100,
             ),
           ],
         ),

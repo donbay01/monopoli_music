@@ -6,7 +6,7 @@ class PodcastDescription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      'Learn from the best pundits in the game, this podcast provides you with the latest sporting news and sports predictions',
+      'Learn from the best artists in the game, this podcast provides you with the latest music and trends',
       style: mediumText(primaryWhite),
     );
   }

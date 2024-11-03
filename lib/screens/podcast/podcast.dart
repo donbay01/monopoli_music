@@ -13,7 +13,7 @@ class PodcastPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: scaffoldBlack,
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(15.0),
+        padding: EdgeInsets.all(20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
