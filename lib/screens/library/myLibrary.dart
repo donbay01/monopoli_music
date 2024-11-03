@@ -92,9 +92,8 @@ class _MylibraryState extends ConsumerState<Mylibrary> {
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
     var user = ref.watch(userProvider);
+
     return Scaffold(
       backgroundColor: scaffoldBlack,
       body: Padding(
@@ -113,7 +112,7 @@ class _MylibraryState extends ConsumerState<Mylibrary> {
                   style: largeText(primaryWhite),
                 ),
                 UserAvatar(
-                  user: user,
+                  user: user!,
                 )
               ],
             ),

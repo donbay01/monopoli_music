@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:monopoli/models/audio/index.dart';
 import 'package:monopoli/models/audio/track.dart';
+import 'package:monopoli/providers/nav.dart';
 import '../../screens/player/music_playing.dart';
 import 'minimized_player.dart';
 
-class PlayerSheet extends StatefulWidget {
+class PlayerSheet extends ConsumerStatefulWidget {
   final Track track;
   final AudioApiResponse audio;
   final AudioPlayer player;
@@ -18,10 +20,10 @@ class PlayerSheet extends StatefulWidget {
   });
 
   @override
-  State<PlayerSheet> createState() => _PlayerSheetState();
+  ConsumerState<PlayerSheet> createState() => _PlayerSheetState();
 }
 
-class _PlayerSheetState extends State<PlayerSheet>
+class _PlayerSheetState extends ConsumerState<PlayerSheet>
     with SingleTickerProviderStateMixin {
   bool isExpanded = false;
 
@@ -37,7 +39,7 @@ class _PlayerSheetState extends State<PlayerSheet>
       );
       _heightAnimation = Tween<double>(
         begin: 70.0,
-        end: MediaQuery.of(context).size.height * 0.9,
+        end: MediaQuery.of(context).size.height,
       ).animate(
         CurvedAnimation(
           parent: _controller!,
@@ -45,20 +47,20 @@ class _PlayerSheetState extends State<PlayerSheet>
         ),
       );
 
-      setState(() {});
+      // setState(() {});
     });
     super.initState();
   }
 
   void toggleSheet() {
-    setState(() {
-      if (isExpanded) {
-        _controller?.reverse();
-      } else {
-        _controller?.forward();
-      }
-      isExpanded = !isExpanded;
-    });
+    ref.read(navShowing.notifier).state = !ref.read(navShowing);
+    if (isExpanded) {
+      _controller?.reverse();
+    } else {
+      _controller?.forward();
+    }
+    isExpanded = !isExpanded;
+    setState(() {});
   }
 
   @override

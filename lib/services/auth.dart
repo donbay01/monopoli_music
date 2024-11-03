@@ -20,6 +20,13 @@ class AuthService {
     );
   }
 
+  static Stream<User?> listenToAuth() => auth.authStateChanges();
+
+  static Stream<DocumentSnapshot<Map<String, dynamic>>> listenToUser() {
+    var user = getUser();
+    return db.collection('users').doc(user!.uid).snapshots();
+  }
+
   static Future<UserCredential> register(
     String email,
     String password,

@@ -23,11 +23,12 @@ class Song {
   final String duration;
   final String imagePath;
 
-  Song(
-      {required this.title,
-      required this.artist,
-      required this.duration,
-      required this.imagePath});
+  Song({
+    required this.title,
+    required this.artist,
+    required this.duration,
+    required this.imagePath,
+  });
 }
 
 final List<Song> songs = [
@@ -85,9 +86,16 @@ class _DiscoverState extends ConsumerState<Discover>
     with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
+    var size = MediaQuery.of(context).size;
+    var height = size.height;
+    var width = size.width;
+
     var user = ref.watch(userProvider);
+
+    if (user == null) {
+      return const SizedBox.shrink();
+    }
+
     return Scaffold(
       backgroundColor: scaffoldBlack,
       body: Padding(

@@ -43,6 +43,6 @@ Map<String, dynamic> _$TrackToJson(Track instance) => <String, dynamic>{
       'explicit': instance.explicit,
       'durationMs': instance.durationMs,
       'durationText': instance.durationText,
-      'artists': instance.artists,
-      'album': instance.album,
+      'artists': instance.artists.map((a) => a.toJson()).toList(),
+      'album': instance.album.toJson(),
     };

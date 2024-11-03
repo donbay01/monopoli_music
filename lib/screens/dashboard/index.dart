@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:monopoli/providers/nav.dart';
 import 'package:monopoli/providers/player.dart';
 import 'package:monopoli/screens/discover/index.dart';
 import 'package:monopoli/screens/library/myLibrary.dart';
@@ -23,10 +24,12 @@ class Dashboard extends ConsumerStatefulWidget {
 class _DashboardState extends ConsumerState<Dashboard> {
   @override
   Widget build(BuildContext context) {
+    var showNav = ref.watch(navShowing);
+
     return PersistentTabView(
-      navBarOverlap: NavBarOverlap.custom(),
-      navBarHeight: 65,
+      navBarHeight: showNav ? 65 : 0,
       backgroundColor: primaryBlack,
+      hideNavigationBar: !showNav,
       tabs: [
         PersistentTabConfig(
           screen: Discover(),

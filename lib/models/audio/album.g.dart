@@ -41,7 +41,7 @@ Map<String, dynamic> _$AlbumToJson(Album instance) => <String, dynamic>{
       'name': instance.name,
       'shareUrl': instance.shareUrl,
       'date': instance.date,
-      'artists': instance.artists,
-      'cover': instance.cover,
-      'content': instance.content,
+      'artists': instance.artists?.map((a) => a.toJson()).toList(),
+      'cover': instance.cover?.map((a) => a.toJson()).toList(),
+      'content': instance.content?.toJson(),
     };

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,10 +9,14 @@ import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:monopoli/models/audio/track.dart';
 import 'package:monopoli/providers/player.dart';
+import 'package:monopoli/providers/user_provider.dart';
 import 'package:monopoli/screens/discover/index.dart';
+import 'package:monopoli/services/auth.dart';
+import 'package:monopoli/services/user.dart';
 import 'package:monopoli/theme/colors.dart';
 import 'package:monopoli/theme/text_style.dart';
 import 'package:palette_generator/palette_generator.dart';
+import 'package:zap_sizer/zap_sizer.dart';
 import '../../models/audio/index.dart';
 
 class MusicPlayerPage extends ConsumerStatefulWidget {
@@ -60,6 +65,8 @@ class _MusicPlayerPageState extends ConsumerState<MusicPlayerPage> {
 
   @override
   void initState() {
+    // var u = ref.read(userProvider);
+    // _isFavorited = u?.liked.contains(widget.track.id) ?? false;
     totalTime = Duration(
       milliseconds: widget.audio.youtubeVideo.audio.first.durationMs,
     );
@@ -75,6 +82,19 @@ class _MusicPlayerPageState extends ConsumerState<MusicPlayerPage> {
   }
 
   void _toggleFavorite() {
+    var user = AuthService.getUser();
+    if (!_isFavorited) {
+      UserService.likeSong(
+        user!.uid,
+        widget.track,
+        widget.audio,
+      );
+    } else {
+      UserService.unLikeSong(
+        user!.uid,
+        widget.track.id,
+      );
+    }
     setState(() {
       _isFavorited = !_isFavorited;
     });
@@ -136,11 +156,11 @@ class _MusicPlayerPageState extends ConsumerState<MusicPlayerPage> {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: 50,
+                height: 20.h,
               ),
               // IconButton(
               //   onPressed: () {},
@@ -159,7 +179,7 @@ class _MusicPlayerPageState extends ConsumerState<MusicPlayerPage> {
                     imageUrl: widget.track.album.cover!.last.url,
                     width: width * 0.7,
                     height: height * 0.3,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.contain,
                   ),
                 ),
               ),
