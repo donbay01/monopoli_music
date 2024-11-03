@@ -5,6 +5,12 @@ import 'package:monopoli/models/audio/track.dart';
 class UserService {
   static var db = FirebaseFirestore.instance;
 
+  static getLikedSong(String uid) => db
+      .collection('users')
+      .doc(uid)
+      .collection('liked')
+      .orderBy('timestamp', descending: true);
+
   static Future<void> likeSong(
     String uid,
     Track track,

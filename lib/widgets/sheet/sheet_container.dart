@@ -47,7 +47,7 @@ class _PlayerSheetState extends ConsumerState<PlayerSheet>
         ),
       );
 
-      // setState(() {});
+      setState(() {});
     });
     super.initState();
   }

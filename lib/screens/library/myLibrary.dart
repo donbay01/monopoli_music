@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:monopoli/screens/library/liked.dart';
 import 'package:monopoli/theme/colors.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:zap_sizer/zap_sizer.dart';
@@ -16,70 +17,6 @@ class Mylibrary extends ConsumerStatefulWidget {
   @override
   ConsumerState<Mylibrary> createState() => _MylibraryState();
 }
-
-class Song {
-  final String title;
-  final String artist;
-  final String duration;
-  final String imagePath;
-
-  Song(
-      {required this.title,
-      required this.artist,
-      required this.duration,
-      required this.imagePath});
-}
-
-final List<Song> songs = [
-  Song(
-    title: 'Higher',
-    artist: 'Burna',
-    duration: '3:45',
-    imagePath: 'assets/burna.png',
-  ),
-  Song(
-    title: 'Feel',
-    artist: 'Davido',
-    duration: '4:12',
-    imagePath: 'assets/davido.png',
-  ),
-  Song(
-    title: 'Wave',
-    artist: 'Asake',
-    duration: '2:58',
-    imagePath: 'assets/asake.png',
-  ),
-  Song(
-    title: 'Higher',
-    artist: 'Burna',
-    duration: '3:45',
-    imagePath: 'assets/city.png',
-  ),
-  Song(
-    title: 'Wildest dream',
-    artist: '21 Savage',
-    duration: '4:12',
-    imagePath: 'assets/savage.png',
-  ),
-  Song(
-    title: 'Juju',
-    artist: 'Asake',
-    duration: '2:58',
-    imagePath: 'assets/album1.png',
-  ),
-  Song(
-    title: 'Higher',
-    artist: 'Burna',
-    duration: '3:45',
-    imagePath: 'assets/album2.png',
-  ),
-  Song(
-    title: 'Feel',
-    artist: 'Davido',
-    duration: '4:12',
-    imagePath: 'assets/album3.png',
-  ),
-];
 
 class _MylibraryState extends ConsumerState<Mylibrary> {
   String selectedText = 'Playlist';
@@ -141,7 +78,8 @@ class _MylibraryState extends ConsumerState<Mylibrary> {
                       label: Text(
                         items[index],
                         style: mediumBold(
-                            isSelected ? primaryBlack : primaryWhite),
+                          isSelected ? primaryBlack : primaryWhite,
+                        ),
                       ),
                     ),
                   );
@@ -158,243 +96,89 @@ class _MylibraryState extends ConsumerState<Mylibrary> {
             SizedBox(
               height: 10,
             ),
-            Expanded(
-              child: ListView.builder(
-                padding: EdgeInsets.zero,
-                itemCount: songs.length,
-                itemBuilder: (context, index) {
-                  final song = songs[index];
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10.0),
-                    child: Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (_) => MusicPlayerPage(
-                            //       imagePath: 'assets/burnaplay.png',
-                            //       musicTitle: 'Higher',
-                            //       artistName: 'Burna Boy',
-                            //     ),
-                            //   ),
-                            // );
-                          },
-                          child: Container(
-                            color: Colors.transparent,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Row(
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                      child: Image.asset(
-                                        song.imagePath,
-                                        height: 70,
-                                        width: 70,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          song.title,
-                                          style: mediumBold(primaryWhite),
-                                        ),
-                                        Text(
-                                          song.artist,
-                                          style: smallText(grey),
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                ),
-                                IconButton(
-                                    onPressed: () {
-                                      _showSongDetails(context, song);
-                                    },
-                                    icon: Icon(
-                                      FontAwesomeIcons.ellipsis,
-                                      color: primaryWhite,
-                                    ))
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            ),
+            // Expanded(
+            //   child: ListView.builder(
+            //     padding: EdgeInsets.zero,
+            //     itemCount: songs.length,
+            //     itemBuilder: (context, index) {
+            //       final song = songs[index];
+            //       return Padding(
+            //         padding: const EdgeInsets.symmetric(vertical: 10.0),
+            //         child: Column(
+            //           children: [
+            //             GestureDetector(
+            //               onTap: () {
+            //                 // Navigator.push(
+            //                 //   context,
+            //                 //   MaterialPageRoute(
+            //                 //     builder: (_) => MusicPlayerPage(
+            //                 //       imagePath: 'assets/burnaplay.png',
+            //                 //       musicTitle: 'Higher',
+            //                 //       artistName: 'Burna Boy',
+            //                 //     ),
+            //                 //   ),
+            //                 // );
+            //               },
+            //               child: Container(
+            //                 color: Colors.transparent,
+            //                 child: Row(
+            //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //                   children: [
+            //                     Row(
+            //                       children: [
+            //                         ClipRRect(
+            //                           borderRadius: BorderRadius.circular(8.0),
+            //                           child: Image.asset(
+            //                             song.imagePath,
+            //                             height: 70,
+            //                             width: 70,
+            //                             fit: BoxFit.cover,
+            //                           ),
+            //                         ),
+            //                         SizedBox(
+            //                           width: 10,
+            //                         ),
+            //                         Column(
+            //                           crossAxisAlignment:
+            //                               CrossAxisAlignment.start,
+            //                           children: [
+            //                             Text(
+            //                               song.title,
+            //                               style: mediumBold(primaryWhite),
+            //                             ),
+            //                             Text(
+            //                               song.artist,
+            //                               style: smallText(grey),
+            //                             )
+            //                           ],
+            //                         )
+            //                       ],
+            //                     ),
+            //                     IconButton(
+            //                       onPressed: () {
+            //                         _showSongDetails(context, song);
+            //                       },
+            //                       icon: Icon(
+            //                         FontAwesomeIcons.ellipsis,
+            //                         color: primaryWhite,
+            //                       ),
+            //                     ),
+            //                   ],
+            //                 ),
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //       );
+            //     },
+            //   ),
+            // ),
+            if (selectedText == 'Liked Songs ') ...[
+              const Liked(),
+            ],
           ],
         ),
       ),
-    );
-  }
-
-  void _showSongDetails(BuildContext context, Song song) {
-    showModalBottomSheet(
-      backgroundColor: Colors.grey[900],
-      context: context,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
-      ),
-      builder: (context) {
-        var height = MediaQuery.of(context).size.height;
-        var width = MediaQuery.of(context).size.width;
-        return Container(
-          height: height * 0.6,
-          width: width,
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: Image.asset(
-                              song.imagePath,
-                              height: 70,
-                              width: 70,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                song.title,
-                                style: mediumBold(primaryWhite),
-                              ),
-                              Text(
-                                song.artist,
-                                style: smallText(grey),
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                      IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: Icon(
-                            Icons.clear,
-                            color: primaryWhite,
-                          ))
-                    ],
-                  ),
-                  Divider(
-                    color: grey,
-                    height: 50,
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.playlist_add,
-                          color: primaryWhite,
-                          size: 30,
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          'Add to playlist',
-                          style: mediumBold(primaryWhite),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.remove,
-                          color: primaryWhite,
-                          size: 30,
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          'Remove from library',
-                          style: mediumBold(primaryWhite),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.download_for_offline_outlined,
-                          color: primaryWhite,
-                          size: 30,
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          'Download',
-                          style: mediumBold(primaryWhite),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Row(
-                      children: [
-                        Icon(
-                          Icons.ios_share,
-                          color: primaryWhite,
-                          size: 30,
-                        ),
-                        SizedBox(
-                          width: 20,
-                        ),
-                        Text(
-                          'Share',
-                          style: mediumBold(primaryWhite),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 100),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
     );
   }
 }
