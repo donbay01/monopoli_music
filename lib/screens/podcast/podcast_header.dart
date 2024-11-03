@@ -20,12 +20,12 @@ class PodcastHeader extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Chill with the Big Boys',
+                'Who are the Biggest 3?',
                 style: largeText(primaryWhite),
               ),
               SizedBox(height: 8.0),
               Text(
-                'Hosted by :BetCode',
+                'Hosted by: MTV Base',
                 style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
             ],

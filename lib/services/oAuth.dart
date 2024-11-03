@@ -17,17 +17,17 @@ class OAuthService {
     return completer;
   }
 
-  static xAuth({
-    required BuildContext context,
-    Function()? completer,
-  }) async {
-    var cred = await AuthService.signInWithTwitter();
-    await complete(
-      context: context,
-      credential: cred,
-    );
-    return completer;
-  }
+  // static xAuth({
+  //   required BuildContext context,
+  //   Function()? completer,
+  // }) async {
+  //   var cred = await AuthService.signInWithTwitter();
+  //   await complete(
+  //     context: context,
+  //     credential: cred,
+  //   );
+  //   return completer;
+  // }
 
   static facebookAuth({
     required BuildContext context,
