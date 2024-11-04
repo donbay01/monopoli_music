@@ -55,19 +55,23 @@ class MinimizedPlayer extends StatelessWidget {
                   SizedBox(
                     width: 4.w,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        track.name,
-                        style: mediumSemiBold(Colors.white),
-                      ),
-                      Text(
-                        track.artists.first.name,
-                        style: mediumText(Colors.white),
-                      ),
-                    ],
+                  SizedBox(
+                    width: 43.w,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          track.name,
+                          overflow: TextOverflow.ellipsis,
+                          style: mediumSemiBold(Colors.white),
+                        ),
+                        Text(
+                          track.artists.first.name,
+                          style: mediumText(Colors.white),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),

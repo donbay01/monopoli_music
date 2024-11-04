@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:just_audio_background/just_audio_background.dart';
 import 'package:monopoli/monopoli.dart';
-
 import 'firebase_options.dart';
 
 void main() async {

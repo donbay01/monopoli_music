@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:monopoli/providers/spotify.dart';
 import 'package:monopoli/screens/albums/index.dart';
+import 'package:monopoli/screens/discover/album.dart';
 import 'package:monopoli/screens/player/music_playing.dart';
+import 'package:monopoli/services/spotify.dart';
 import 'package:monopoli/theme/colors.dart';
 import 'package:monopoli/theme/text_style.dart';
 import 'package:monopoli/widgets/sheet/player.dart';
@@ -84,6 +87,11 @@ final List<Song> songs = [
 
 class _DiscoverState extends ConsumerState<Discover>
     with TickerProviderStateMixin {
+  var ids = [
+    '6lI21W76LD0S3vC55GrfSS',
+    '5Af7bJAiAKBCazSQU8BOsD',
+  ];
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -95,6 +103,8 @@ class _DiscoverState extends ConsumerState<Discover>
     if (user == null) {
       return const SizedBox.shrink();
     }
+
+    var t = ref.watch(spotifyToken);
 
     return Scaffold(
       backgroundColor: scaffoldBlack,
@@ -131,15 +141,19 @@ class _DiscoverState extends ConsumerState<Discover>
                       height: height * 0.5,
                       width: width * 0.8,
                       decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              colors: [Color(0xFF58556E), Color(0xff66656D)],
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter),
-                          borderRadius: BorderRadius.circular(20)),
+                        gradient: LinearGradient(
+                          colors: [
+                            Color(0xFF58556E),
+                            Color(0xff66656D),
+                          ],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: SingleChildScrollView(
-                          // scrollDirection: Axis.vertical,
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
@@ -152,11 +166,12 @@ class _DiscoverState extends ConsumerState<Discover>
                                     style: mediumSemiBold(primaryWhite),
                                   ),
                                   TextButton(
-                                      onPressed: () {},
-                                      child: Text(
-                                        'view all',
-                                        style: mediumBold(primaryWhite),
-                                      ))
+                                    onPressed: () {},
+                                    child: Text(
+                                      'view all',
+                                      style: mediumBold(primaryWhite),
+                                    ),
+                                  ),
                                 ],
                               ),
                               Container(
@@ -170,7 +185,8 @@ class _DiscoverState extends ConsumerState<Discover>
                                     final song = songs[index];
                                     return Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          vertical: 10.0),
+                                        vertical: 10.0,
+                                      ),
                                       child: Column(
                                         children: [
                                           GestureDetector(
@@ -225,21 +241,22 @@ class _DiscoverState extends ConsumerState<Discover>
                                                             song.artist,
                                                             style:
                                                                 smallText(grey),
-                                                          )
+                                                          ),
                                                         ],
                                                       )
                                                     ],
                                                   ),
                                                   IconButton(
-                                                      onPressed: () {
-                                                        _showSongDetails(
-                                                            context, song);
-                                                      },
-                                                      icon: Icon(
-                                                        FontAwesomeIcons
-                                                            .ellipsisVertical,
-                                                        color: primaryWhite,
-                                                      ))
+                                                    onPressed: () {
+                                                      _showSongDetails(
+                                                          context, song);
+                                                    },
+                                                    icon: Icon(
+                                                      FontAwesomeIcons
+                                                          .ellipsisVertical,
+                                                      color: primaryWhite,
+                                                    ),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -262,11 +279,13 @@ class _DiscoverState extends ConsumerState<Discover>
                       height: height * 0.5,
                       width: width * 0.75,
                       decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              colors: [Color(0xFF475B47), Color(0xff494F51)],
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter),
-                          borderRadius: BorderRadius.circular(20)),
+                        gradient: LinearGradient(
+                          colors: [Color(0xFF475B47), Color(0xff494F51)],
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: SingleChildScrollView(
@@ -282,11 +301,12 @@ class _DiscoverState extends ConsumerState<Discover>
                                     style: mediumSemiBold(primaryWhite),
                                   ),
                                   TextButton(
-                                      onPressed: () {},
-                                      child: Text(
-                                        'view all',
-                                        style: mediumBold(primaryWhite),
-                                      ))
+                                    onPressed: () {},
+                                    child: Text(
+                                      'view all',
+                                      style: mediumBold(primaryWhite),
+                                    ),
+                                  ),
                                 ],
                               ),
                               SizedBox(
@@ -397,7 +417,13 @@ class _DiscoverState extends ConsumerState<Discover>
                 'Trending Album',
                 style: mediumSemiBold(primaryWhite),
               ),
-              AlbumListScreen(),
+              if (t != null) ...[
+                Albums(
+                  token: t,
+                  ids: ids,
+                )
+              ]
+              // AlbumListScreen(),
             ],
           ),
         ),
@@ -409,12 +435,13 @@ class _DiscoverState extends ConsumerState<Discover>
     showModalBottomSheet(
       backgroundColor: Colors.grey[900],
       context: context,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
       ),
       builder: (context) {
         var height = MediaQuery.of(context).size.height;
         var width = MediaQuery.of(context).size.width;
+
         return Container(
           height: height * 0.6,
           width: width,
@@ -461,13 +488,14 @@ class _DiscoverState extends ConsumerState<Discover>
                         ],
                       ),
                       IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: Icon(
-                            Icons.clear,
-                            color: primaryWhite,
-                          ))
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(
+                          Icons.clear,
+                          color: primaryWhite,
+                        ),
+                      ),
                     ],
                   ),
                   Divider(

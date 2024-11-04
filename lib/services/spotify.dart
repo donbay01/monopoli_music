@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:monopoli/models/spotify/album.dart';
 import 'package:monopoli/models/spotify/category.dart';
-
 import '../models/spotify/playlist.dart';
+
+import 'package:monopoli/models/audio/track.dart' as t;
 
 class Spotify {
   static var clientId = 'cf2c8da705094cc1a2cd0849b20c5f09';
@@ -99,5 +102,58 @@ class Spotify {
         .cast<SpotifyPlaylistTrackResponse>();
 
     return t;
+  }
+
+  static Future<List<SpotifyAlbum>> getMultipleAlbums(
+    String accessToken,
+    List<String> albumIds,
+  ) async {
+    final url = Uri.parse(
+      'https://api.spotify.com/v1/albums?ids=${albumIds.join(",")}',
+    );
+    final headers = {
+      'Authorization': 'Bearer $accessToken',
+    };
+
+    final response = await http.get(url, headers: headers);
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+
+      return data['albums']
+          .map((a) => SpotifyAlbum.fromJSON(a))
+          .toList()
+          .cast<SpotifyAlbum>();
+    } else {
+      print(response.statusCode);
+      throw Exception('Failed to fetch albums');
+    }
+  }
+
+  static Future<List<t.Track>?> getAlbumTracks(
+    String token,
+    String albumID,
+  ) async {
+    try {
+      final url = Uri.parse(
+        'https://api.spotify.com/v1/albums/$albumID/tracks',
+      );
+      final headers = {
+        'Authorization': 'Bearer $token',
+      };
+
+      final response = await http.get(url, headers: headers);
+      final data = jsonDecode(response.body);
+
+      print(data['items']);
+
+      return data['items']
+          .map((a) => t.Track.fromJson(a))
+          .toList()
+          .cast<t.Track>();
+    } catch (e) {
+      print(e);
+      return null;
+    }
   }
 }

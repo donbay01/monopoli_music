@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:monopoli/screens/library/downloaded.dart';
 import 'package:monopoli/screens/library/liked.dart';
+import 'package:monopoli/screens/library/shared.dart';
 import 'package:monopoli/theme/colors.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:zap_sizer/zap_sizer.dart';
-
+import './playlist.dart';
 import '../../providers/user_provider.dart';
 import '../../theme/text_style.dart';
 import '../../widgets/user/avatar.dart';
@@ -22,7 +24,7 @@ class _MylibraryState extends ConsumerState<Mylibrary> {
   String selectedText = 'Playlist';
   final List<String> items = [
     'Playlist',
-    'Liked Songs ',
+    'Liked Songs',
     'Downloaded',
     'Shared'
   ];
@@ -38,7 +40,7 @@ class _MylibraryState extends ConsumerState<Mylibrary> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Row(
@@ -88,93 +90,25 @@ class _MylibraryState extends ConsumerState<Mylibrary> {
             ),
             GradientText(
               selectedText,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 25.0,
               ),
               colors: [purple, primaryWhite],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
-            // Expanded(
-            //   child: ListView.builder(
-            //     padding: EdgeInsets.zero,
-            //     itemCount: songs.length,
-            //     itemBuilder: (context, index) {
-            //       final song = songs[index];
-            //       return Padding(
-            //         padding: const EdgeInsets.symmetric(vertical: 10.0),
-            //         child: Column(
-            //           children: [
-            //             GestureDetector(
-            //               onTap: () {
-            //                 // Navigator.push(
-            //                 //   context,
-            //                 //   MaterialPageRoute(
-            //                 //     builder: (_) => MusicPlayerPage(
-            //                 //       imagePath: 'assets/burnaplay.png',
-            //                 //       musicTitle: 'Higher',
-            //                 //       artistName: 'Burna Boy',
-            //                 //     ),
-            //                 //   ),
-            //                 // );
-            //               },
-            //               child: Container(
-            //                 color: Colors.transparent,
-            //                 child: Row(
-            //                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //                   children: [
-            //                     Row(
-            //                       children: [
-            //                         ClipRRect(
-            //                           borderRadius: BorderRadius.circular(8.0),
-            //                           child: Image.asset(
-            //                             song.imagePath,
-            //                             height: 70,
-            //                             width: 70,
-            //                             fit: BoxFit.cover,
-            //                           ),
-            //                         ),
-            //                         SizedBox(
-            //                           width: 10,
-            //                         ),
-            //                         Column(
-            //                           crossAxisAlignment:
-            //                               CrossAxisAlignment.start,
-            //                           children: [
-            //                             Text(
-            //                               song.title,
-            //                               style: mediumBold(primaryWhite),
-            //                             ),
-            //                             Text(
-            //                               song.artist,
-            //                               style: smallText(grey),
-            //                             )
-            //                           ],
-            //                         )
-            //                       ],
-            //                     ),
-            //                     IconButton(
-            //                       onPressed: () {
-            //                         _showSongDetails(context, song);
-            //                       },
-            //                       icon: Icon(
-            //                         FontAwesomeIcons.ellipsis,
-            //                         color: primaryWhite,
-            //                       ),
-            //                     ),
-            //                   ],
-            //                 ),
-            //               ),
-            //             ),
-            //           ],
-            //         ),
-            //       );
-            //     },
-            //   ),
-            // ),
-            if (selectedText == 'Liked Songs ') ...[
+            if (selectedText == 'Playlist') ...[
+              const Playlist(),
+            ],
+            if (selectedText == 'Liked Songs') ...[
               const Liked(),
+            ],
+            if (selectedText == 'Downloaded') ...[
+              const Downloaded(),
+            ],
+            if (selectedText == 'Shared') ...[
+              const Shared(),
             ],
           ],
         ),

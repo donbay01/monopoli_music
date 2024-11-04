@@ -3,7 +3,9 @@ import 'package:debounce_textfield/debounce_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:monopoli/providers/player.dart';
+import 'package:monopoli/services/auth.dart';
 import 'package:monopoli/services/music.dart';
+import 'package:monopoli/services/user.dart';
 import 'package:monopoli/theme/colors.dart';
 import 'package:zap_sizer/zap_sizer.dart';
 import '../../models/audio/models.dart';
@@ -35,6 +37,8 @@ class _SearchSheetState extends ConsumerState<SearchSheet> {
 
   @override
   Widget build(BuildContext context) {
+    var user = AuthService.getUser();
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -42,16 +46,21 @@ class _SearchSheetState extends ConsumerState<SearchSheet> {
         appBar: AppBar(
           backgroundColor: primaryBlack,
           automaticallyImplyLeading: true,
-          leading: IconButton(onPressed: (){
-            Navigator.pop(context);
-          }, icon: Icon(Icons.clear,color: primaryWhite,)),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.clear,
+              color: primaryWhite,
+            ),
+          ),
           title: DebounceTextfield(
             duration: const Duration(milliseconds: 600),
             action: (enteredText) {
               search(enteredText);
             },
             height: 100,
-
             clearButtonIcon: const Icon(
               Icons.clear_rounded,
               color: Colors.white,
@@ -109,6 +118,11 @@ class _SearchSheetState extends ConsumerState<SearchSheet> {
                       ref.read(audioProvider.notifier).state = audio;
                       ref.read(trackProvider.notifier).state = track;
                       context.loaderOverlay.hide();
+                      UserService.addSong(
+                        user!.uid,
+                        track,
+                        audio,
+                      );
                       Navigator.of(context).pop();
                       // pushScreenWithoutNavBar(
                       //   context,

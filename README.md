@@ -16,8 +16,3 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 flutter pub run build_runner build
-
-## Permission issue
-
-sudo chown -R `whoami` ~/.cocoapods
-sudo chown -R `whoami` ~/Library/Caches/CocoaPods

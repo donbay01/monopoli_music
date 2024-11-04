@@ -21,11 +21,11 @@ class Tracks {
 
 @JsonSerializable()
 class Track {
-  final String type;
+  final String? type;
   final String id;
   final String name;
-  final String label;
-  final String shareUrl;
+  final String? label;
+  final String? shareUrl;
   final bool explicit;
   final int durationMs;
   final String durationText;
@@ -33,16 +33,16 @@ class Track {
   final Album album;
 
   Track({
-    required this.type,
+    this.type,
     required this.id,
     required this.name,
-    required this.shareUrl,
+    this.shareUrl,
     required this.explicit,
     required this.durationMs,
     required this.durationText,
     required this.artists,
     required this.album,
-    required this.label,
+    this.label,
   });
 
   factory Track.fromJson(Map<String, dynamic> json) => _$TrackFromJson(json);

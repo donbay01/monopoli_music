@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:monopoli/services/auth.dart';
-import 'package:monopoli/services/user.dart';
-import 'package:monopoli/widgets/lists/music_tile.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import '../../models/audio/index.dart';
 import '../../models/audio/track.dart';
+import '../../services/auth.dart';
+import '../../services/user.dart';
+import '../../widgets/lists/music_tile.dart';
 
-class Liked extends ConsumerWidget {
-  const Liked({super.key});
+class Downloaded extends ConsumerWidget {
+  const Downloaded({super.key});
 
   @override
   Widget build(
@@ -19,7 +19,7 @@ class Liked extends ConsumerWidget {
 
     return PaginateFirestore(
       itemBuilderType: PaginateBuilderType.listView,
-      query: UserService.getLikedSong(user!.uid),
+      query: UserService.getDownloadedSong(user!.uid),
       isLive: true,
       shrinkWrap: true,
       itemBuilder: (context, snapshots, index) {
