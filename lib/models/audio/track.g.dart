@@ -19,14 +19,14 @@ Map<String, dynamic> _$TracksToJson(Tracks instance) => <String, dynamic>{
     };
 
 Track _$TrackFromJson(Map<String, dynamic> json) => Track(
-      type: json['type'] as String,
-      id: json['id'] as String,
-      name: json['name'] as String,
+      type: json['type'] as String?,
+      id: json['id'] as String?,
+      name: json['name'] as String?,
       label: '${json['name']} - (${json['artists'][0]['name']})',
-      shareUrl: json['shareUrl'] as String,
+      shareUrl: json['shareUrl'] as String?,
       explicit: json['explicit'] as bool,
-      durationMs: (json['durationMs'] as num).toInt(),
-      durationText: json['durationText'] as String,
+      durationMs: ((json['durationMs'] ?? json['duration_ms']) as num).toInt(),
+      durationText: json['durationText'] as String?,
       artists: (json['artists'] as List<dynamic>)
           .map((e) => Artist.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -36,13 +36,13 @@ Track _$TrackFromJson(Map<String, dynamic> json) => Track(
 Map<String, dynamic> _$TrackToJson(Track instance) => <String, dynamic>{
       'type': instance.type,
       'id': instance.id,
-      'label': '${instance.name} - (${instance.artists.first.name})',
+      'label': '${instance.name} - (${instance.artists?.first.name})',
       'value': instance.id,
       'name': instance.name,
       'shareUrl': instance.shareUrl,
       'explicit': instance.explicit,
       'durationMs': instance.durationMs,
       'durationText': instance.durationText,
-      'artists': instance.artists.map((a) => a.toJson()).toList(),
-      'album': instance.album.toJson(),
+      'artists': instance.artists?.map((a) => a.toJson()).toList(),
+      'album': instance.album?.toJson(),
     };

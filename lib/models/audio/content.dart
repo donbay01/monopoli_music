@@ -6,20 +6,20 @@ part 'content.g.dart';
 
 @JsonSerializable()
 class Content {
-  final String type;
-  final String id;
-  final String name;
-  final String shareUrl;
-  final List<Artist> artists;
-  final List<Cover> cover;
+  final String? type;
+  final String? id;
+  final String? name;
+  final String? shareUrl;
+  final List<Artist>? artists;
+  final List<Cover>? cover;
 
   Content({
-    required this.type,
-    required this.id,
-    required this.name,
-    required this.shareUrl,
-    required this.artists,
-    required this.cover,
+    this.type,
+    this.id,
+    this.name,
+    this.shareUrl,
+    this.artists,
+    this.cover,
   });
 
   factory Content.fromJson(Map<String, dynamic> json) =>

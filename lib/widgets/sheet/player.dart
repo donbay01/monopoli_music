@@ -31,14 +31,16 @@ class _MusicPlayerSheetState extends ConsumerState<MusicPlayerSheet> {
               audio!.youtubeVideo.audio.first.url,
             ),
             tag: MediaItem(
-              id: track.id,
-              album: track.album.name,
-              title: track.name,
+              id: track.id!,
+              album: track.album!.name,
+              title: track.name!,
               displayTitle: track.name,
-              artist: track.artists.first.name,
-              artUri: Uri.parse(
-                track.album.cover!.last.url,
-              ),
+              artist: track.artists!.first.name,
+              artUri: track.album!.cover == null
+                  ? null
+                  : Uri.parse(
+                      track.album!.cover!.last.url,
+                    ),
               genre: track.type,
             ),
           ),

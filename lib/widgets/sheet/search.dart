@@ -114,7 +114,7 @@ class _SearchSheetState extends ConsumerState<SearchSheet> {
                   return GestureDetector(
                     onTap: () async {
                       context.loaderOverlay.show();
-                      var audio = await MusicService.getTrackURL(track.id);
+                      var audio = await MusicService.getTrackURL(track.id!);
                       ref.read(audioProvider.notifier).state = audio;
                       ref.read(trackProvider.notifier).state = track;
                       context.loaderOverlay.hide();
@@ -139,7 +139,7 @@ class _SearchSheetState extends ConsumerState<SearchSheet> {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(5.5.h),
                             child: CachedNetworkImage(
-                              imageUrl: track.album.cover!.last.url,
+                              imageUrl: track.album!.cover!.last.url,
                               fit: BoxFit.cover,
                               height: 5.5.h,
                               width: 5.5.h,
@@ -154,12 +154,12 @@ class _SearchSheetState extends ConsumerState<SearchSheet> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  track.name,
+                                  track.name!,
                                   overflow: TextOverflow.ellipsis,
                                   style: mediumSemiBold(Colors.white),
                                 ),
                                 Text(
-                                  track.artists.first.name,
+                                  track.artists!.first.name ?? 'N/A',
                                   style: mediumText(
                                     Colors.white,
                                   ),

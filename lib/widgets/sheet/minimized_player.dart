@@ -38,20 +38,19 @@ class MinimizedPlayer extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  if (track.album.cover != null) ...[
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(32),
-                      child: Hero(
-                        tag: Key(track.id),
-                        child: CachedNetworkImage(
-                          imageUrl: track.album.cover!.first.url,
-                          fit: BoxFit.cover,
-                          height: 5.5.h,
-                          width: 5.5.h,
-                        ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(32),
+                    child: Hero(
+                      tag: Key(track.id!),
+                      child: CachedNetworkImage(
+                        imageUrl: track.album!.cover?.first.url ??
+                            track.album!.images!.first.url,
+                        fit: BoxFit.cover,
+                        height: 5.5.h,
+                        width: 5.5.h,
                       ),
                     ),
-                  ],
+                  ),
                   SizedBox(
                     width: 4.w,
                   ),
@@ -62,12 +61,12 @@ class MinimizedPlayer extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          track.name,
+                          track.name!,
                           overflow: TextOverflow.ellipsis,
                           style: mediumSemiBold(Colors.white),
                         ),
                         Text(
-                          track.artists.first.name,
+                          track.artists!.first.name ?? 'N/A',
                           style: mediumText(Colors.white),
                         ),
                       ],

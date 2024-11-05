@@ -130,30 +130,57 @@ class Spotify {
     }
   }
 
-  static Future<List<t.Track>?> getAlbumTracks(
+  static Future<List> getAlbumTracks(
     String token,
     String albumID,
   ) async {
-    try {
-      final url = Uri.parse(
-        'https://api.spotify.com/v1/albums/$albumID/tracks',
-      );
-      final headers = {
-        'Authorization': 'Bearer $token',
-      };
+    final url = Uri.parse(
+      'https://api.spotify.com/v1/albums/$albumID/tracks',
+    );
+    final headers = {
+      'Authorization': 'Bearer $token',
+    };
 
-      final response = await http.get(url, headers: headers);
-      final data = jsonDecode(response.body);
+    final response = await http.get(url, headers: headers);
+    final data = jsonDecode(response.body);
 
-      print(data['items']);
+    return data['items'];
+  }
 
-      return data['items']
-          .map((a) => t.Track.fromJson(a))
-          .toList()
-          .cast<t.Track>();
-    } catch (e) {
-      print(e);
-      return null;
-    }
+  static Future<t.Track> getSingleTrack(
+    String token,
+    String trackId,
+  ) async {
+    final url = Uri.parse(
+      'https://api.spotify.com/v1/tracks/$trackId',
+    );
+    final headers = {
+      'Authorization': 'Bearer $token',
+    };
+
+    final response = await http.get(url, headers: headers);
+    final data = jsonDecode(response.body);
+
+    return t.Track.fromJson(data);
+  }
+
+  static Future<List<t.Track>> getMultipleTracks(
+    String token,
+    List<String> trackIds,
+  ) async {
+    final url = Uri.parse(
+      'https://api.spotify.com/v1/tracks?ids=${trackIds.join(",")}',
+    );
+    final headers = {
+      'Authorization': 'Bearer $token',
+    };
+
+    final response = await http.get(url, headers: headers);
+    final data = jsonDecode(response.body);
+
+    return data['tracks']
+        .map((a) => t.Track.fromJson(a))
+        .toList()
+        .cast<t.Track>();
   }
 }

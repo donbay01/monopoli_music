@@ -65,7 +65,7 @@ class MusicTile extends ConsumerWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: CachedNetworkImage(
-                          imageUrl: track.album.cover!.last.url,
+                          imageUrl: track.album!.cover!.last.url,
                           height: 70,
                           width: 70,
                           fit: BoxFit.cover,
@@ -78,11 +78,11 @@ class MusicTile extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            track.name,
+                            track.name ?? 'N/A',
                             style: mediumBold(primaryWhite),
                           ),
                           Text(
-                            track.artists.first.name,
+                            track.artists?.first.name ?? 'N/A',
                             style: smallText(grey),
                           )
                         ],
@@ -90,7 +90,7 @@ class MusicTile extends ConsumerWidget {
                     ],
                   ),
                   IconButton(
-                    onPressed: () => _showSongDetails(
+                    onPressed: () => showSongDetails(
                       context,
                       ref,
                       track,
@@ -98,7 +98,7 @@ class MusicTile extends ConsumerWidget {
                     ),
                     icon: const Icon(
                       FontAwesomeIcons.ellipsis,
-                      color: primaryWhite,
+                      color: Color.fromARGB(255, 116, 90, 90),
                     ),
                   ),
                 ],
@@ -110,7 +110,7 @@ class MusicTile extends ConsumerWidget {
     );
   }
 
-  void _showSongDetails(
+  void showSongDetails(
     BuildContext context,
     WidgetRef ref,
     Track track,
@@ -151,7 +151,7 @@ class MusicTile extends ConsumerWidget {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
                             child: CachedNetworkImage(
-                              imageUrl: track.album.cover!.last.url,
+                              imageUrl: track.album!.cover!.last.url,
                               height: 70,
                               width: 70,
                               fit: BoxFit.cover,
@@ -164,11 +164,11 @@ class MusicTile extends ConsumerWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                track.name,
+                                track?.name ?? 'N/A',
                                 style: mediumBold(primaryWhite),
                               ),
                               Text(
-                                track.artists.first.name,
+                                track.artists?.first.name ?? 'N/A',
                                 style: smallText(grey),
                               )
                             ],
@@ -200,7 +200,7 @@ class MusicTile extends ConsumerWidget {
                         await UserService.addSongToPlayList(
                           userId,
                           ref.id,
-                          track.id,
+                          track.id!,
                         );
                         Navigator.of(context).pop();
                       },
@@ -225,7 +225,7 @@ class MusicTile extends ConsumerWidget {
                   ],
                   GestureDetector(
                     onTap: () {
-                      UserService.unLikeSong(userId, track.id);
+                      UserService.unLikeSong(userId, track.id!);
                       UserService.removeSong(userId, track);
                       Navigator.of(context).pop();
                     },
@@ -254,10 +254,10 @@ class MusicTile extends ConsumerWidget {
                         final audioSource = AudioSource.uri(
                           Uri.parse(audio.youtubeVideo.audio.first.url),
                           tag: MediaItem(
-                            id: track.id,
-                            album: track.album.name,
-                            title: track.name,
-                            artUri: Uri.parse(track.album.cover!.first.url),
+                            id: track.id!,
+                            album: track.album!.name,
+                            title: track.name!,
+                            artUri: Uri.parse(track.album!.cover!.first.url),
                           ),
                         );
                         // final audioSource = LockCachingAudioSource(
@@ -266,7 +266,7 @@ class MusicTile extends ConsumerWidget {
                         //   ),
                         // );
                         p.setAudioSource(audioSource);
-                        UserService.updateSong(userId, track.id, {
+                        UserService.updateSong(userId, track.id!, {
                           'downloaded': true,
                         });
                         Navigator.pop(context);
@@ -298,7 +298,7 @@ class MusicTile extends ConsumerWidget {
                           audio.youtubeVideo.audio.first.url,
                         ),
                       );
-                      UserService.updateSong(userId, track.id, {
+                      UserService.updateSong(userId, track.id!, {
                         'shared': true,
                       });
                     },

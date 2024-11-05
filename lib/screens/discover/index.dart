@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:monopoli/providers/spotify.dart';
 import 'package:monopoli/screens/albums/index.dart';
 import 'package:monopoli/screens/discover/album.dart';
+import 'package:monopoli/screens/discover/top_music.dart';
 import 'package:monopoli/screens/player/music_playing.dart';
 import 'package:monopoli/services/spotify.dart';
 import 'package:monopoli/theme/colors.dart';
@@ -137,141 +138,11 @@ class _DiscoverState extends ConsumerState<Discover>
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    Container(
-                      height: height * 0.5,
-                      width: width * 0.8,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Color(0xFF58556E),
-                            Color(0xff66656D),
-                          ],
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                        ),
-                        borderRadius: BorderRadius.circular(20),
+                    if (t != null) ...[
+                      TopMusic(
+                        token: t,
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'Top Music',
-                                    style: mediumSemiBold(primaryWhite),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {},
-                                    child: Text(
-                                      'view all',
-                                      style: mediumBold(primaryWhite),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                height: height * 0.4,
-                                width: width,
-                                child: ListView.builder(
-                                  padding: EdgeInsets.zero,
-                                  itemCount: songs.length,
-                                  scrollDirection: Axis.vertical,
-                                  itemBuilder: (context, index) {
-                                    final song = songs[index];
-                                    return Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        vertical: 10.0,
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () {
-                                              // Navigator.push(
-                                              //     context,
-                                              //     MaterialPageRoute(
-                                              //         builder: (_) =>
-                                              //             MusicPlayerPage(
-                                              //               imagePath:
-                                              //                   song.imagePath,
-                                              //               musicTitle:
-                                              //                   song.title,
-                                              //               artistName:
-                                              //                   song.artist,
-                                              //             )));
-                                            },
-                                            child: Container(
-                                              color: Colors.transparent,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8.0),
-                                                        child: Image.asset(
-                                                          song.imagePath,
-                                                          height: 50,
-                                                          width: 50,
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        width: 10,
-                                                      ),
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            song.title,
-                                                            style: mediumBold(
-                                                                primaryWhite),
-                                                          ),
-                                                          Text(
-                                                            song.artist,
-                                                            style:
-                                                                smallText(grey),
-                                                          ),
-                                                        ],
-                                                      )
-                                                    ],
-                                                  ),
-                                                  IconButton(
-                                                    onPressed: () {
-                                                      _showSongDetails(
-                                                          context, song);
-                                                    },
-                                                    icon: Icon(
-                                                      FontAwesomeIcons
-                                                          .ellipsisVertical,
-                                                      color: primaryWhite,
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
+                    ],
                     SizedBox(
                       width: 20,
                     ),

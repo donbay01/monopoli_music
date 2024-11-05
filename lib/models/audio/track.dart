@@ -22,26 +22,26 @@ class Tracks {
 @JsonSerializable()
 class Track {
   final String? type;
-  final String id;
-  final String name;
+  final String? id;
+  final String? name;
   final String? label;
   final String? shareUrl;
-  final bool explicit;
-  final int durationMs;
-  final String durationText;
-  final List<Artist> artists;
-  final Album album;
+  final bool? explicit;
+  final int? durationMs;
+  final String? durationText;
+  final List<Artist>? artists;
+  final Album? album;
 
   Track({
     this.type,
-    required this.id,
-    required this.name,
+    this.id,
+    this.name,
     this.shareUrl,
-    required this.explicit,
-    required this.durationMs,
-    required this.durationText,
-    required this.artists,
-    required this.album,
+    this.explicit,
+    this.durationMs,
+    this.durationText,
+    this.artists,
+    this.album,
     this.label,
   });
 

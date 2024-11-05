@@ -92,7 +92,7 @@ class _MusicPlayerPageState extends ConsumerState<MusicPlayerPage> {
     } else {
       UserService.unLikeSong(
         user!.uid,
-        widget.track.id,
+        widget.track.id!,
       );
     }
     setState(() {
@@ -117,7 +117,7 @@ class _MusicPlayerPageState extends ConsumerState<MusicPlayerPage> {
   // Function to update background colors based on the asset image
   Future<void> _updateBackgroundColors() async {
     final paletteGenerator = await PaletteGenerator.fromImageProvider(
-      CachedNetworkImageProvider(widget.track.album.cover!.first.url),
+      CachedNetworkImageProvider(widget.track.album!.cover!.first.url),
     );
 
     setState(() {
@@ -172,11 +172,13 @@ class _MusicPlayerPageState extends ConsumerState<MusicPlayerPage> {
               // SizedBox(
               //   height: 40,
               // ),
+
               Center(
                 child: Hero(
-                  tag: Key(widget.track.id),
+                  tag: Key(widget.track.id!),
                   child: CachedNetworkImage(
-                    imageUrl: widget.track.album.cover!.last.url,
+                    imageUrl: widget.track.album!.cover?.last.url ??
+                        widget.track.album!.images!.first.url,
                     width: width * 0.7,
                     height: height * 0.3,
                     fit: BoxFit.contain,
@@ -193,11 +195,11 @@ class _MusicPlayerPageState extends ConsumerState<MusicPlayerPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.track.name,
+                        widget.track.name ?? 'N/A',
                         style: largeText(primaryWhite),
                       ),
                       Text(
-                        widget.track.artists.first.name,
+                        widget.track.artists!.first.name ?? 'N/A',
                         style: mediumText(grey),
                       ),
                     ],

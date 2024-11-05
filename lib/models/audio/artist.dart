@@ -19,18 +19,18 @@ class Artists {
 
 @JsonSerializable()
 class Artist {
-  final String type;
-  final String id;
-  final String name;
-  final String shareUrl;
+  final String? type;
+  final String? id;
+  final String? name;
+  final String? shareUrl;
   final bool? verified;
   final Visuals? visuals;
 
   Artist({
-    required this.type,
-    required this.id,
-    required this.name,
-    required this.shareUrl,
+    this.type,
+    this.id,
+    this.name,
+    this.shareUrl,
     this.verified,
     this.visuals,
   });

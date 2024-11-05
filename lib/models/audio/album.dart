@@ -28,6 +28,7 @@ class Album {
   final List<Artist>? artists;
   final List<Cover>? cover;
   final Content? content;
+  final List<Cover>? images;
 
   Album({
     this.type,
@@ -38,6 +39,7 @@ class Album {
     this.artists,
     this.cover,
     this.content,
+    this.images,
   });
 
   factory Album.fromJson(Map<String, dynamic> json) => _$AlbumFromJson(json);

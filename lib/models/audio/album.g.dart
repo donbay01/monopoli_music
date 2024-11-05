@@ -30,6 +30,9 @@ Album _$AlbumFromJson(Map<String, dynamic> json) => Album(
       cover: (json['cover'] as List<dynamic>?)
           ?.map((e) => Cover.fromJson(e as Map<String, dynamic>))
           .toList(),
+      images: (json['images'] as List<dynamic>?)
+          ?.map((e) => Cover.fromJson(e as Map<String, dynamic>))
+          .toList(),
       content: json['content'] == null
           ? null
           : Content.fromJson(json['content'] as Map<String, dynamic>),

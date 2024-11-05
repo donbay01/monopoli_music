@@ -19,10 +19,10 @@ Map<String, dynamic> _$ArtistsToJson(Artists instance) => <String, dynamic>{
     };
 
 Artist _$ArtistFromJson(Map<String, dynamic> json) => Artist(
-      type: json['type'] as String,
-      id: json['id'] as String,
-      name: json['name'] as String,
-      shareUrl: json['shareUrl'] as String,
+      type: json['type'] as String?,
+      id: json['id'] as String?,
+      name: json['name'] as String?,
+      shareUrl: json['shareUrl'] as String?,
       verified: json['verified'] as bool?,
       visuals: json['visuals'] == null
           ? null

@@ -24,12 +24,12 @@ class Dashboard extends ConsumerStatefulWidget {
 class _DashboardState extends ConsumerState<Dashboard> {
   @override
   Widget build(BuildContext context) {
-    var showNav = ref.watch(navShowing);
+    // var showNav = ref.watch(navShowing);
 
     return PersistentTabView(
-      navBarHeight: showNav ? 65 : 0,
+      // navBarHeight: showNav ? 65 : 0,
       backgroundColor: primaryBlack,
-      hideNavigationBar: !showNav,
+      // hideNavigationBar: !showNav,
       tabs: [
         PersistentTabConfig(
           screen: Discover(),
