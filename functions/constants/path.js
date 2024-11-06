@@ -1,5 +1,5 @@
 const userPath = 'users/{userId}';
-const streamedTrackPath = 'tracks/{trackId}';
+const streamedTrackPath = userPath + '/tracks/{trackId}';
 
 module.exports = {
     userPath,
