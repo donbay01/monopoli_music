@@ -3,7 +3,6 @@ import 'package:monopoli/screens/podcast/mini_player.dart';
 import 'package:monopoli/screens/podcast/podcast_description.dart';
 import 'package:monopoli/screens/podcast/podcast_header.dart';
 import 'package:monopoli/theme/colors.dart';
-
 import '../../theme/text_style.dart';
 import 'episode_list.dart';
 
@@ -17,7 +16,9 @@ class PodcastPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 50,),
+            SizedBox(
+              height: 50,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -38,7 +39,6 @@ class PodcastPage extends StatelessWidget {
           ],
         ),
       ),
-      // bottomNavigationBar: MiniPlayer(),
     );
   }
 }

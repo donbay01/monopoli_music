@@ -31,7 +31,6 @@ class FeaturedSongs extends StatelessWidget {
             shrinkWrap: true,
             itemCount: data.contents.totalCount,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-
               crossAxisCount: 2,
             ),
             itemBuilder: (context, index) {
@@ -40,7 +39,10 @@ class FeaturedSongs extends StatelessWidget {
               return GestureDetector(
                 onTap: () => pushScreenWithNavBar(
                   context,
-                  PlaylistScreen(playlist: a),
+                  PlaylistScreen(
+                    name: a.name,
+                    playlistId: a.id,
+                  ),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),

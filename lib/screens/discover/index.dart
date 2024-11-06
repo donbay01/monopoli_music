@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:monopoli/providers/spotify.dart';
 import 'package:monopoli/screens/albums/index.dart';
 import 'package:monopoli/screens/discover/album.dart';
+import 'package:monopoli/screens/discover/hot_releases.dart';
 import 'package:monopoli/screens/discover/top_music.dart';
 import 'package:monopoli/screens/player/music_playing.dart';
 import 'package:monopoli/services/spotify.dart';
@@ -180,99 +181,11 @@ class _DiscoverState extends ConsumerState<Discover>
                                   ),
                                 ],
                               ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Container(
-                                height: height * 0.4,
-                                width: width,
-                                child: ListView.builder(
-                                  padding: EdgeInsets.zero,
-                                  itemCount: songs.length,
-                                  scrollDirection: Axis.vertical,
-                                  itemBuilder: (context, index) {
-                                    final song = songs[index];
-                                    return Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 10.0),
-                                      child: Column(
-                                        children: [
-                                          GestureDetector(
-                                            onTap: () {
-                                              // Navigator.push(
-                                              //     context,
-                                              //     MaterialPageRoute(
-                                              //         builder: (_) =>
-                                              //             MusicPlayerPage(
-                                              //               imagePath:
-                                              //                   'assets/burnaplay.png',
-                                              //               musicTitle:
-                                              //                   'Higher',
-                                              //               artistName:
-                                              //                   'Burna Boy',
-                                              //             )));
-                                            },
-                                            child: Container(
-                                              color: Colors.transparent,
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(8.0),
-                                                        child: Image.asset(
-                                                          song.imagePath,
-                                                          height: 50,
-                                                          width: 50,
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        width: 10,
-                                                      ),
-                                                      Column(
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .start,
-                                                        children: [
-                                                          Text(
-                                                            song.title,
-                                                            style: mediumBold(
-                                                                primaryWhite),
-                                                          ),
-                                                          Text(
-                                                            song.artist,
-                                                            style:
-                                                                smallText(grey),
-                                                          )
-                                                        ],
-                                                      )
-                                                    ],
-                                                  ),
-                                                  IconButton(
-                                                      onPressed: () {
-                                                        // _showSongDetails(context, song);
-                                                      },
-                                                      icon: Icon(
-                                                        FontAwesomeIcons
-                                                            .ellipsisVertical,
-                                                        color: primaryWhite,
-                                                      ))
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
+                              if (t != null) ...[
+                                HotReleases(
+                                  token: t,
                                 ),
-                              ),
+                              ],
                             ],
                           ),
                         ),

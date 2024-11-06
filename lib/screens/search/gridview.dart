@@ -2,10 +2,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:monopoli/providers/spotify.dart';
+import 'package:monopoli/screens/library/playlist_detail.dart';
+import 'package:monopoli/screens/playlists/index.dart';
 import 'package:monopoli/services/music.dart';
 import 'package:monopoli/services/spotify.dart';
 import 'package:monopoli/theme/colors.dart';
 import 'package:monopoli/theme/text_style.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
 class GenreGridPage extends ConsumerWidget {
   @override
@@ -50,10 +53,18 @@ class GenreGridPage extends ConsumerWidget {
 
             return GestureDetector(
               onTap: () async {
-                // var p = await Spotify.getCategoriesPlaylist(
-                //   token,
-                //   c.id,
-                // );
+                var p = await Spotify.getCategoriesPlaylist(
+                  token,
+                  c.id,
+                );
+
+                pushScreenWithNavBar(
+                  context,
+                  CategoryPlaylist(
+                    category: c,
+                    playlists: p,
+                  ),
+                );
               },
               child: Card(
                 elevation: 10,
