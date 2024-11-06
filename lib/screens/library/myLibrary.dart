@@ -50,9 +50,11 @@ class _MylibraryState extends ConsumerState<Mylibrary> {
                   'Library',
                   style: largeText(primaryWhite),
                 ),
-                UserAvatar(
-                  user: user!,
-                )
+                if (user != null) ...[
+                  UserAvatar(
+                    user: user,
+                  )
+                ]
               ],
             ),
             SizedBox(

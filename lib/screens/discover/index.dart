@@ -102,10 +102,6 @@ class _DiscoverState extends ConsumerState<Discover>
 
     var user = ref.watch(userProvider);
 
-    if (user == null) {
-      return const SizedBox.shrink();
-    }
-
     var t = ref.watch(spotifyToken);
 
     return Scaffold(
@@ -126,9 +122,11 @@ class _DiscoverState extends ConsumerState<Discover>
                     'Discover',
                     style: largeText(primaryWhite),
                   ),
-                  UserAvatar(
-                    user: user,
-                  ),
+                  if (user != null) ...[
+                    UserAvatar(
+                      user: user,
+                    ),
+                  ]
                 ],
               ),
               // const FeaturedSongs(),
