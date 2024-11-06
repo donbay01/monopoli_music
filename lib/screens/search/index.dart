@@ -3,6 +3,7 @@ import 'package:monopoli/screens/search/gridview.dart';
 import 'package:monopoli/theme/colors.dart';
 import 'package:monopoli/theme/text_style.dart';
 import 'package:monopoli/widgets/sheet/search.dart';
+import 'package:zap_sizer/zap_sizer.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -99,6 +100,9 @@ class _SearchScreenState extends State<SearchScreen> {
                   height: height,
                   width: width,
                   child: GenreGridPage(),
+                ),
+                SizedBox(
+                  height: 10.h,
                 ),
               ],
             ),

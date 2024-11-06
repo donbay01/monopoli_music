@@ -5,9 +5,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:monopoli/models/playlist/index.dart';
 import 'package:monopoli/providers/player.dart';
+import 'package:monopoli/services/auth.dart';
 import 'package:monopoli/services/music.dart';
 import 'package:monopoli/services/spotify.dart';
 import 'package:zap_sizer/zap_sizer.dart';
+import '../../services/user.dart';
 import '../../theme/colors.dart';
 import '../../theme/text_style.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -32,6 +34,7 @@ class HotReleases extends ConsumerWidget {
       '2nYeyMeqYDiFSYYtl2BWD6'
     ];
     var size = MediaQuery.of(context).size;
+    var user = AuthService.getUser();
 
     return Container(
       height: size.height * 0.5,
@@ -100,6 +103,12 @@ class HotReleases extends ConsumerWidget {
                                     ref.read(trackProvider.notifier).state =
                                         song;
                                     ref.read(audioProvider.notifier).state = a;
+                                    // ref.read(isExpanded.notifier).state = true;
+                                    UserService.addSong(
+                                      user!.uid,
+                                      song,
+                                      a,
+                                    );
                                   } catch (e) {
                                     Fluttertoast.showToast(
                                       msg: 'An error occurred',

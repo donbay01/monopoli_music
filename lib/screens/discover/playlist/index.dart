@@ -80,6 +80,7 @@ class PlaylistScreen extends ConsumerWidget {
 
                     ref.read(trackProvider.notifier).state = track;
                     ref.read(audioProvider.notifier).state = audio;
+                    // ref.read(isExpanded.notifier).state = true;
 
                     var user = AuthService.getUser();
                     UserService.addSong(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:monopoli/theme/text_style.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import '../../models/audio/index.dart';
 import '../../models/audio/track.dart';
@@ -18,6 +19,12 @@ class Downloaded extends ConsumerWidget {
     var user = AuthService.getUser();
 
     return PaginateFirestore(
+      onEmpty: Center(
+        child: Text(
+          'No song has been downloaded',
+          style: mediumText(Colors.white),
+        ),
+      ),
       itemBuilderType: PaginateBuilderType.listView,
       query: UserService.getDownloadedSong(user!.uid),
       isLive: true,

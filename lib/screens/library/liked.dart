@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:monopoli/services/auth.dart';
 import 'package:monopoli/services/user.dart';
+import 'package:monopoli/theme/text_style.dart';
 import 'package:monopoli/widgets/lists/music_tile.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import '../../models/audio/index.dart';
@@ -18,6 +19,12 @@ class Liked extends ConsumerWidget {
     var user = AuthService.getUser();
 
     return PaginateFirestore(
+      onEmpty: Center(
+        child: Text(
+          'No song has been liked',
+          style: mediumText(Colors.white),
+        ),
+      ),
       itemBuilderType: PaginateBuilderType.listView,
       query: UserService.getLikedSong(user!.uid),
       isLive: true,

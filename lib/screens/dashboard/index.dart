@@ -80,6 +80,10 @@ class _DashboardState extends ConsumerState<Dashboard> {
           ),
         ),
       ],
+      margin: EdgeInsets.zero,
+      avoidBottomPadding: true,
+      resizeToAvoidBottomInset: false,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: const MusicPlayerSheet(),
       navBarBuilder: (navBarConfig) => Style7BottomNavBar(
         navBarConfig: navBarConfig,

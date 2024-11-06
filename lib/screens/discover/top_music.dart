@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:monopoli/models/playlist/index.dart';
+import 'package:monopoli/models/audio/track.dart';
 import 'package:monopoli/providers/player.dart';
+import 'package:monopoli/services/auth.dart';
 import 'package:monopoli/services/music.dart';
 import 'package:monopoli/services/spotify.dart';
 import 'package:zap_sizer/zap_sizer.dart';
+import '../../helper/options_sheet.dart';
+import '../../services/user.dart';
 import '../../theme/colors.dart';
 import '../../theme/text_style.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -34,6 +37,7 @@ class TopMusic extends ConsumerWidget {
       '2nYeyMeqYDiFSYYtl2BWD6'
     ];
     var size = MediaQuery.of(context).size;
+    var user = AuthService.getUser();
 
     return Container(
       height: size.height * 0.5,
@@ -118,6 +122,12 @@ class TopMusic extends ConsumerWidget {
                                     ref.read(trackProvider.notifier).state =
                                         song;
                                     ref.read(audioProvider.notifier).state = a;
+                                    // ref.read(isExpanded.notifier).state = true;
+                                    UserService.addSong(
+                                      user!.uid,
+                                      song,
+                                      a,
+                                    );
                                   } catch (e) {
                                     Fluttertoast.showToast(
                                       msg: 'An error occurred',
@@ -171,18 +181,18 @@ class TopMusic extends ConsumerWidget {
                                           )
                                         ],
                                       ),
-                                      // IconButton(
-                                      //   onPressed: () {
-                                      //     // showSongDetails(
-                                      //     //   context,
-                                      //     //   song,
-                                      //     // );
-                                      //   },
-                                      //   icon: Icon(
-                                      //     FontAwesomeIcons.ellipsisVertical,
-                                      //     color: primaryWhite,
-                                      //   ),
-                                      // ),
+                                      IconButton(
+                                        onPressed: () => showSongDetails(
+                                          context,
+                                          ref,
+                                          song,
+                                          null,
+                                        ),
+                                        icon: Icon(
+                                          FontAwesomeIcons.ellipsisVertical,
+                                          color: primaryWhite,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -199,6 +209,169 @@ class TopMusic extends ConsumerWidget {
           ),
         ),
       ),
+    );
+  }
+
+  void _showSongDetails(
+    BuildContext context,
+    Track song,
+  ) {
+    showModalBottomSheet(
+      backgroundColor: Colors.grey[900],
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+      ),
+      builder: (context) {
+        var height = MediaQuery.of(context).size.height;
+        var width = MediaQuery.of(context).size.width;
+
+        return Container(
+          height: height * 0.6,
+          width: width,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(8.0),
+                            child: CachedNetworkImage(
+                              imageUrl: song.album!.cover!.first.url,
+                              height: 70,
+                              width: 70,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                song.name!,
+                                style: mediumBold(primaryWhite),
+                              ),
+                              Text(
+                                song.artists!.first!.name!,
+                                style: smallText(grey),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(
+                          Icons.clear,
+                          color: primaryWhite,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Divider(
+                    color: grey,
+                    height: 50,
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.playlist_add,
+                          color: primaryWhite,
+                          size: 30,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          'Add to playlist',
+                          style: mediumBold(primaryWhite),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.remove,
+                          color: primaryWhite,
+                          size: 30,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          'Remove from library',
+                          style: mediumBold(primaryWhite),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.download_for_offline_outlined,
+                          color: primaryWhite,
+                          size: 30,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          'Download',
+                          style: mediumBold(primaryWhite),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  GestureDetector(
+                    onTap: () {},
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.ios_share,
+                          color: primaryWhite,
+                          size: 30,
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Text(
+                          'Share',
+                          style: mediumBold(primaryWhite),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 100),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
   }
 }

@@ -5,6 +5,7 @@ import '../../models/audio/index.dart';
 import '../../models/audio/track.dart';
 import '../../services/auth.dart';
 import '../../services/user.dart';
+import '../../theme/text_style.dart';
 import '../../widgets/lists/music_tile.dart';
 
 class Shared extends ConsumerWidget {
@@ -18,6 +19,12 @@ class Shared extends ConsumerWidget {
     var user = AuthService.getUser();
 
     return PaginateFirestore(
+      onEmpty: Center(
+        child: Text(
+          'No song has been shared',
+          style: mediumText(Colors.white),
+        ),
+      ),
       itemBuilderType: PaginateBuilderType.listView,
       query: UserService.getSharedSong(user!.uid),
       isLive: true,

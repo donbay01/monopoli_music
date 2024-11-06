@@ -4,6 +4,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:monopoli/models/audio/index.dart';
 import 'package:monopoli/models/audio/track.dart';
 import 'package:monopoli/providers/nav.dart';
+import 'package:monopoli/providers/player.dart';
 import '../../screens/player/music_playing.dart';
 import 'minimized_player.dart';
 
@@ -25,8 +26,6 @@ class PlayerSheet extends ConsumerStatefulWidget {
 
 class _PlayerSheetState extends ConsumerState<PlayerSheet>
     with SingleTickerProviderStateMixin {
-  bool isExpanded = false;
-
   AnimationController? _controller;
   Animation<double>? _heightAnimation;
 
@@ -54,13 +53,15 @@ class _PlayerSheetState extends ConsumerState<PlayerSheet>
 
   void toggleSheet() {
     ref.read(navShowing.notifier).state = !ref.read(navShowing);
-    if (isExpanded) {
+    var isExpand = ref.read(isExpanded);
+    if (isExpand) {
       _controller?.reverse();
     } else {
       _controller?.forward();
     }
-    isExpanded = !isExpanded;
-    setState(() {});
+
+    ref.read(isExpanded.notifier).state = !isExpand;
+    // setState(() {});
   }
 
   @override
@@ -75,39 +76,45 @@ class _PlayerSheetState extends ConsumerState<PlayerSheet>
       return const SizedBox.shrink();
     }
 
-    return GestureDetector(
-      onTap: toggleSheet,
-      onVerticalDragUpdate: (details) {
-        if (details.primaryDelta! > 0 && isExpanded) {
-          toggleSheet();
-        } else if (details.primaryDelta! < 0 && !isExpanded) {
-          toggleSheet();
-        }
-      },
-      child: AnimatedBuilder(
-        animation: _controller!,
-        builder: (context, child) {
-          return Container(
-            height: _heightAnimation!.value,
-            width: double.infinity,
-            decoration: const BoxDecoration(
-              color: Colors.black,
-              borderRadius: BorderRadius.vertical(
-                top: Radius.circular(20),
-              ),
-            ),
-            child: isExpanded
-                ? MusicPlayerPage(
-                    audio: widget.audio,
-                    track: widget.track,
-                  )
-                : MinimizedPlayer(
-                    player: widget.player,
-                    track: widget.track,
+    return Consumer(
+      builder: (context, ref, _) {
+        var isExpand = ref.watch(isExpanded);
+
+        return GestureDetector(
+          onTap: toggleSheet,
+          onVerticalDragUpdate: (details) {
+            if (details.primaryDelta! > 0 && isExpand) {
+              toggleSheet();
+            } else if (details.primaryDelta! < 0 && !isExpand) {
+              toggleSheet();
+            }
+          },
+          child: AnimatedBuilder(
+            animation: _controller!,
+            builder: (context, child) {
+              return Container(
+                height: _heightAnimation!.value,
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(20),
                   ),
-          );
-        },
-      ),
+                ),
+                child: isExpand
+                    ? MusicPlayerPage(
+                        audio: widget.audio,
+                        track: widget.track,
+                      )
+                    : MinimizedPlayer(
+                        player: widget.player,
+                        track: widget.track,
+                      ),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }

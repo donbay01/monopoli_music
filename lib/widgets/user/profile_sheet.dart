@@ -73,7 +73,9 @@ class ProfileSheet extends StatelessWidget {
               Row(
                 children: [
                   const CircleAvatar(
-                    child: Image(image: AssetImage('assets/avatar.png')),
+                    child: Icon(
+                      FontAwesomeIcons.user,
+                    ),
                   ),
                   const SizedBox(
                     width: 20,

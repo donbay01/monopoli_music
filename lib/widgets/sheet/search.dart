@@ -117,6 +117,7 @@ class _SearchSheetState extends ConsumerState<SearchSheet> {
                       var audio = await MusicService.getTrackURL(track.id!);
                       ref.read(audioProvider.notifier).state = audio;
                       ref.read(trackProvider.notifier).state = track;
+                      // ref.read(isExpanded.notifier).state = true;
                       context.loaderOverlay.hide();
                       UserService.addSong(
                         user!.uid,

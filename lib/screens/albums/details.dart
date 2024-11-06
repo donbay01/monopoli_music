@@ -14,6 +14,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 
 class SongListScreen extends ConsumerStatefulWidget {
   final SpotifyAlbum album;
+
   final String token;
 
   const SongListScreen({
@@ -102,6 +103,7 @@ class _SongListScreenState extends ConsumerState<SongListScreen> {
                             );
                             ref.read(audioProvider.notifier).state = audio;
                             ref.read(trackProvider.notifier).state = t;
+                            // ref.read(isExpanded.notifier).state = true;
                             UserService.addSong(
                               user!.uid,
                               t,
@@ -115,22 +117,17 @@ class _SongListScreenState extends ConsumerState<SongListScreen> {
                               msg: 'An error occurred. Try again later',
                             );
                           }
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (_) => MusicPlayerPage(
-                          //               imagePath: song.imageUrl,
-                          //               musicTitle: song.title,
-                          //               artistName: song.artist,
-                          //             )));
                         },
                         child: ListTile(
-                          // leading: CachedNetworkImage(
-                          //   imageUrl: track.name,
-                          //   width: 50,
-                          //   height: 50,
-                          //   fit: BoxFit.cover,
-                          // ),
+                          leading: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: CachedNetworkImage(
+                              imageUrl: widget.album!.images!.first.url,
+                              width: 60,
+                              height: 60,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
                           title: Text(
                             track['name'],
                             style: mediumBold(primaryWhite),

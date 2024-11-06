@@ -19,6 +19,12 @@ class Playlist extends ConsumerWidget {
     var user = AuthService.getUser();
 
     return PaginateFirestore(
+      onEmpty: Center(
+        child: Text(
+          'No song has been added to the playlist',
+          style: mediumText(Colors.white),
+        ),
+      ),
       separator: SizedBox(
         height: 1.5.h,
       ),
@@ -40,6 +46,15 @@ class Playlist extends ConsumerWidget {
           ),
           child: Row(
             children: [
+              Image.asset(
+                'assets/launch.png',
+                height: 80,
+                width: 80,
+                fit: BoxFit.cover,
+              ),
+              SizedBox(
+                width: 3.w,
+              ),
               Text(
                 snap.get('name'),
                 style: mediumSemiBold(

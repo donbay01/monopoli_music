@@ -44,6 +44,7 @@ class MusicTile extends ConsumerWidget {
             onTap: () {
               ref.read(audioProvider.notifier).state = audio;
               ref.read(trackProvider.notifier).state = track;
+              // ref.read(isExpanded.notifier).state = true;
               // Navigator.push(
               //   context,
               //   MaterialPageRoute(

@@ -59,8 +59,8 @@ class CategoryPlaylist extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                   child: CachedNetworkImage(
                     imageUrl: playlist.images.first.url,
-                    width: 23.w,
-                    height: 23.w,
+                    width: 15.w,
+                    height: 15.w,
                   ),
                 ),
                 SizedBox(
