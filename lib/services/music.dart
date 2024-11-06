@@ -9,8 +9,9 @@ import 'package:monopoli/models/playlist/index.dart';
 const baseURL = 'https://spotify-scraper.p.rapidapi.com/v1';
 const headers = {
   'Content-Type': 'application/json',
-  'x-rapidapi-key': '0dec7e90f4msh1c806f9ede307efp1eeba2jsn9f6cade779d1',
+  'x-rapidapi-key': '2f7b27745bmsh4c535726654ab8fp1cbecbjsnad90f63e6dda',
   // 'a317b8b4c8mshd4dbc5fa0caf658p1335d4jsn5ba5d44faa36',
+  // '0dec7e90f4msh1c806f9ede307efp1eeba2jsn9f6cade779d1',
   'x-rapidapi-host': 'spotify-scraper.p.rapidapi.com',
 };
 
