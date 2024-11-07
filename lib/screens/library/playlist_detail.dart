@@ -22,7 +22,6 @@ class PlaylistDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     var user = AuthService.getUser();
 
     return Scaffold(

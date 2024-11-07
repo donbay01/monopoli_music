@@ -7,7 +7,7 @@ part of 'album.dart';
 // **************************************************************************
 
 Albums _$AlbumsFromJson(Map<String, dynamic> json) => Albums(
-      totalCount: (json['totalCount'] as num).toInt(),
+      totalCount: ((json['totalCount'] ?? json['total']) as num).toInt(),
       items: (json['items'] as List<dynamic>)
           .map((e) => Album.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -47,4 +47,5 @@ Map<String, dynamic> _$AlbumToJson(Album instance) => <String, dynamic>{
       'artists': instance.artists?.map((a) => a.toJson()).toList(),
       'cover': instance.cover?.map((a) => a.toJson()).toList(),
       'content': instance.content?.toJson(),
+      'images': instance.images?.map((a) => a.toJson()).toList(),
     };

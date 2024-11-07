@@ -7,7 +7,9 @@ import 'package:just_audio_background/just_audio_background.dart';
 import 'package:monopoli/models/audio/index.dart';
 import 'package:monopoli/models/audio/track.dart';
 import 'package:monopoli/services/user.dart';
+import 'package:monopoli/widgets/lists/create_playlist.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:zap_sizer/zap_sizer.dart';
 
 import '../../providers/player.dart';
 import '../../theme/colors.dart';
@@ -66,7 +68,8 @@ class MusicTile extends ConsumerWidget {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: CachedNetworkImage(
-                          imageUrl: track.album!.cover!.last.url,
+                          imageUrl: track.album?.cover?.first.url ??
+                              track.album!.images!.first.url,
                           height: 70,
                           width: 70,
                           fit: BoxFit.cover,
@@ -75,18 +78,21 @@ class MusicTile extends ConsumerWidget {
                       const SizedBox(
                         width: 10,
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            track.name ?? 'N/A',
-                            style: mediumBold(primaryWhite),
-                          ),
-                          Text(
-                            track.artists?.first.name ?? 'N/A',
-                            style: smallText(grey),
-                          )
-                        ],
+                      SizedBox(
+                        width: 56.5.w,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              track.name ?? 'N/A',
+                              style: mediumBold(primaryWhite),
+                            ),
+                            Text(
+                              track.artists?.first.name ?? 'N/A',
+                              style: smallText(grey),
+                            )
+                          ],
+                        ),
                       )
                     ],
                   ),
@@ -152,7 +158,8 @@ class MusicTile extends ConsumerWidget {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(8.0),
                             child: CachedNetworkImage(
-                              imageUrl: track.album!.cover!.last.url,
+                              imageUrl: track.album?.cover?.last.url ??
+                                  track.album!.images!.first.url,
                               height: 70,
                               width: 70,
                               fit: BoxFit.cover,
@@ -161,18 +168,21 @@ class MusicTile extends ConsumerWidget {
                           const SizedBox(
                             width: 10,
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                track?.name ?? 'N/A',
-                                style: mediumBold(primaryWhite),
-                              ),
-                              Text(
-                                track.artists?.first.name ?? 'N/A',
-                                style: smallText(grey),
-                              )
-                            ],
+                          SizedBox(
+                            width: 56.w,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  track?.name ?? 'N/A',
+                                  style: mediumBold(primaryWhite),
+                                ),
+                                Text(
+                                  track.artists?.first.name ?? 'N/A',
+                                  style: smallText(grey),
+                                )
+                              ],
+                            ),
                           )
                         ],
                       ),
@@ -193,17 +203,15 @@ class MusicTile extends ConsumerWidget {
                   ),
                   if (!isPlaylist) ...[
                     GestureDetector(
-                      onTap: () async {
-                        // ask for playlist name....
-                        var ref = await UserService.createPlaylist(
-                          uid: userId,
+                      onTap: () {
+                        showModalBottomSheet(
+                          context: context,
+                          backgroundColor: Colors.grey[900],
+                          useRootNavigator: true,
+                          builder: (_) => CreatePlaylist(
+                            track: track,
+                          ),
                         );
-                        await UserService.addSongToPlayList(
-                          userId,
-                          ref.id,
-                          track.id!,
-                        );
-                        Navigator.of(context).pop();
                       },
                       child: Row(
                         children: [

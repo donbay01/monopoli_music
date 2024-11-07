@@ -5,12 +5,14 @@ import 'package:monopoli/models/audio/track.dart';
 class UserService {
   static var db = FirebaseFirestore.instance;
 
-  static getSongsInPlaylist(String uid, String playlistId) => db
-      .collection('users')
-      .doc(uid)
-      .collection('tracks')
-      .where('playlists', arrayContains: playlistId)
-      .orderBy('timestamp');
+  static getSongsInPlaylist(String uid, String playlistId) {
+    return db
+        .collection('users')
+        .doc(uid)
+        .collection('tracks')
+        .where('playlists', arrayContains: playlistId)
+        .orderBy('timestamp');
+  }
 
   static Future<DocumentReference<Map<String, dynamic>>> createPlaylist({
     required String uid,
@@ -77,7 +79,7 @@ class UserService {
       {
         'track': track.toJson(),
         'audio': audio.toJson(),
-        'timstamp': FieldValue.serverTimestamp(),
+        'timestamp': FieldValue.serverTimestamp(),
         // 'playlists': [],
         // 'liked': false,
         // 'shared': false,
@@ -116,12 +118,8 @@ class UserService {
         );
   }
 
-  static getLikedSong(String uid) => db
-      .collection('users')
-      .doc(uid)
-      .collection('tracks')
-      .where('liked', isEqualTo: true)
-      .orderBy('timestamp', descending: true);
+  static getLikedSong(String uid) =>
+      db.collection('users').doc(uid).collection('tracks');
 
   static getDownloadedSong(String uid) => db
       .collection('users')

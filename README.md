@@ -17,11 +17,5 @@ samples, guidance on mobile development, and a full API reference.
 
 flutter pub run build_runner build
 
-Create playlist
 Open full screen on song play
-Close music sheet button
-Search grid scroll to bottom
 Music player stick to nav
-Like music
-
-Trending albums

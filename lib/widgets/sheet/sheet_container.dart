@@ -105,6 +105,7 @@ class _PlayerSheetState extends ConsumerState<PlayerSheet>
                     ? MusicPlayerPage(
                         audio: widget.audio,
                         track: widget.track,
+                        function: () => toggleSheet(),
                       )
                     : MinimizedPlayer(
                         player: widget.player,

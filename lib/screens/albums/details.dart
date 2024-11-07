@@ -14,14 +14,18 @@ import '../../theme/text_style.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 
 class SongListScreen extends ConsumerStatefulWidget {
-  final SpotifyAlbum album;
+  final String id;
+  final String name;
+  final String image;
 
   final String token;
 
   const SongListScreen({
     super.key,
-    required this.album,
     required this.token,
+    required this.id,
+    required this.image,
+    required this.name,
   });
 
   @override
@@ -47,7 +51,7 @@ class _SongListScreenState extends ConsumerState<SongListScreen> {
           ),
         ),
         title: Text(
-          widget.album.name,
+          widget.name,
           style: mediumSemiBold(primaryWhite),
         ),
         backgroundColor: Colors.transparent,
@@ -60,7 +64,7 @@ class _SongListScreenState extends ConsumerState<SongListScreen> {
               Padding(
                 padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
                 child: CachedNetworkImage(
-                  imageUrl: widget.album!.images!.first.url,
+                  imageUrl: widget.image,
                   width: size.width * 0.7,
                   height: size.height * 0.3,
                   fit: BoxFit.cover,
@@ -70,7 +74,10 @@ class _SongListScreenState extends ConsumerState<SongListScreen> {
                 height: 30,
               ),
               FutureBuilder(
-                future: Spotify.getAlbumTracks(widget.token, widget.album.id),
+                future: Spotify.getAlbumTracks(
+                  widget.token,
+                  widget.id,
+                ),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return Center(
@@ -137,14 +144,19 @@ class _SongListScreenState extends ConsumerState<SongListScreen> {
                             track['artists'][0]['name'],
                             style: smallText(grey),
                           ),
-                          trailing: IconButton(onPressed: (){}, icon: Icon(FontAwesomeIcons.ellipsisVertical)),
+                          trailing: IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              FontAwesomeIcons.ellipsisVertical,
+                            ),
+                          ),
                         ),
                       );
                     }).toList(),
                   );
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 200,
               ),
             ],

@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:monopoli/models/spotify/album.dart';
+import 'package:monopoli/models/audio/album.dart';
 import 'package:monopoli/models/spotify/category.dart';
 import '../models/spotify/playlist.dart';
 
@@ -104,31 +104,49 @@ class Spotify {
     return t;
   }
 
-  static Future<List<SpotifyAlbum>> getMultipleAlbums(
+  static Future<Albums> getTrendingAlbums(
     String accessToken,
-    List<String> albumIds,
   ) async {
     final url = Uri.parse(
-      'https://api.spotify.com/v1/albums?ids=${albumIds.join(",")}',
+      'https://api.spotify.com/v1/browse/new-releases',
     );
     final headers = {
       'Authorization': 'Bearer $accessToken',
     };
 
-    final response = await http.get(url, headers: headers);
+    final res = await http.get(url, headers: headers);
+    final data = jsonDecode(res.body);
 
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
+    var a = data['albums'];
 
-      return data['albums']
-          .map((a) => SpotifyAlbum.fromJSON(a))
-          .toList()
-          .cast<SpotifyAlbum>();
-    } else {
-      print(response.statusCode);
-      throw Exception('Failed to fetch albums');
-    }
+    return Albums.fromJson(a);
   }
+
+  // static Future<List<SpotifyAlbum>> getMultipleAlbums(
+  //   String accessToken,
+  //   List<String> albumIds,
+  // ) async {
+  //   final url = Uri.parse(
+  //     'https://api.spotify.com/v1/albums?ids=${albumIds.join(",")}',
+  //   );
+  //   final headers = {
+  //     'Authorization': 'Bearer $accessToken',
+  //   };
+
+  //   final response = await http.get(url, headers: headers);
+
+  //   if (response.statusCode == 200) {
+  //     final data = jsonDecode(response.body);
+
+  //     return data['albums']
+  //         .map((a) => SpotifyAlbum.fromJSON(a))
+  //         .toList()
+  //         .cast<SpotifyAlbum>();
+  //   } else {
+  //     print(response.statusCode);
+  //     throw Exception('Failed to fetch albums');
+  //   }
+  // }
 
   static Future<List> getAlbumTracks(
     String token,

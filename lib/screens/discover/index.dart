@@ -23,71 +23,6 @@ class Discover extends ConsumerStatefulWidget {
   ConsumerState<Discover> createState() => _DiscoverState();
 }
 
-class Song {
-  final String title;
-  final String artist;
-  final String duration;
-  final String imagePath;
-
-  Song({
-    required this.title,
-    required this.artist,
-    required this.duration,
-    required this.imagePath,
-  });
-}
-
-final List<Song> songs = [
-  Song(
-    title: 'Higher',
-    artist: 'Burna',
-    duration: '3:45',
-    imagePath: 'assets/burna.png',
-  ),
-  Song(
-    title: 'Feel',
-    artist: 'Davido',
-    duration: '4:12',
-    imagePath: 'assets/davido.png',
-  ),
-  Song(
-    title: 'Wave',
-    artist: 'Asake',
-    duration: '2:58',
-    imagePath: 'assets/asake.png',
-  ),
-  Song(
-    title: 'Higher',
-    artist: 'Burna',
-    duration: '3:45',
-    imagePath: 'assets/city.png',
-  ),
-  Song(
-    title: 'Wildest dream',
-    artist: '21 Savage',
-    duration: '4:12',
-    imagePath: 'assets/savage.png',
-  ),
-  Song(
-    title: 'Juju',
-    artist: 'Asake',
-    duration: '2:58',
-    imagePath: 'assets/album1.png',
-  ),
-  Song(
-    title: 'Higher',
-    artist: 'Burna',
-    duration: '3:45',
-    imagePath: 'assets/album2.png',
-  ),
-  Song(
-    title: 'Feel',
-    artist: 'Davido',
-    duration: '4:12',
-    imagePath: 'assets/album3.png',
-  ),
-];
-
 class _DiscoverState extends ConsumerState<Discover>
     with TickerProviderStateMixin {
   var ids = [
@@ -175,14 +110,16 @@ class _DiscoverState extends ConsumerState<Discover>
                                     style: mediumSemiBold(primaryWhite),
                                   ),
                                   GestureDetector(
-                                    onTap: (){},
+                                    onTap: () {},
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
-                                          border: Border.all(color: primaryWhite,width: 1)
-                                      ),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
+                                          border: Border.all(
+                                              color: primaryWhite, width: 1)),
                                       child: Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 5),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10.0, vertical: 5),
                                         child: Text(
                                           'View all',
                                           style: smallText(primaryWhite),

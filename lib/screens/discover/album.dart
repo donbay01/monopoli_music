@@ -21,7 +21,7 @@ class Albums extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: Spotify.getMultipleAlbums(token, ids),
+      future: Spotify.getTrendingAlbums(token),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
@@ -33,9 +33,12 @@ class Albums extends StatelessWidget {
           return Center(
             child: Column(
               children: [
-                Image(image: AssetImage('assets/internet.png')),
+                Image(
+                  image: AssetImage('assets/internet.png'),
+                ),
                 Text(
-                  'Check internet Connection',style: mediumText(primaryWhite),
+                  'Check internet Connection',
+                  style: mediumText(primaryWhite),
                 ),
               ],
             ),
@@ -54,17 +57,19 @@ class Albums extends StatelessWidget {
             mainAxisSpacing: 10,
             childAspectRatio: 0.8,
           ),
-          itemCount: snap.length,
+          itemCount: snap.items.length,
           itemBuilder: (context, index) {
-            final album = snap[index];
+            final album = snap.items[index];
 
             return GestureDetector(
               onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => SongListScreen(
-                    album: album,
+                    id: album.id!,
+                    image: album.cover?.first.url ?? album.images!.first.url,
                     token: token,
+                    name: album.name!,
                   ),
                 ),
               ),
@@ -72,7 +77,8 @@ class Albums extends StatelessWidget {
                 children: [
                   Expanded(
                     child: CachedNetworkImage(
-                      imageUrl: album.images.first.url,
+                      imageUrl:
+                          album?.cover?.first.url ?? album.images!.first.url,
                       fit: BoxFit.cover,
                       width: 40.w,
                       height: 40.w,
@@ -80,7 +86,7 @@ class Albums extends StatelessWidget {
                   ),
                   SizedBox(height: 8),
                   Text(
-                    album.name,
+                    album.name ?? 'N/A',
                     style: mediumBold(primaryWhite),
                   ),
                 ],
