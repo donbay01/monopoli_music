@@ -85,17 +85,17 @@ class _MusicPlayerPageState extends ConsumerState<MusicPlayerPage> {
     super.initState();
   }
 
-  void _toggleFavorite() async {
+  void _toggleFavorite() {
     try {
       var user = AuthService.getUser();
       if (!_isFavorited) {
-        await UserService.likeSong(
+        UserService.likeSong(
           user!.uid,
           widget.track,
           widget.audio,
         );
       } else {
-        await UserService.unLikeSong(
+        UserService.unLikeSong(
           user!.uid,
           widget.track.id!,
         );
