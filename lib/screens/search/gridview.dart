@@ -40,13 +40,13 @@ class GenreGridPage extends ConsumerWidget {
         var data = snapshot.data!;
 
         return SizedBox(
-          height: 100.h,
+          height: 150.h,
           child: GridView.builder(
             padding: EdgeInsets.zero,
             shrinkWrap: true,
-            physics: const ClampingScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
+              crossAxisCount: 3,
               mainAxisSpacing: 15.0,
               crossAxisSpacing: 10.0,
               childAspectRatio: 1,
@@ -95,7 +95,7 @@ class GenreGridPage extends ConsumerWidget {
                           ),
                           child: Text(
                             c.name,
-                            style: mediumSemiBold(primaryWhite),
+                            style: smallBold(primaryWhite),
                           ),
                         ),
                       )

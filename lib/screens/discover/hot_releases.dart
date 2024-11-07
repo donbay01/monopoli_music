@@ -9,6 +9,7 @@ import 'package:monopoli/services/auth.dart';
 import 'package:monopoli/services/music.dart';
 import 'package:monopoli/services/spotify.dart';
 import 'package:zap_sizer/zap_sizer.dart';
+import '../../helper/options_sheet.dart';
 import '../../services/user.dart';
 import '../../theme/colors.dart';
 import '../../theme/text_style.dart';
@@ -31,6 +32,8 @@ class HotReleases extends ConsumerWidget {
       '1mk8ZC9OeTZMr8Wy31LqRj',
       '6XBIOtdSL47qn201KKNCA0',
       '1qxKva4IzWde7m2jLpZvDU',
+      '2qdwZPTNCHb8DXfQin53WK',
+      '2kaH2Z8ezDUKf6fNw250rZ',
       '2nYeyMeqYDiFSYYtl2BWD6'
     ];
     var size = MediaQuery.of(context).size;
@@ -40,22 +43,15 @@ class HotReleases extends ConsumerWidget {
       height: size.height * 0.5,
       width: size.width * 0.8,
       decoration: BoxDecoration(
-        // gradient: const LinearGradient(
-        //   colors: [
-        //     Color(0xFF58556E),
-        //     Color(0xff66656D),
-        //   ],
-        //   begin: Alignment.topCenter,
-        //   end: Alignment.bottomCenter,
-        // ),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(0.0),
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
+              SizedBox(height: 20,),
               FutureBuilder(
                 future: Spotify.getMultipleTracks(token, trackIds),
                 builder: (context, snapshot) {
@@ -66,9 +62,14 @@ class HotReleases extends ConsumerWidget {
                   }
 
                   if (snapshot.hasError) {
-                    return const Center(
-                      child: Text(
-                        'An error occurred',
+                    return Center(
+                      child: Column(
+                        children: [
+                          Image(image: AssetImage('assets/internet.png')),
+                          Text(
+                            'Check internet Connection',style: mediumText(primaryWhite),
+                          ),
+                        ],
                       ),
                     );
                   }
@@ -139,7 +140,7 @@ class HotReleases extends ConsumerWidget {
                                             width: 10,
                                           ),
                                           SizedBox(
-                                            width: 43.w,
+                                            width: 35.w,
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -148,7 +149,7 @@ class HotReleases extends ConsumerWidget {
                                                   song.name ?? 'N/A',
                                                   overflow:
                                                       TextOverflow.ellipsis,
-                                                  style: mediumBold(
+                                                  style: smallBold(
                                                     primaryWhite,
                                                   ),
                                                 ),
@@ -161,6 +162,18 @@ class HotReleases extends ConsumerWidget {
                                             ),
                                           )
                                         ],
+                                      ),
+                                      IconButton(
+                                        onPressed: () => showSongDetails(
+                                          context,
+                                          ref,
+                                          song,
+                                          null,
+                                        ),
+                                        icon: Icon(
+                                          FontAwesomeIcons.ellipsisVertical,
+                                          color: grey,
+                                        ),
                                       ),
                                     ],
                                   ),

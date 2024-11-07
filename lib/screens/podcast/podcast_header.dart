@@ -12,21 +12,21 @@ class PodcastHeader extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(10.0),
           child:Container(
-              width: width * 0.4,
-              child: Image(image: AssetImage('assets/jazz.png'),fit: BoxFit.cover,)),),
+              width: width * 0.3,
+              child: Image(image: AssetImage('assets/hiphop.png'),fit: BoxFit.cover,)),),
         SizedBox(width: 16.0),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Who are the Biggest 3?',
-                style: largeText(primaryWhite),
+                'Who are the Big 3?',
+                style: mediumSemiBold(primaryWhite),
               ),
               SizedBox(height: 8.0),
               Text(
                 'Hosted by: MTV Base',
-                style: TextStyle(fontSize: 16, color: Colors.grey),
+                style: mediumText(Colors.grey),
               ),
             ],
           ),

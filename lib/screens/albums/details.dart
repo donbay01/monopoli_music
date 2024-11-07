@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:monopoli/models/spotify/album.dart';
 import 'package:monopoli/services/auth.dart';
 import 'package:monopoli/services/music.dart';
@@ -60,13 +61,13 @@ class _SongListScreenState extends ConsumerState<SongListScreen> {
                 padding: const EdgeInsets.only(left: 20.0, right: 20, top: 20),
                 child: CachedNetworkImage(
                   imageUrl: widget.album!.images!.first.url,
-                  width: size.width * 5,
-                  height: size.height * 0.35,
+                  width: size.width * 0.7,
+                  height: size.height * 0.3,
                   fit: BoxFit.cover,
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 30,
               ),
               FutureBuilder(
                 future: Spotify.getAlbumTracks(widget.token, widget.album.id),
@@ -119,23 +120,24 @@ class _SongListScreenState extends ConsumerState<SongListScreen> {
                           }
                         },
                         child: ListTile(
-                          leading: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: CachedNetworkImage(
-                              imageUrl: widget.album!.images!.first.url,
-                              width: 60,
-                              height: 60,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                          // leading: ClipRRect(
+                          //   borderRadius: BorderRadius.circular(8),
+                          //   child: CachedNetworkImage(
+                          //     imageUrl: widget.album!.images!.first.url,
+                          //     width: 60,
+                          //     height: 60,
+                          //     fit: BoxFit.cover,
+                          //   ),
+                          // ),
                           title: Text(
                             track['name'],
-                            style: mediumBold(primaryWhite),
+                            style: smallBold(primaryWhite),
                           ),
                           subtitle: Text(
                             track['artists'][0]['name'],
-                            style: mediumText(grey),
+                            style: smallText(grey),
                           ),
+                          trailing: IconButton(onPressed: (){}, icon: Icon(FontAwesomeIcons.ellipsisVertical)),
                         ),
                       );
                     }).toList(),

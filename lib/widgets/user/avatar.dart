@@ -35,7 +35,7 @@ class UserAvatar extends StatelessWidget {
         ),
       ),
       child: const CircleAvatar(
-        child: Icon(FontAwesomeIcons.user),
+        child: Icon(FontAwesomeIcons.user,size: 20,),
         // child: Image(
         //   image: AssetImage('assets/avatar.png'),
         // ),

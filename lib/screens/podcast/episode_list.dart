@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:monopoli/theme/colors.dart';
+import 'package:monopoli/theme/text_style.dart';
 
 class EpisodesList extends StatelessWidget {
   final List<Map<String, String>> episodes = [
@@ -32,11 +34,12 @@ class EpisodeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: purple,
       child: ListTile(
-        title: Text(title, style: TextStyle(fontWeight: FontWeight.bold)),
-        subtitle: Text(duration),
+        title: Text(title, style: mediumBold(primaryWhite)),
+        subtitle: Text(duration,style: mediumText(primaryBlack),),
         trailing: IconButton(
-          icon: Icon(Icons.play_circle_fill, color: Colors.deepPurple),
+          icon: Icon(Icons.play_circle_fill, color: primaryBlack),
           onPressed: () {
             // Handle play button press
           },

@@ -30,7 +30,16 @@ class Albums extends StatelessWidget {
         }
 
         if (snapshot.hasError) {
-          return Text('error');
+          return Center(
+            child: Column(
+              children: [
+                Image(image: AssetImage('assets/internet.png')),
+                Text(
+                  'Check internet Connection',style: mediumText(primaryWhite),
+                ),
+              ],
+            ),
+          );
         }
 
         var snap = snapshot.data!;
@@ -65,8 +74,8 @@ class Albums extends StatelessWidget {
                     child: CachedNetworkImage(
                       imageUrl: album.images.first.url,
                       fit: BoxFit.cover,
-                      width: 30.w,
-                      height: 30.w,
+                      width: 40.w,
+                      height: 40.w,
                     ),
                   ),
                   SizedBox(height: 8),

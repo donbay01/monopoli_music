@@ -66,15 +66,25 @@ class TopMusic extends ConsumerWidget {
                     'Top Music',
                     style: mediumSemiBold(primaryWhite),
                   ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'view all',
-                      style: mediumBold(primaryWhite),
+                  GestureDetector(
+                    onTap: (){},
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: primaryWhite,width: 1)
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 5),
+                        child: Text(
+                          'View all',
+                          style: smallText(primaryWhite),
+                        ),
+                      ),
                     ),
                   ),
                 ],
               ),
+              SizedBox(height: 10,),
               FutureBuilder(
                 future: Spotify.getMultipleTracks(token, trackIds),
                 builder: (context, snapshot) {
@@ -85,9 +95,14 @@ class TopMusic extends ConsumerWidget {
                   }
 
                   if (snapshot.hasError) {
-                    return const Center(
-                      child: Text(
-                        'An error occurred',
+                    return  Center(
+                      child: Column(
+                        children: [
+                          Image(image: AssetImage('assets/internet.png')),
+                          Text(
+                            'Check internet Connection',style: mediumText(primaryWhite),
+                          ),
+                        ],
                       ),
                     );
                   }
@@ -103,7 +118,6 @@ class TopMusic extends ConsumerWidget {
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
                         final song = data![index];
-
                         return Padding(
                           padding: const EdgeInsets.symmetric(
                             vertical: 10.0,
@@ -158,7 +172,7 @@ class TopMusic extends ConsumerWidget {
                                             width: 10,
                                           ),
                                           SizedBox(
-                                            width: 43.w,
+                                            width: 35.w,
                                             child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -167,7 +181,7 @@ class TopMusic extends ConsumerWidget {
                                                   song.name ?? 'N/A',
                                                   overflow:
                                                       TextOverflow.ellipsis,
-                                                  style: mediumBold(
+                                                  style: smallBold(
                                                     primaryWhite,
                                                   ),
                                                 ),
@@ -190,7 +204,7 @@ class TopMusic extends ConsumerWidget {
                                         ),
                                         icon: Icon(
                                           FontAwesomeIcons.ellipsisVertical,
-                                          color: primaryWhite,
+                                          color: grey,
                                         ),
                                       ),
                                     ],

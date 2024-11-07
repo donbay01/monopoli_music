@@ -145,7 +145,7 @@ class ProfileSheet extends StatelessWidget {
                       ),
                       Text(
                         'Contact us',
-                        style: mediumBold(primaryWhite),
+                        style: mediumText(primaryWhite),
                       )
                     ],
                   ),
@@ -173,7 +173,7 @@ class ProfileSheet extends StatelessWidget {
                       ),
                       Text(
                         ' Share the app',
-                        style: mediumBold(primaryWhite),
+                        style: mediumText(primaryWhite),
                       )
                     ],
                   ),
@@ -306,7 +306,7 @@ class ProfileSheet extends StatelessWidget {
                       ),
                       Text(
                         'Delete your account',
-                        style: mediumBold(primaryWhite),
+                        style: mediumText(primaryWhite),
                       )
                     ],
                   ),

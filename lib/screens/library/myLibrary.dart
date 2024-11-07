@@ -46,9 +46,12 @@ class _MylibraryState extends ConsumerState<Mylibrary> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                GradientText(
                   'Library',
-                  style: largeText(primaryWhite),
+                  style: const TextStyle(
+                    fontSize: 25.0,
+                  ),
+                  colors: [purple, primaryWhite],
                 ),
                 if (user != null) ...[
                   UserAvatar(
@@ -81,7 +84,7 @@ class _MylibraryState extends ConsumerState<Mylibrary> {
                       ),
                       label: Text(
                         items[index],
-                        style: mediumBold(
+                        style: smallText(
                           isSelected ? primaryBlack : primaryWhite,
                         ),
                       ),
@@ -90,15 +93,9 @@ class _MylibraryState extends ConsumerState<Mylibrary> {
                 },
               ),
             ),
-            GradientText(
-              selectedText,
-              style: const TextStyle(
-                fontSize: 25.0,
-              ),
-              colors: [purple, primaryWhite],
-            ),
+            Text(selectedText,style: mediumSemiBold(primaryWhite),),
             const SizedBox(
-              height: 10,
+              height: 50,
             ),
             if (selectedText == 'Playlist') ...[
               const Playlist(),

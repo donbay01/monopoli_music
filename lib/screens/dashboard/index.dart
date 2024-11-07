@@ -48,7 +48,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
           item: ItemConfig(
             icon: const Icon(
               FontAwesomeIcons.search,
-              size: 25,
+              size: 20,
             ),
             title: "Search",
             textStyle: small(),
@@ -60,7 +60,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
           item: ItemConfig(
             icon: const Icon(
               FontAwesomeIcons.podcast,
-              size: 25,
+              size: 20,
             ),
             title: "Podcast",
             textStyle: small(),
@@ -72,7 +72,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
           item: ItemConfig(
             icon: const Icon(
               Icons.library_music,
-              size: 25,
+              size: 20,
             ),
             title: "Library",
             textStyle: small(),

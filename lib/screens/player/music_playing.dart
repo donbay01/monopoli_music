@@ -196,7 +196,7 @@ class _MusicPlayerPageState extends ConsumerState<MusicPlayerPage> {
                     children: [
                       Text(
                         widget.track.name ?? 'N/A',
-                        style: largeText(primaryWhite),
+                        style: mediumBold(primaryWhite),
                       ),
                       Text(
                         widget.track.artists!.first.name ?? 'N/A',
@@ -210,7 +210,7 @@ class _MusicPlayerPageState extends ConsumerState<MusicPlayerPage> {
                       // Change icon based on state
                       color: _isFavorited ? Colors.red : Colors.grey,
                       // Change color based on state
-                      size: 40,
+                      size: 30,
                     ),
                     onPressed: _toggleFavorite, // Call toggle function on tap
                   ),

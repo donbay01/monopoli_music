@@ -73,13 +73,13 @@ class CategoryPlaylist extends StatelessWidget {
                     children: [
                       Text(
                         playlist.name,
-                        style: mediumSemiBold(Colors.white),
+                        style: mediumBold(Colors.white),
                       ),
                       Text(
                         playlist.description,
                         maxLines: 3,
-                        style: mediumText(
-                          Colors.white,
+                        style: smallText(
+                          Colors.grey,
                         ),
                       ),
                     ],

@@ -3,6 +3,7 @@ import 'package:monopoli/screens/podcast/mini_player.dart';
 import 'package:monopoli/screens/podcast/podcast_description.dart';
 import 'package:monopoli/screens/podcast/podcast_header.dart';
 import 'package:monopoli/theme/colors.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 import '../../theme/text_style.dart';
 import 'episode_list.dart';
 
@@ -22,9 +23,12 @@ class PodcastPage extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                GradientText(
                   'Podcast',
-                  style: largeText(primaryWhite),
+                  style: const TextStyle(
+                    fontSize: 25.0,
+                  ),
+                  colors: [purple, primaryWhite],
                 ),
               ],
             ),
@@ -34,7 +38,6 @@ class PodcastPage extends StatelessWidget {
             PodcastHeader(),
             SizedBox(height: 16.0),
             PodcastDescription(),
-            SizedBox(height: 16.0),
             EpisodesList(),
           ],
         ),

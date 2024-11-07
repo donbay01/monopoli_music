@@ -3,6 +3,7 @@ import 'package:monopoli/screens/search/gridview.dart';
 import 'package:monopoli/theme/colors.dart';
 import 'package:monopoli/theme/text_style.dart';
 import 'package:monopoli/widgets/sheet/search.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:zap_sizer/zap_sizer.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -34,14 +35,17 @@ class _SearchScreenState extends State<SearchScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    GradientText(
                       'Search',
-                      style: largeText(primaryWhite),
+                      style: const TextStyle(
+                        fontSize: 25.0,
+                      ),
+                      colors: [purple, primaryWhite],
                     ),
                   ],
                 ),
                 SizedBox(
-                  height: 40,
+                  height: 20,
                 ),
                 TextField(
                   readOnly: true,
@@ -58,7 +62,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   // textStyle: mediumText(primaryWhite),
                   decoration: InputDecoration(
                     labelText: 'Artists, Songs, Album and more',
-                    labelStyle: medium(),
+                    labelStyle: smallText(Colors.grey),
                     hintText: 'Artists, Songs, Album and more',
                     hintStyle: smallText(primaryWhite),
                     filled: true,

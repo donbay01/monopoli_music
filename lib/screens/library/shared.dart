@@ -20,9 +20,17 @@ class Shared extends ConsumerWidget {
 
     return PaginateFirestore(
       onEmpty: Center(
-        child: Text(
-          'No song has been shared',
-          style: mediumText(Colors.white),
+        child: Column(
+          children: [
+            Container(
+                height: 200,
+                width: 200,
+                child: Image(image: AssetImage('assets/empty.png'))),
+            Text(
+              'No song has been added to the playlist',
+              style: smallText(Colors.grey),
+            ),
+          ],
         ),
       ),
       itemBuilderType: PaginateBuilderType.listView,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:monopoli/screens/library/playlist_detail.dart';
 import 'package:monopoli/services/auth.dart';
 import 'package:monopoli/services/user.dart';
@@ -20,9 +21,17 @@ class Playlist extends ConsumerWidget {
 
     return PaginateFirestore(
       onEmpty: Center(
-        child: Text(
-          'No song has been added to the playlist',
-          style: mediumText(Colors.white),
+        child: Column(
+          children: [
+            Container(
+                height: 200,
+                width: 200,
+                child: Image(image: AssetImage('assets/empty.png'))),
+            Text(
+              'No song has been added to the playlist',
+              style: smallText(Colors.grey),
+            ),
+          ],
         ),
       ),
       separator: SizedBox(

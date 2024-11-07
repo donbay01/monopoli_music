@@ -12,6 +12,7 @@ import 'package:monopoli/theme/colors.dart';
 import 'package:monopoli/theme/text_style.dart';
 import 'package:monopoli/widgets/sheet/player.dart';
 import 'package:monopoli/widgets/user/avatar.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:zap_sizer/zap_sizer.dart';
 import '../../../providers/user_provider.dart';
 
@@ -118,9 +119,12 @@ class _DiscoverState extends ConsumerState<Discover>
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  GradientText(
                     'Discover',
-                    style: largeText(primaryWhite),
+                    style: const TextStyle(
+                      fontSize: 25.0,
+                    ),
+                    colors: [purple, primaryWhite],
                   ),
                   if (user != null) ...[
                     UserAvatar(
@@ -147,7 +151,7 @@ class _DiscoverState extends ConsumerState<Discover>
                     ),
                     Container(
                       height: height * 0.5,
-                      width: width * 0.75,
+                      width: width * 0.8,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [Color(0xFF475B47), Color(0xff494F51)],
@@ -170,11 +174,20 @@ class _DiscoverState extends ConsumerState<Discover>
                                     'Hot Releases',
                                     style: mediumSemiBold(primaryWhite),
                                   ),
-                                  TextButton(
-                                    onPressed: () {},
-                                    child: Text(
-                                      'view all',
-                                      style: mediumBold(primaryWhite),
+                                  GestureDetector(
+                                    onTap: (){},
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(20),
+                                          border: Border.all(color: primaryWhite,width: 1)
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 5),
+                                        child: Text(
+                                          'View all',
+                                          style: smallText(primaryWhite),
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ],
