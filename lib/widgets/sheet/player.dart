@@ -15,46 +15,49 @@ class MusicPlayerSheet extends ConsumerStatefulWidget {
 class _MusicPlayerSheetState extends ConsumerState<MusicPlayerSheet> {
   @override
   Widget build(BuildContext context) {
-    return Consumer(
-      builder: (context, ref, _) {
-        var p = ref.watch(player);
-        var track = ref.watch(trackProvider);
-        var audio = ref.watch(audioProvider);
+    return Material(
+      color: Colors.transparent,
+      child: Consumer(
+        builder: (context, ref, _) {
+          var p = ref.watch(player);
+          var track = ref.watch(trackProvider);
+          var audio = ref.watch(audioProvider);
 
-        if (track == null) {
-          return const SizedBox.shrink();
-        }
+          if (track == null) {
+            return const SizedBox.shrink();
+          }
 
-        p.setAudioSource(
-          AudioSource.uri(
-            Uri.parse(
-              audio!.youtubeVideo.audio.first.url,
+          p.setAudioSource(
+            AudioSource.uri(
+              Uri.parse(
+                audio!.youtubeVideo.audio.first.url,
+              ),
+              tag: MediaItem(
+                id: track.id!,
+                album: track.album!.name,
+                title: track.name!,
+                displayTitle: track.name,
+                artist: track.artists!.first.name,
+                artUri: track.album!.cover == null
+                    ? null
+                    : Uri.parse(
+                        track.album!.cover!.last.url,
+                      ),
+                genre: track.type,
+              ),
             ),
-            tag: MediaItem(
-              id: track.id!,
-              album: track.album!.name,
-              title: track.name!,
-              displayTitle: track.name,
-              artist: track.artists!.first.name,
-              artUri: track.album!.cover == null
-                  ? null
-                  : Uri.parse(
-                      track.album!.cover!.last.url,
-                    ),
-              genre: track.type,
-            ),
-          ),
-        );
+          );
 
-        return Align(
-          alignment: Alignment.bottomCenter,
-          child: PlayerSheet(
-            audio: audio,
-            player: p,
-            track: track,
-          ),
-        );
-      },
+          return Align(
+            alignment: Alignment.bottomCenter,
+            child: PlayerSheet(
+              audio: audio,
+              player: p,
+              track: track,
+            ),
+          );
+        },
+      ),
     );
   }
 }

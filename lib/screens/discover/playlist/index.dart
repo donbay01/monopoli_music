@@ -80,7 +80,6 @@ class PlaylistScreen extends ConsumerWidget {
 
                     ref.read(trackProvider.notifier).state = track;
                     ref.read(audioProvider.notifier).state = audio;
-                    // ref.read(isExpanded.notifier).state = true;
 
                     var user = AuthService.getUser();
                     UserService.addSong(
@@ -88,6 +87,9 @@ class PlaylistScreen extends ConsumerWidget {
                       track,
                       audio,
                     );
+
+                    ref.read(controller)?.forward();
+                    ref.read(isExpanded.notifier).state = true;
                   } catch (e) {
                     Fluttertoast.showToast(
                       msg: "An error occurred",

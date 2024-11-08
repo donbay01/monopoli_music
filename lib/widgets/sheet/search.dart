@@ -117,7 +117,6 @@ class _SearchSheetState extends ConsumerState<SearchSheet> {
                       var audio = await MusicService.getTrackURL(track.id!);
                       ref.read(audioProvider.notifier).state = audio;
                       ref.read(trackProvider.notifier).state = track;
-                      // ref.read(isExpanded.notifier).state = true;
                       context.loaderOverlay.hide();
                       UserService.addSong(
                         user!.uid,
@@ -125,6 +124,8 @@ class _SearchSheetState extends ConsumerState<SearchSheet> {
                         audio,
                       );
                       Navigator.of(context).pop();
+                      ref.read(controller)?.forward();
+                      ref.read(isExpanded.notifier).state = true;
                       // pushScreenWithoutNavBar(
                       //   context,
                       //   MusicPlayerPage(

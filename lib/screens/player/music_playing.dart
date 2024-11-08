@@ -154,175 +154,186 @@ class _MusicPlayerPageState extends ConsumerState<MusicPlayerPage> {
     var width = size.width;
 
     return TweenAnimationBuilder(
-        tween: ColorTween(begin: dominantColor, end: vibrantColor),
-        duration: const Duration(seconds: 3),
-        builder: (context, Color? color, child) {
-          return Container(
-            height: height,
-            width: width,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  (dominantColor ?? Colors.black).withOpacity(0.7),
-                  (vibrantColor ?? Colors.grey).withOpacity(0.9),
-                ],
-              ),
+      tween: ColorTween(begin: dominantColor, end: vibrantColor),
+      duration: const Duration(seconds: 2),
+      builder: (context, Color? color, child) {
+        return AnimatedContainer(
+          duration: const Duration(seconds: 2),
+          height: height,
+          width: width,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                (dominantColor ?? Colors.black).withOpacity(0.7),
+                (vibrantColor ?? Colors.grey).withOpacity(0.9),
+              ],
             ),
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 20.h,
-                    ),
-                    Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            widget.function();
-                          },
-                          child: Icon(
-                            Icons.arrow_back_ios_new_outlined,
-                            color: primaryWhite,
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 40,
-                    ),
-
-                    Center(
-                      child: Hero(
-                        tag: Key(widget.track.id!),
-                        child: CachedNetworkImage(
-                          imageUrl: widget.track.album!.cover?.last.url ??
-                              widget.track.album!.images!.first.url,
-                          width: width * 0.7,
-                          height: height * 0.3,
-                          fit: BoxFit.contain,
+          ),
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 20.h,
+                  ),
+                  Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          widget.function();
+                        },
+                        child: Icon(
+                          Icons.arrow_back_ios_new_outlined,
+                          color: primaryWhite,
                         ),
                       ),
-                    ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 40,
+                  ),
 
-                    const SizedBox(height: 30),
-                    // Music Title and Artist
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              widget.track.name ?? 'N/A',
-                              style: mediumBold(primaryWhite),
-                            ),
-                            Text(
-                              widget.track.artists!.first.name ?? 'N/A',
-                              style: mediumText(grey),
-                            ),
-                          ],
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            _isFavorited
-                                ? Icons.favorite
-                                : Icons.favorite_border,
-                            // Change icon based on state
-                            color: _isFavorited ? Colors.red : Colors.grey,
-                            // Change color based on state
-                            size: 30,
-                          ),
-                          onPressed:
-                              _toggleFavorite, // Call toggle function on tap
-                        ),
-                      ],
+                  Center(
+                    child: Hero(
+                      tag: Key(widget.track.id!),
+                      child: CachedNetworkImage(
+                        imageUrl: widget.track.album!.cover?.last.url ??
+                            widget.track.album!.images!.first.url,
+                        width: width * 0.7,
+                        height: height * 0.3,
+                        fit: BoxFit.contain,
+                      ),
                     ),
-                    const SizedBox(height: 40),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Column(
+                  ),
+
+                  const SizedBox(height: 30),
+                  // Music Title and Artist
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Slider(
-                            min: 0,
-                            max: totalTime.inSeconds.toDouble(),
-                            value: currentTime.inSeconds.toDouble(),
-                            onChanged: (value) {
-                              setState(() {
-                                currentTime = Duration(seconds: value.toInt());
-                                _audioPlayer.seek(currentTime);
-                              });
-                            },
+                          Text(
+                            widget.track.name ?? 'N/A',
+                            style: mediumBold(primaryWhite),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                formatDuration(currentTime), // Current time
-                                style: TextStyle(color: Colors.white),
-                              ),
-                              Text(
-                                formatDuration(totalTime), // Total time
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ],
+                          Text(
+                            widget.track.artists!.first.name ?? 'N/A',
+                            style: mediumText(grey),
                           ),
                         ],
                       ),
-                    ),
-                    const SizedBox(height: 40),
-                    // Music Controls (just icons for simplicity)
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      IconButton(
+                        icon: Icon(
+                          _isFavorited ? Icons.favorite : Icons.favorite_border,
+                          // Change icon based on state
+                          color: _isFavorited ? Colors.red : Colors.grey,
+                          // Change color based on state
+                          size: 30,
+                        ),
+                        onPressed:
+                            _toggleFavorite, // Call toggle function on tap
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 40),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    child: Column(
                       children: [
-                        IconButton(
-                          icon: Icon(FontAwesomeIcons.shuffle,
-                              color: Colors.white, size: 25),
-                          onPressed: () {},
+                        Slider(
+                          min: 0,
+                          max: totalTime.inSeconds.toDouble(),
+                          value: currentTime.inSeconds.toDouble(),
+                          onChanged: (value) {
+                            setState(() {
+                              currentTime = Duration(seconds: value.toInt());
+                              _audioPlayer.seek(currentTime);
+                            });
+                          },
                         ),
-                        IconButton(
-                          icon: Icon(FontAwesomeIcons.backward,
-                              color: Colors.white, size: 25),
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            isPlaying
-                                ? FontAwesomeIcons.pause
-                                : FontAwesomeIcons.play,
-                            color: Colors.white,
-                            size: 25,
-                          ),
-                          onPressed: togglePlayPause,
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            FontAwesomeIcons.forward,
-                            color: Colors.white,
-                            size: 25,
-                          ),
-                          onPressed: () {},
-                        ),
-                        IconButton(
-                          icon: Icon(
-                            FontAwesomeIcons.repeat,
-                            color: Colors.white,
-                            size: 25,
-                          ),
-                          onPressed: () {},
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              formatDuration(currentTime), // Current time
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Text(
+                              formatDuration(totalTime), // Total time
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 40),
+                  // Music Controls (just icons for simplicity)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      IconButton(
+                        icon: Icon(FontAwesomeIcons.shuffle,
+                            color: Colors.white, size: 25),
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: Icon(FontAwesomeIcons.backward,
+                            color: Colors.white, size: 25),
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          isPlaying
+                              ? FontAwesomeIcons.pause
+                              : FontAwesomeIcons.play,
+                          color: Colors.white,
+                          size: 25,
+                        ),
+                        onPressed: togglePlayPause,
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          FontAwesomeIcons.forward,
+                          color: Colors.white,
+                          size: 25,
+                        ),
+                        onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          FontAwesomeIcons.repeat,
+                          color: Colors.white,
+                          size: 25,
+                        ),
+                        onPressed: () {
+                          var mode = _audioPlayer.loopMode;
+                          LoopMode target;
+
+                          if (mode == LoopMode.one) {
+                            target = LoopMode.off;
+                          } else {
+                            target = LoopMode.one;
+                          }
+
+                          _audioPlayer.setLoopMode(target);
+                        },
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 }

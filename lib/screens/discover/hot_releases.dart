@@ -51,7 +51,9 @@ class HotReleases extends ConsumerWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               FutureBuilder(
                 future: Spotify.getMultipleTracks(token, trackIds),
                 builder: (context, snapshot) {
@@ -67,7 +69,8 @@ class HotReleases extends ConsumerWidget {
                         children: [
                           Image(image: AssetImage('assets/internet.png')),
                           Text(
-                            'Check internet Connection',style: mediumText(primaryWhite),
+                            'Check internet Connection',
+                            style: mediumText(primaryWhite),
                           ),
                         ],
                       ),
@@ -104,12 +107,15 @@ class HotReleases extends ConsumerWidget {
                                     ref.read(trackProvider.notifier).state =
                                         song;
                                     ref.read(audioProvider.notifier).state = a;
-                                    // ref.read(isExpanded.notifier).state = true;
+
                                     UserService.addSong(
                                       user!.uid,
                                       song,
                                       a,
                                     );
+
+                                    ref.read(controller)?.forward();
+                                    ref.read(isExpanded.notifier).state = true;
                                   } catch (e) {
                                     Fluttertoast.showToast(
                                       msg: 'An error occurred',

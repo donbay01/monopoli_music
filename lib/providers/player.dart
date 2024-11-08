@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:monopoli/models/audio/index.dart';
@@ -8,3 +9,4 @@ final trackProvider = StateProvider<Track?>((ref) => null);
 final audioProvider = StateProvider<AudioApiResponse?>((ref) => null);
 
 final isExpanded = StateProvider((ref) => false);
+final controller = StateProvider<AnimationController?>((ref) => null);

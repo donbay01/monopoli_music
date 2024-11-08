@@ -46,6 +46,8 @@ class _PlayerSheetState extends ConsumerState<PlayerSheet>
         ),
       );
 
+      ref.read(controller.notifier).state = _controller;
+
       setState(() {});
     });
     super.initState();

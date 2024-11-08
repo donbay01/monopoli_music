@@ -67,14 +67,14 @@ class TopMusic extends ConsumerWidget {
                     style: mediumSemiBold(primaryWhite),
                   ),
                   GestureDetector(
-                    onTap: (){},
+                    onTap: () {},
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: primaryWhite,width: 1)
-                      ),
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: primaryWhite, width: 1)),
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 5),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10.0, vertical: 5),
                         child: Text(
                           'View all',
                           style: smallText(primaryWhite),
@@ -84,7 +84,9 @@ class TopMusic extends ConsumerWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               FutureBuilder(
                 future: Spotify.getMultipleTracks(token, trackIds),
                 builder: (context, snapshot) {
@@ -95,12 +97,13 @@ class TopMusic extends ConsumerWidget {
                   }
 
                   if (snapshot.hasError) {
-                    return  Center(
+                    return Center(
                       child: Column(
                         children: [
                           Image(image: AssetImage('assets/internet.png')),
                           Text(
-                            'Check internet Connection',style: mediumText(primaryWhite),
+                            'Check internet Connection',
+                            style: mediumText(primaryWhite),
                           ),
                         ],
                       ),
@@ -136,12 +139,14 @@ class TopMusic extends ConsumerWidget {
                                     ref.read(trackProvider.notifier).state =
                                         song;
                                     ref.read(audioProvider.notifier).state = a;
-                                    // ref.read(isExpanded.notifier).state = true;
                                     UserService.addSong(
                                       user!.uid,
                                       song,
                                       a,
                                     );
+
+                                    ref.read(controller)?.forward();
+                                    ref.read(isExpanded.notifier).state = true;
                                   } catch (e) {
                                     Fluttertoast.showToast(
                                       msg: 'An error occurred',

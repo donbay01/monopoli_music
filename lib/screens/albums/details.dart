@@ -111,13 +111,15 @@ class _SongListScreenState extends ConsumerState<SongListScreen> {
                             );
                             ref.read(audioProvider.notifier).state = audio;
                             ref.read(trackProvider.notifier).state = t;
-                            // ref.read(isExpanded.notifier).state = true;
                             UserService.addSong(
                               user!.uid,
                               t,
                               audio,
                             );
                             context.loaderOverlay.hide();
+
+                            ref.read(controller)?.forward();
+                            ref.read(isExpanded.notifier).state = true;
                           } catch (e) {
                             print(e);
                             context.loaderOverlay.hide();
