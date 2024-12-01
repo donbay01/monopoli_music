@@ -58,8 +58,8 @@ class _CarouselState extends State<Carousel> {
                 children: const [
                   Slider3(),
                   Slider1(),
-                  Slider2(),
                   Slider4(),
+                  Slider2(),
                 ],
               ),
             ),
