@@ -29,7 +29,7 @@ class _OnboardingCarouselState extends State<OnboardingCarousel> {
           ),
         ),
         child: SingleChildScrollView(
-          reverse: true,
+          // reverse: true,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -38,15 +38,12 @@ class _OnboardingCarouselState extends State<OnboardingCarousel> {
                 from: 90.h,
                 delay: const Duration(milliseconds: 100),
                 child: Container(
-                  height: MediaQuery.of(context).size.height * 0.1,
+                  height: MediaQuery.of(context).size.height * 0.25,
                   width: MediaQuery.of(context).size.width * 0.5,
                   child: const Image(
-                    image: AssetImage('assets/appLogo.png'),
+                    image: AssetImage('assets/launchLogo.png'),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.1,
               ),
               SlideInRight(
                 delay: const Duration(milliseconds: 200),
@@ -69,10 +66,10 @@ class _OnboardingCarouselState extends State<OnboardingCarousel> {
                   },
                   child: Text(
                     'Get Started',
-                    style: mediumBold(primaryWhite),
+                    style: mediumBold(primaryBlack),
                   ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.transparent,
+                    backgroundColor: purple,
                     padding: const EdgeInsets.symmetric(
                         vertical: 15, horizontal: 130),
                     shape: BeveledRectangleBorder(

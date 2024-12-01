@@ -123,11 +123,11 @@ class _RegisterState extends State<Register> {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: 30,
+                        height: 20,
                       ),
                       Container(
-                        height: 10.h,
-                        width: 50.w,
+                        height: MediaQuery.of(context).size.height * 0.15,
+                        width: MediaQuery.of(context).size.width * 0.5,
                         child: Image(
                           image: AssetImage('assets/appLogo.png'),
                         ),
@@ -136,14 +136,14 @@ class _RegisterState extends State<Register> {
                         height: 10,
                       ),
                       Container(
-                        height: 20.h,
-                        width: 100.w,
+                        height: MediaQuery.of(context).size.height * 0.17,
+                        width: MediaQuery.of(context).size.width,
                         child: Image(
                           image: AssetImage('assets/registerEmail.png'),
                         ),
                       ),
                       SizedBox(
-                        height: 70,
+                        height: 50,
                       ),
                       CustomTextField(
                         controller: userNameController,
@@ -164,7 +164,7 @@ class _RegisterState extends State<Register> {
                               ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 15,
                       ),
                       CustomTextField(
                         radius: 25,
@@ -185,7 +185,7 @@ class _RegisterState extends State<Register> {
                               ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 15,
                       ),
                       CustomTextField(
                         radius: 25,
@@ -205,7 +205,7 @@ class _RegisterState extends State<Register> {
                               ),
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 15,
                       ),
                       CustomTextField(
                         controller: passwordController,
@@ -220,7 +220,7 @@ class _RegisterState extends State<Register> {
                       ),
                       CheckboxListTile(
                         activeColor: purple,
-                        checkColor: primaryWhite,
+                        checkColor: primaryBlack,
                         title: Text(
                           'I accept the Terms and Conditions',
                           style: smallText(primaryWhite),
@@ -237,7 +237,7 @@ class _RegisterState extends State<Register> {
                         height: 5,
                       ),
                       CustomButton(
-                        color: primaryWhite,
+                        color: purple,
                         function: register,
                         child: Text(
                           'Register',

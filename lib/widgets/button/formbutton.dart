@@ -11,7 +11,7 @@ class CustomButton extends StatelessWidget {
     super.key,
     required this.child,
     this.function,
-    this.color = primaryWhite,
+    this.color = purple,
   });
 
   @override

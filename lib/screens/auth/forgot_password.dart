@@ -86,7 +86,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   height: 50,
                 ),
                 CustomButton(
-                  color: primaryWhite,
+                  color: purple,
                   function: () => reset(),
                   child: Text(
                     'Reset Password',

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:monopoli/components/onboarding_carousel/slider/slider_four.dart';
 import 'package:monopoli/components/onboarding_carousel/slider/slider_one.dart';
+import 'package:monopoli/components/onboarding_carousel/slider/slider_three.dart';
 import 'package:monopoli/components/onboarding_carousel/slider/slider_two.dart';
 import 'package:monopoli/theme/colors.dart';
 
@@ -12,7 +14,7 @@ class Carousel extends StatefulWidget {
 }
 
 class _CarouselState extends State<Carousel> {
-  final int _numPages = 2;
+  final int _numPages = 4;
   final PageController _pageController = PageController(
     initialPage: 0,
   );
@@ -54,8 +56,10 @@ class _CarouselState extends State<Carousel> {
                   });
                 },
                 children: const [
+                  Slider3(),
                   Slider1(),
                   Slider2(),
+                  Slider4(),
                 ],
               ),
             ),

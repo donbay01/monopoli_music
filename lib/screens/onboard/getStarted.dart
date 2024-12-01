@@ -38,27 +38,12 @@ class _GetStartedState extends State<GetStarted> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 15.h,
-                width: 40.w,
-                child:  Image(
-                  image: AssetImage('assets/volume.png'),
-                ),
-              ),
-              SizedBox(
-                height: 50,
-                width: 200,
+                height: MediaQuery.of(context).size.height * 0.25,
+                width: MediaQuery.of(context).size.width * 0.5,
                 child: const Image(
                   image: AssetImage('assets/appLogo.png'),
                 ),
               ),
-              SizedBox(height: 100,),
-              // Pulse(
-              //   delay: const Duration(milliseconds: 500),
-              //   child: Text(
-              //     'Over 1000+\nMusic online',
-              //     style: boldText(primaryWhite),
-              //   ),
-              // ),
                SizedBox(
                 height: 20,
               ),
@@ -177,7 +162,7 @@ class _GetStartedState extends State<GetStarted> {
                         builder: (_) => const Login(),
                       ),
                     );
-                  }, child: Text('Log in'))
+                  }, child: Text('Log in',style: mediumBold(purple),))
                 ],
               ),
               const SizedBox(

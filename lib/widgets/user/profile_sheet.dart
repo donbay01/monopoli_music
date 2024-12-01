@@ -33,7 +33,7 @@ class ProfileSheet extends StatelessWidget {
           end: Alignment.bottomCenter,
           colors: [
             Color(0xFF1C1821),
-            Color(0xFF2F1F43),
+            Color(0xFFF6B500),
           ],
         ),
         borderRadius: BorderRadius.vertical(
@@ -164,7 +164,7 @@ class ProfileSheet extends StatelessWidget {
                   child: Row(
                     children: [
                       Icon(
-                        FontAwesomeIcons.share,
+                        Icons.folder_shared_outlined,
                         color: primaryWhite,
                         size: 20,
                       ),
@@ -186,10 +186,10 @@ class ProfileSheet extends StatelessWidget {
                     barrierDismissible: false,
                     context: context,
                     builder: (ctx) => AlertDialog(
-                      backgroundColor: const Color(0xFF2F1F43),
+                      backgroundColor: const Color(0xFFF6B500),
                       title: Text(
                         'Are You sure you want to log out?',
-                        style: mediumText(primaryWhite),
+                        style: mediumText(primaryBlack),
                       ),
                       content: Row(
                         children: [
@@ -204,7 +204,7 @@ class ProfileSheet extends StatelessWidget {
                             },
                             child: Text(
                               'Yes',
-                              style: mediumText(primaryWhite),
+                              style: mediumText(primaryBlack),
                             ),
                           ),
                           TextButton(
@@ -233,7 +233,7 @@ class ProfileSheet extends StatelessWidget {
                       ),
                       Text(
                         'Log out',
-                        style: mediumBold(primaryWhite),
+                        style: mediumText(primaryWhite),
                       )
                     ],
                   ),
@@ -246,10 +246,10 @@ class ProfileSheet extends StatelessWidget {
                     barrierDismissible: false,
                     context: context,
                     builder: (ctx) => AlertDialog(
-                      backgroundColor: const Color(0xFF2F1F43),
+                      backgroundColor: const Color(0xFFF6B500),
                       title: Text(
                         'Are You sure you want to delete your account?',
-                        style: mediumText(primaryWhite),
+                        style: mediumText(primaryBlack),
                       ),
                       content: Row(
                         children: [
@@ -277,7 +277,7 @@ class ProfileSheet extends StatelessWidget {
                             },
                             child: Text(
                               'Yes',
-                              style: mediumText(primaryWhite),
+                              style: mediumText(primaryBlack),
                             ),
                           ),
                           TextButton(
@@ -297,8 +297,8 @@ class ProfileSheet extends StatelessWidget {
                   child: Row(
                     children: [
                       const Icon(
-                        Icons.delete,
-                        color: Colors.red,
+                        Icons.delete_outline_rounded,
+                        color: primaryWhite,
                         size: 25,
                       ),
                       const SizedBox(

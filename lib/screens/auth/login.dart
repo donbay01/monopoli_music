@@ -68,7 +68,7 @@ class _LoginState extends State<Login> {
                       height: 30,
                     ),
                     Container(
-                      height: MediaQuery.of(context).size.height * 0.1,
+                      height: MediaQuery.of(context).size.height * 0.2,
                       width: MediaQuery.of(context).size.width * 0.5,
                       child: Image(
                         image: AssetImage('assets/appLogo.png'),
@@ -78,7 +78,7 @@ class _LoginState extends State<Login> {
                       height: 10,
                     ),
                     Container(
-                      height: MediaQuery.of(context).size.height * 0.2,
+                      height: MediaQuery.of(context).size.height * 0.1,
                       width: MediaQuery.of(context).size.width,
                       child: Image(
                         image: AssetImage('assets/login.png'),
@@ -145,7 +145,7 @@ class _LoginState extends State<Login> {
                       height: 10,
                     ),
                     CustomButton(
-                      color: primaryWhite,
+                      color: purple,
                       function: () async {
                         context.loaderOverlay.show();
                         try {

@@ -110,7 +110,6 @@ class _SearchSheetState extends ConsumerState<SearchSheet> {
                 shrinkWrap: true,
                 itemBuilder: (context, index) {
                   var track = results!.tracks!.items[index];
-
                   return GestureDetector(
                     onTap: () async {
                       context.loaderOverlay.show();
