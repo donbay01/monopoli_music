@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:monopoli/services/auth.dart';
 import 'package:monopoli/services/config.dart';
 
@@ -31,8 +32,15 @@ class _AuthPlayerState extends State<AuthPlayer> with WidgetsBindingObserver {
       if (user != null) {
         player.stop();
       } else {
-        await player.setUrl(
-          audioUrl,
+        await player.setAudioSource(
+          AudioSource.uri(
+            Uri.parse(audioUrl),
+            tag: const MediaItem(
+              id: '1',
+              album: "Desthim",
+              title: "Desthim",
+            ),
+          ),
         );
 
         await player.setVolume(0.11);
