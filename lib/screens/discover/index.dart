@@ -143,7 +143,7 @@ class _DiscoverState extends ConsumerState<Discover>
                 ),
               ),
               SizedBox(
-                height: 40,
+                height: 30,
               ),
               Text(
                 'Trending Album',
