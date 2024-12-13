@@ -9,6 +9,9 @@ class AuthService {
   static var db = FirebaseFirestore.instance;
 
   static User? getUser() => auth.currentUser;
+  User? firebaseUser() {
+    return auth.currentUser;
+  }
 
   static Future<UserCredential> login(
     String email,

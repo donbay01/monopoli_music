@@ -59,147 +59,129 @@ class _LoginState extends State<Login> {
             ),
             child: Padding(
               padding: EdgeInsets.all(15.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 30,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.2,
+                    width: MediaQuery.of(context).size.width * 0.5,
+                    child: Image(
+                      image: AssetImage('assets/appLogo.png'),
                     ),
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.2,
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      child: Image(
-                        image: AssetImage('assets/appLogo.png'),
-                      ),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  CustomTextField(
+                    radius: 10,
+                    isEmail: true,
+                    controller: emailController,
+                    label: 'Email Address',
+                    hint: 'Enter your email address',
+                    prefixIcon: Icon(Icons.email_outlined),
+                    suffixIcon: emailController.text.isEmpty
+                        ? Container(
+                      width: 0,
+                    )
+                        : IconButton(
+                      icon: const Icon(Icons.close),
+                      onPressed: () {
+                        emailController.clear();
+                      },
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.1,
-                      width: MediaQuery.of(context).size.width,
-                      child: Image(
-                        image: AssetImage('assets/login.png'),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 70,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    CustomTextField(
-                      radius: 25,
-                      isEmail: true,
-                      controller: emailController,
-                      label: 'Email Address',
-                      hint: 'Enter your email address',
-                      prefixIcon: Icon(Icons.email_outlined),
-                      suffixIcon: emailController.text.isEmpty
-                          ? Container(
-                              width: 0,
-                            )
-                          : IconButton(
-                              icon: const Icon(Icons.close),
-                              onPressed: () {
-                                emailController.clear();
-                              },
-                            ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    CustomTextField(
-                      controller: passwordController,
-                      label: 'Password*',
-                      hint: 'xxxxxxxxxx',
-                      isPassword: true,
-                      radius: 25,
-                      prefixIcon: const Icon(Icons.lock),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const ForgotPassword(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            'Forgot Password?',
-                            style: smallText(primaryWhite),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    CustomButton(
-                      color: purple,
-                      function: () async {
-                        context.loaderOverlay.show();
-                        try {
-                          await AuthService.login(
-                            emailController.text,
-                            passwordController.text,
-                          );
-                          context.loaderOverlay.hide();
-                          Navigator.pushAndRemoveUntil(
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomTextField(
+                    controller: passwordController,
+                    label: 'Password*',
+                    hint: 'xxxxxxxxxx',
+                    isPassword: true,
+                    radius: 10,
+                    prefixIcon: const Icon(Icons.lock),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => Dashboard(),
+                              builder: (context) => const ForgotPassword(),
                             ),
-                            (route) => false,
                           );
-                        } on FirebaseAuthException catch (e) {
-                          context.loaderOverlay.hide();
-                          SnackbarHelper.displayToastMessage(
-                            context: context,
-                            message: e.message!,
-                          );
-                        }
-                      },
-                      child: Text(
-                        'Sign in',
-                        style: mediumBold(primaryBlack),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Don't have an account ?",
+                        },
+                        child: Text(
+                          'Forgot Password?',
                           style: smallText(primaryWhite),
                         ),
-                        TextButton(
-                          onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => Register(),
-                            ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomButton(
+                    color: primaryWhite,
+                    function: () async {
+                      context.loaderOverlay.show();
+                      try {
+                        await AuthService.login(
+                          emailController.text,
+                          passwordController.text,
+                        );
+                        context.loaderOverlay.hide();
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => Dashboard(),
                           ),
-                          child: Text(
-                            'Register',
-                            style: mediumText(purple),
+                              (route) => false,
+                        );
+                      } on FirebaseAuthException catch (e) {
+                        context.loaderOverlay.hide();
+                        SnackbarHelper.displayToastMessage(
+                          context: context,
+                          message: e.message!,
+                        );
+                      }
+                    },
+                    child: Text(
+                      'Sign in',
+                      style: mediumBold(primaryBlack),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Don't have an account ?",
+                        style: smallText(primaryWhite),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => Register(),
                           ),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
+                        child: Text(
+                          'Register',
+                          style: mediumText(purple),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ),

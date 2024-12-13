@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:monopoli/screens/auth/login.dart';
 import 'package:monopoli/screens/auth/verify_email.dart';
 import 'package:monopoli/theme/colors.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:zap_sizer/zap_sizer.dart';
 import '../../helper/snackbar.dart';
 import '../../services/auth.dart';
@@ -111,165 +112,173 @@ class _RegisterState extends State<Register> {
             height: 100.h,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('assets/onboarding.png'),
-                fit: BoxFit.cover
-              ),
+                  image: AssetImage('assets/onboarding.png'),
+                  fit: BoxFit.cover),
             ),
             child: Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: SingleChildScrollView(
-                child: Form(
-                  key: key,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 20,
+              padding: const EdgeInsets.symmetric(horizontal: 15.0),
+              child: Form(
+                key: key,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.2,
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      child: Image(
+                        image: AssetImage('assets/appLogo.png'),
                       ),
-                      Container(
-                        height: MediaQuery.of(context).size.height * 0.15,
-                        width: MediaQuery.of(context).size.width * 0.5,
-                        child: Image(
-                          image: AssetImage('assets/appLogo.png'),
-                        ),
+                    ),
+                    CustomTextField(
+                      controller: userNameController,
+                      label: 'Username',
+                      hint: 'Enter your username',
+                      radius: 10,
+                      labelStyle: const TextStyle(color: primaryWhite),
+                      prefixIcon: const Icon(Icons.person),
+                      suffixIcon: userNameController.text.isEmpty
+                          ? Container(
+                              width: 0,
+                            )
+                          : IconButton(
+                              icon: const Icon(Icons.close),
+                              onPressed: () {
+                                userNameController.clear();
+                              },
+                            ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomTextField(
+                      radius: 10,
+                      isEmail: true,
+                      controller: emailController,
+                      label: 'Email Address',
+                      hint: 'Enter your email address',
+                      prefixIcon: Icon(Icons.email_outlined),
+                      suffixIcon: emailController.text.isEmpty
+                          ? Container(
+                              width: 0,
+                            )
+                          : IconButton(
+                              icon: const Icon(Icons.close),
+                              onPressed: () {
+                                emailController.clear();
+                              },
+                            ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomTextField(
+                      radius: 10,
+                      controller: phoneController,
+                      label: 'Phone Number',
+                      hint: 'Enter your Phone number',
+                      prefixIcon: Icon(Icons.phone),
+                      suffixIcon: phoneController.text.isEmpty
+                          ? Container(
+                              width: 0,
+                            )
+                          : IconButton(
+                              icon: const Icon(Icons.close),
+                              onPressed: () {
+                                phoneController.clear();
+                              },
+                            ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CustomTextField(
+                      controller: passwordController,
+                      label: 'Password*',
+                      hint: 'xxxxxxxxxx',
+                      isPassword: true,
+                      radius: 10,
+                      prefixIcon: const Icon(Icons.lock),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    CheckboxListTile(
+                      activeColor: purple,
+                      checkColor: primaryBlack,
+                      checkboxShape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        height: MediaQuery.of(context).size.height * 0.17,
-                        width: MediaQuery.of(context).size.width,
-                        child: Image(
-                          image: AssetImage('assets/registerEmail.png'),
-                        ),
-                      ),
-                      SizedBox(
-                        height: 50,
-                      ),
-                      CustomTextField(
-                        controller: userNameController,
-                        label: 'Username',
-                        hint: 'Enter your username',
-                        radius: 25,
-                        labelStyle: const TextStyle(color: primaryWhite),
-                        prefixIcon: const Icon(Icons.person),
-                        suffixIcon: userNameController.text.isEmpty
-                            ? Container(
-                                width: 0,
-                              )
-                            : IconButton(
-                                icon: const Icon(Icons.close),
-                                onPressed: () {
-                                  userNameController.clear();
-                                },
-                              ),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      CustomTextField(
-                        radius: 25,
-                        isEmail: true,
-                        controller: emailController,
-                        label: 'Email Address',
-                        hint: 'Enter your email address',
-                        prefixIcon: Icon(Icons.email_outlined),
-                        suffixIcon: emailController.text.isEmpty
-                            ? Container(
-                                width: 0,
-                              )
-                            : IconButton(
-                                icon: const Icon(Icons.close),
-                                onPressed: () {
-                                  emailController.clear();
-                                },
-                              ),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      CustomTextField(
-                        radius: 25,
-                        controller: phoneController,
-                        label: 'Phone Number',
-                        hint: 'Enter your Phone number',
-                        prefixIcon: Icon(Icons.phone),
-                        suffixIcon: phoneController.text.isEmpty
-                            ? Container(
-                                width: 0,
-                              )
-                            : IconButton(
-                                icon: const Icon(Icons.close),
-                                onPressed: () {
-                                  phoneController.clear();
-                                },
-                              ),
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      CustomTextField(
-                        controller: passwordController,
-                        label: 'Password*',
-                        hint: 'xxxxxxxxxx',
-                        isPassword: true,
-                        radius: 25,
-                        prefixIcon: const Icon(Icons.lock),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      CheckboxListTile(
-                        activeColor: purple,
-                        checkColor: primaryBlack,
-                        title: Text(
-                          'I accept the Terms and Conditions',
-                          style: smallText(primaryWhite),
-                        ),
-                        value: termsAndCondition,
-                        onChanged: (newValue) {
-                          setState(() {
-                            termsAndCondition = newValue!;
-                          });
-                        },
-                        controlAffinity: ListTileControlAffinity.leading,
-                      ),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      CustomButton(
-                        color: purple,
-                        function: register,
-                        child: Text(
-                          'Register',
-                          style: mediumBold(primaryBlack),
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      title: Wrap(
                         children: [
                           Text(
-                            "Already have an account?",
+                            'By continuing you agree to Yeba',
                             style: smallText(primaryWhite),
                           ),
-                          TextButton(
-                            onPressed: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => Login(),
-                              ),
-                            ),
+                          GestureDetector(
+                            onTap: () {},
                             child: Text(
-                              'Login',
-                              style: mediumText(purple),
+                              'Privacy Policy',
+                              style: smallText(primaryWhite),
+                            ),
+                          ),
+                          Text(
+                            ' and ',
+                            style: smallText(primaryWhite),
+                          ),
+                          GestureDetector(
+                            onTap: () {},
+                            child: Text(
+                              'Terms and Conditions',
+                              style: smallText(purple),
                             ),
                           ),
                         ],
                       ),
-                    ],
-                  ),
+                      value: termsAndCondition,
+                      onChanged: (newValue) {
+                        setState(() {
+                          termsAndCondition = newValue!;
+                        });
+                      },
+                      controlAffinity: ListTileControlAffinity.leading,
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    CustomButton(
+                      color: primaryWhite,
+                      function: register,
+                      child: Text(
+                        'Register',
+                        style: mediumBold(primaryBlack),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Already have an account?",
+                          style: smallText(primaryWhite),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => Login(),
+                            ),
+                          ),
+                          child: Text(
+                            'Login',
+                            style: mediumText(purple),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),

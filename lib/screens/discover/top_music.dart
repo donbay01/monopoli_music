@@ -39,23 +39,16 @@ class TopMusic extends ConsumerWidget {
     var size = MediaQuery.of(context).size;
     var user = AuthService.getUser();
 
-    return Container(
-      height: size.height * 0.5,
-      width: size.width * 0.8,
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [
-            Color(0xFF58556E),
-            Color(0xff66656D),
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
+    return SingleChildScrollView(
+      child: Container(
+        height: size.height * 0.5,
+        width: size.width * 0.8,
+        decoration: BoxDecoration(
+          image: DecorationImage(image: AssetImage('assets/topMusic.png'),fit: BoxFit.cover),
+          borderRadius: BorderRadius.circular(20),
         ),
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -74,10 +67,10 @@ class TopMusic extends ConsumerWidget {
                           border: Border.all(color: primaryWhite, width: 1)),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 10.0, vertical: 5),
+                            horizontal: 15.0, vertical: 5),
                         child: Text(
                           'View all',
-                          style: smallText(primaryWhite),
+                          style: smallBold(primaryWhite),
                         ),
                       ),
                     ),
@@ -157,16 +150,16 @@ class TopMusic extends ConsumerWidget {
                                   color: Colors.transparent,
                                   child: Row(
                                     mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                    MainAxisAlignment.spaceBetween,
                                     children: [
                                       Row(
                                         children: [
                                           ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(8.0),
+                                            BorderRadius.circular(8.0),
                                             child: CachedNetworkImage(
                                               imageUrl: song.album?.cover?.first
-                                                      .url ??
+                                                  .url ??
                                                   song.album!.images!.first.url,
                                               height: 50,
                                               width: 50,
@@ -180,12 +173,12 @@ class TopMusic extends ConsumerWidget {
                                             width: 35.w,
                                             child: Column(
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                              CrossAxisAlignment.start,
                                               children: [
                                                 Text(
                                                   song.name ?? 'N/A',
                                                   overflow:
-                                                      TextOverflow.ellipsis,
+                                                  TextOverflow.ellipsis,
                                                   style: smallBold(
                                                     primaryWhite,
                                                   ),

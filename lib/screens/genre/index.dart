@@ -103,8 +103,8 @@ class _GenreSelectionPageState extends State<GenreSelectionPage> {
                 child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3, // 3 columns
-                    mainAxisSpacing: 20.0,
-                    crossAxisSpacing: 20.0,
+                    mainAxisSpacing: 25.0,
+                    crossAxisSpacing: 25.0,
                     childAspectRatio: 3 / 3,
                   ),
                   itemCount: genres.length,
@@ -118,8 +118,10 @@ class _GenreSelectionPageState extends State<GenreSelectionPage> {
                             selectedGenres[genre] = !selectedGenres[genre]!;
                           });
                         } else {
-                          SnackbarHelper.displayToastMessage(context: context,
-                              message: 'You can only select up to $maxSelection genres.');
+                          SnackbarHelper.displayToastMessage(
+                              context: context,
+                              message:
+                                  'You can only select up to $maxSelection genres.');
                         }
                       },
                       child: Container(
@@ -127,12 +129,14 @@ class _GenreSelectionPageState extends State<GenreSelectionPage> {
                           shape: BoxShape.circle,
                           color: selectedGenres[genre]!
                               ? purple
-                              : Color(0xFF695ECB).withOpacity(0.1),
+                              : purple.withOpacity(0.1),
                         ),
                         child: Center(
                           child: Text(
                             genre,
-                            style: mediumBold(primaryWhite),
+                            style: mediumBold(selectedGenres[genre]!
+                                ? primaryBlack
+                                : primaryWhite),
                           ),
                         ),
                       ),
@@ -171,7 +175,19 @@ class _GenreSelectionPageState extends State<GenreSelectionPage> {
                 },
               ),
               SizedBox(height: 10.0),
-              TextButton(onPressed: (){}, child: Text('Skip',style: mediumBold(purple),)),
+              TextButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ArtistSelectionPage(),
+                      ),
+                    );
+                  },
+                  child: Text(
+                    'Skip',
+                    style: mediumBold(purple),
+                  )),
               SizedBox(height: 70.0),
             ],
           ),
