@@ -15,6 +15,7 @@ import 'package:monopoli/widgets/user/avatar.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:zap_sizer/zap_sizer.dart';
 import '../../../providers/user_provider.dart';
+import '../../widgets/user/profile_sheet.dart';
 
 class Discover extends ConsumerStatefulWidget {
   const Discover({super.key});
@@ -61,11 +62,18 @@ class _DiscoverState extends ConsumerState<Discover>
                     ),
                     colors: [purple, primaryWhite],
                   ),
-                  if (user != null) ...[
-                    UserAvatar(
-                      user: user,
+                  GestureDetector(
+                    onTap: () => showModalBottomSheet(
+                      context: context,
+                      useRootNavigator: true,
+                      builder: (context) => ProfileSheet(
+                        user: user,
+                      ),
                     ),
-                  ]
+                    child: const CircleAvatar(
+                      child: Icon(FontAwesomeIcons.user,size: 20,color: primaryBlack,),
+                    ),
+                  )
                 ],
               ),
               // const FeaturedSongs(),

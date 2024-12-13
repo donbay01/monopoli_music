@@ -88,7 +88,6 @@ class TopMusic extends ConsumerWidget {
                       child: CircularProgressIndicator(),
                     );
                   }
-
                   if (snapshot.hasError) {
                     return Center(
                       child: Column(
