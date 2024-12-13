@@ -145,9 +145,15 @@ class _DiscoverState extends ConsumerState<Discover>
               SizedBox(
                 height: 30,
               ),
-              Text(
-                'Trending Album',
-                style: mediumSemiBold(primaryWhite),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Trending Album',
+                    style: mediumSemiBold(primaryWhite),
+                  ),
+                  TextButton(onPressed: (){}, child: Text('View all',style: medium(),))
+                ],
               ),
               if (t != null) ...[
                 Albums(
