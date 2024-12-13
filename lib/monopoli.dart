@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -14,7 +13,6 @@ import 'package:monopoli/services/music.dart';
 import 'package:monopoli/services/spotify.dart';
 import 'package:monopoli/theme/colors.dart';
 import 'package:zap_sizer/zap_sizer.dart';
-
 import 'widgets/player/auth.dart';
 
 class Monopoli extends ConsumerStatefulWidget {

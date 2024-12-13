@@ -1,21 +1,24 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:just_audio_background/just_audio_background.dart';
+import 'package:monopoli/providers/player.dart';
 import 'package:monopoli/services/auth.dart';
 import 'package:monopoli/services/config.dart';
 
-class AuthPlayer extends StatefulWidget {
+class AuthPlayer extends ConsumerStatefulWidget {
   const AuthPlayer({super.key});
 
   @override
-  State<AuthPlayer> createState() => _AuthPlayerState();
+  ConsumerState<AuthPlayer> createState() => _AuthPlayerState();
 }
 
-class _AuthPlayerState extends State<AuthPlayer> with WidgetsBindingObserver {
+class _AuthPlayerState extends ConsumerState<AuthPlayer>
+    with WidgetsBindingObserver {
   StreamSubscription<User?>? sub;
-  final player = AudioPlayer();
+  AudioPlayer? _player;
 
   @override
   void initState() {
@@ -27,25 +30,24 @@ class _AuthPlayerState extends State<AuthPlayer> with WidgetsBindingObserver {
   init() async {
     await RemoteConfigService.activate();
     var audioUrl = RemoteConfigService.config.getString('backgroundAudio');
+    _player = ref.read(player);
 
-    sub = AuthService.auth.authStateChanges().listen((user) async {
-      if (user != null) {
-        player.stop();
-      } else {
-        await player.setAudioSource(
-          AudioSource.uri(
-            Uri.parse(audioUrl),
-            tag: const MediaItem(
-              id: '1',
-              album: "Desthim",
-              title: "Desthim",
-            ),
-          ),
-        );
+    await _player?.setAudioSource(
+      AudioSource.uri(
+        Uri.parse(audioUrl),
+        tag: const MediaItem(
+          id: '1',
+          album: "Desthim",
+          title: "Desthim",
+        ),
+      ),
+    );
 
-        await player.setVolume(0.11);
+    await _player?.setVolume(0.11);
 
-        await player.play();
+    sub = AuthService.auth.authStateChanges().listen((u) {
+      if (u != null) {
+        _player?.stop();
       }
     });
   }
@@ -55,11 +57,11 @@ class _AuthPlayerState extends State<AuthPlayer> with WidgetsBindingObserver {
     var user = AuthService.getUser();
 
     if (state == AppLifecycleState.hidden) {
-      player.pause();
+      _player?.pause();
     }
 
     if (state == AppLifecycleState.resumed && user == null) {
-      player.play();
+      _player?.play();
     }
 
     super.didChangeAppLifecycleState(state);
@@ -68,7 +70,7 @@ class _AuthPlayerState extends State<AuthPlayer> with WidgetsBindingObserver {
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-    player.dispose();
+    _player?.dispose();
     sub?.cancel();
     super.dispose();
   }

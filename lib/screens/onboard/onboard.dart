@@ -1,5 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:monopoli/providers/player.dart';
 import 'package:zap_sizer/zap_sizer.dart';
 import 'package:monopoli/monopoli.dart';
 import 'package:monopoli/screens/onboard/getStarted.dart';
@@ -8,14 +10,14 @@ import 'package:zap_sizer/main.dart';
 import '../../../theme/colors.dart';
 import '../../components/onboarding_carousel/carousel.dart';
 
-class OnboardingCarousel extends StatefulWidget {
+class OnboardingCarousel extends ConsumerStatefulWidget {
   const OnboardingCarousel({super.key});
 
   @override
-  State<OnboardingCarousel> createState() => _OnboardingCarouselState();
+  ConsumerState<OnboardingCarousel> createState() => _OnboardingCarouselState();
 }
 
-class _OnboardingCarouselState extends State<OnboardingCarousel> {
+class _OnboardingCarouselState extends ConsumerState<OnboardingCarousel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +49,7 @@ class _OnboardingCarouselState extends State<OnboardingCarousel> {
               ),
               SlideInRight(
                 delay: const Duration(milliseconds: 200),
-                child: Carousel()
+                child: Carousel(),
               ),
               const SizedBox(
                 height: 60,
@@ -57,6 +59,7 @@ class _OnboardingCarouselState extends State<OnboardingCarousel> {
                 delay: const Duration(milliseconds: 300),
                 child: ElevatedButton(
                   onPressed: () {
+                    ref.read(player).play();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -71,7 +74,9 @@ class _OnboardingCarouselState extends State<OnboardingCarousel> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: purple,
                     padding: const EdgeInsets.symmetric(
-                        vertical: 15, horizontal: 130),
+                      vertical: 15,
+                      horizontal: 130,
+                    ),
                     shape: BeveledRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
                       side: const BorderSide(color: purple, width: 1),
