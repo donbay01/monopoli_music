@@ -15,6 +15,8 @@ import 'package:monopoli/services/spotify.dart';
 import 'package:monopoli/theme/colors.dart';
 import 'package:zap_sizer/zap_sizer.dart';
 
+import 'widgets/player/auth.dart';
+
 class Monopoli extends ConsumerStatefulWidget {
   const Monopoli({super.key});
 
@@ -72,7 +74,7 @@ class _MonopoliState extends ConsumerState<Monopoli> {
             home: Stack(
               children: [
                 user == null ? const SplashScreen() : const Dashboard(),
-                // const AuthPlayer(),
+                const AuthPlayer(),
               ],
             ),
           );
