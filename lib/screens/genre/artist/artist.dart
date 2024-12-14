@@ -120,16 +120,18 @@ class _ArtistSelectionPageState extends State<ArtistSelectionPage> {
         return GestureDetector(
           onTap: () => toggleSelection(artist),
           child: Container(
+            // height: MediaQuery.of(context).size.height,
+            // width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: isSelected ? purple : Color(0xFF695ECB).withOpacity(0.1),
+              color: isSelected ? purple : purple.withOpacity(0.1),
             ),
             // color: isSelected ? purple : Colors.transparent,
             child: Center(
               child: Text(
                 artist,
                 textAlign: TextAlign.center,
-                style: mediumText(primaryWhite),
+                style: mediumBold(isSelected ? primaryBlack : primaryWhite),
               ),
             ),
           ),
@@ -214,6 +216,8 @@ class _ArtistSelectionPageState extends State<ArtistSelectionPage> {
           ),
         ),
         body: Container(
+          height: MediaQuery.of(context).size.height,
+          width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage(
@@ -227,6 +231,7 @@ class _ArtistSelectionPageState extends State<ArtistSelectionPage> {
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     'You may select three (3) genres that matches your taste',
@@ -264,9 +269,12 @@ class _ArtistSelectionPageState extends State<ArtistSelectionPage> {
                     onChanged: onSearchChanged,
                   ),
                   SizedBox(
-                    height: 30,
+                    height: 20,
                   ),
                   buildSelectedArtists(),
+                  SizedBox(
+                    height: 20,
+                  ),
                   buildArtistGrid(),
                   buildSearchResults(),
                   GenreButton(
@@ -303,7 +311,15 @@ class _ArtistSelectionPageState extends State<ArtistSelectionPage> {
                     height: 10,
                   ),
                   TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => Dashboard(),
+                          ),
+                              (route) => false,
+                        );
+                      },
                       child: Text(
                         'Skip',
                         style: mediumBold(purple),

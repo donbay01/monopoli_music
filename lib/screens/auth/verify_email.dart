@@ -1,32 +1,29 @@
 import 'dart:async';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:monopoli/helper/snackbar.dart';
-import 'package:monopoli/screens/auth/login.dart';
-import 'package:monopoli/screens/onboard/onboard.dart';
-import 'package:monopoli/services/auth.dart';
-
-import '../genre/index.dart';
+import '../../services/auth.dart';
 import '../../theme/colors.dart';
 import '../../theme/text_style.dart';
+import '../genre/index.dart';
+import '../onboard/onboard.dart';
 
 class VerifyEmail extends StatefulWidget {
-  const VerifyEmail({super.key});
+  const VerifyEmail({Key? key}) : super(key: key);
 
   @override
-  State<VerifyEmail> createState() => _VerifyEmailState();
+  _VerifyEmailState createState() => _VerifyEmailState();
 }
 
 class _VerifyEmailState extends State<VerifyEmail> {
   bool isVerified = false;
   Timer? timer;
   bool canResendEmail = false;
+  AuthService? service;
 
   @override
   void initState() {
-    var user = AuthService.getUser()!;
-    isVerified = user.emailVerified;
+    service = AuthService();
+    isVerified = service!.firebaseUser()!.emailVerified;
     super.initState();
   }
 
@@ -37,7 +34,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
 
       timer = Timer.periodic(
         const Duration(seconds: 3),
-        (_) => checkEmailVerified(),
+            (_) => checkEmailVerified(),
       );
     }
 
@@ -53,10 +50,8 @@ class _VerifyEmailState extends State<VerifyEmail> {
   Future checkEmailVerified() async {
     var user = AuthService.getUser()!;
     await user.reload();
-
-    var u = AuthService.getUser()!;
-    if (u.emailVerified) {
-      isVerified = u.emailVerified;
+    if (service!.firebaseUser()!.emailVerified) {
+      isVerified = service!.firebaseUser()!.emailVerified;
       timer?.cancel();
       setState(() {});
 
@@ -65,20 +60,16 @@ class _VerifyEmailState extends State<VerifyEmail> {
         MaterialPageRoute(
           builder: (context) => const GenreSelectionPage(),
         ),
-        (route) => false,
+            (route) => false,
       );
+
     }
+
   }
 
   Future sendVerificationEmail() async {
-    final user = AuthService.getUser()!;
+    final user = service!.firebaseUser()!;
     await user.sendEmailVerification();
-
-    SnackbarHelper.displayToastMessage(
-      context: context,
-      message: 'Email Sent',
-    );
-
     setState(() {
       canResendEmail = false;
     });
@@ -105,7 +96,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
           padding: const EdgeInsets.all(15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
-
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(
                 height: 70,
@@ -113,7 +104,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
               Center(
                 child: Text(
                   'Verify your Email',
-                  style: largeText(primaryWhite),
+                  style: mediumSemiBold(primaryWhite),
                 ),
               ),
               const SizedBox(
@@ -124,7 +115,7 @@ class _VerifyEmailState extends State<VerifyEmail> {
                   width: MediaQuery.of(context).size.width,
                   child: Image(image: AssetImage('assets/verify.png'))),
               const SizedBox(
-                height: 100,
+                height: 50,
               ),
               Center(
                 child: Text(
@@ -134,24 +125,18 @@ class _VerifyEmailState extends State<VerifyEmail> {
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
-              Center(
-                child: Text(
-                  "Didn't receive an email?",
-                  style: mediumText(Colors.blueGrey),
-                  textAlign: TextAlign.center,
-                ),
+              Text(
+                "Didn't receive an email?",
+                style: mediumText(purple),
+                textAlign: TextAlign.center,
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              Center(
-                child: Text(
-                  'Check your spam or junk. It goes there sometimes!',
-                  style: smallText(Colors.blueGrey),
-                  textAlign: TextAlign.center,
-                ),
+              SizedBox(height: 5,),
+              Text(
+                'Check your spam or junk. It goes there sometimes!',
+                style: smallText(Colors.blueGrey),
+                textAlign: TextAlign.center,
               ),
               const SizedBox(
                 height: 40,
@@ -159,22 +144,29 @@ class _VerifyEmailState extends State<VerifyEmail> {
               ElevatedButton.icon(
                 onPressed: () {
                   canResendEmail ? sendVerificationEmail() : null;
+                  SnackbarHelper.displayToastMessage(
+                    context: context,
+                    message: 'Email Sent',
+                  );
                 },
                 icon: const Icon(
                   Icons.email,
-                  color: primaryWhite,
+                  color: primaryBlack,
                 ),
                 label: Text(
                   'Resend Email',
-                  style: smallText(primaryWhite),
+                  style: mediumBold(primaryBlack),
                 ),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: purple,
+                  backgroundColor: primaryWhite,
                   minimumSize: const Size.fromHeight(50),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)
+                  )
                 ),
               ),
               const SizedBox(
-                height: 30,
+                height: 20,
               ),
               TextButton(
                 onPressed: () {
@@ -184,12 +176,12 @@ class _VerifyEmailState extends State<VerifyEmail> {
                     MaterialPageRoute(
                       builder: (context) => const OnboardingCarousel(),
                     ),
-                    (route) => false,
+                        (route) => false,
                   );
                 },
                 child: Text(
                   'Cancel',
-                  style: mediumSemiBold(purple),
+                  style: mediumBold(purple),
                 ),
               ),
               const SizedBox(
@@ -200,5 +192,6 @@ class _VerifyEmailState extends State<VerifyEmail> {
         ),
       ),
     );
+
   }
 }

@@ -15,7 +15,7 @@ class SnackbarHelper {
         content: Text(
           message,
           textAlign: TextAlign.center,
-          style: mediumText(primaryWhite),
+          style: mediumBold(primaryBlack),
         ),
         backgroundColor: color ?? purple,
       ),

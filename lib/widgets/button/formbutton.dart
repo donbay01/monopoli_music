@@ -11,7 +11,7 @@ class CustomButton extends StatelessWidget {
     super.key,
     required this.child,
     this.function,
-    this.color = purple,
+    this.color = primaryWhite,
   });
 
   @override
@@ -27,7 +27,7 @@ class CustomButton extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
-          backgroundColor: color,
+          backgroundColor: primaryWhite,
         ),
         child: child,
       ),

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:monopoli/models/user/user_model.dart';
+import 'package:monopoli/screens/onboard/onboard.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:loader_overlay/loader_overlay.dart';
@@ -13,7 +14,7 @@ import '../../theme/colors.dart';
 import '../../theme/text_style.dart';
 
 class ProfileSheet extends StatelessWidget {
-  final UserModel user;
+  final UserModel? user;
 
   const ProfileSheet({
     super.key,
@@ -102,26 +103,6 @@ class ProfileSheet extends StatelessWidget {
                 color: grey,
                 height: 50,
               ),
-              // GestureDetector(
-              //   onTap: () {},
-              //   child: Row(
-              //     children: [
-              //       Icon(
-              //         Icons.edit,
-              //         color: primaryWhite,
-              //         size: 25,
-              //       ),
-              //       SizedBox(
-              //         width: 20,
-              //       ),
-              //       Text(
-              //         'Edit your profile',
-              //         style: mediumBold(primaryWhite),
-              //       )
-              //     ],
-              //   ),
-              // ),
-              // SizedBox(height: 20),
               GestureDetector(
                 onTap: () {
                   Navigator.push(
@@ -199,7 +180,7 @@ class ProfileSheet extends StatelessWidget {
                               Navigator.of(ctx).pop();
                               pushScreenWithoutNavBar(
                                 context,
-                                GetStarted(),
+                                OnboardingCarousel(),
                               );
                             },
                             child: Text(

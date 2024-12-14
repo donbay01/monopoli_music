@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:monopoli/models/audio/index.dart';
 import 'package:monopoli/models/audio/track.dart';
 
 class UserService {
   static var db = FirebaseFirestore.instance;
+  static FirebaseAuth auth = FirebaseAuth.instance;
 
   static getSongsInPlaylist(String uid, String playlistId) {
     return db
@@ -12,6 +14,10 @@ class UserService {
         .collection('tracks')
         .where('playlists', arrayContains: playlistId)
         .orderBy('timestamp');
+  }
+
+  User? firebaseUser() {
+    return auth.currentUser;
   }
 
   static Future<DocumentReference<Map<String, dynamic>>> createPlaylist({

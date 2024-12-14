@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:monopoli/providers/player.dart';
+import 'package:monopoli/screens/auth/login.dart';
 import 'package:zap_sizer/zap_sizer.dart';
 import 'package:monopoli/monopoli.dart';
 import 'package:monopoli/screens/onboard/getStarted.dart';
@@ -36,12 +37,15 @@ class _OnboardingCarouselState extends ConsumerState<OnboardingCarousel> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              SizedBox(
+                height: 50,
+              ),
               SlideInDown(
-                from: 90.h,
+                from: 100.h,
                 delay: const Duration(milliseconds: 100),
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.25,
-                  width: MediaQuery.of(context).size.width * 0.5,
+                  width: MediaQuery.of(context).size.width,
                   child: const Image(
                     image: AssetImage('assets/launchLogo.png'),
                   ),
@@ -52,7 +56,7 @@ class _OnboardingCarouselState extends ConsumerState<OnboardingCarousel> {
                 child: Carousel(),
               ),
               const SizedBox(
-                height: 60,
+                height: 20,
               ),
               SlideInUp(
                 from: 100.h,
@@ -63,7 +67,7 @@ class _OnboardingCarouselState extends ConsumerState<OnboardingCarousel> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => const GetStarted(),
+                        builder: (_) => const Login(),
                       ),
                     );
                   },
@@ -72,14 +76,13 @@ class _OnboardingCarouselState extends ConsumerState<OnboardingCarousel> {
                     style: mediumBold(primaryBlack),
                   ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: purple,
+                    backgroundColor: primaryWhite,
                     padding: const EdgeInsets.symmetric(
                       vertical: 15,
                       horizontal: 130,
                     ),
-                    shape: BeveledRectangleBorder(
+                    shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10),
-                      side: const BorderSide(color: purple, width: 1),
                     ),
                   ),
                 ),
