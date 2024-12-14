@@ -62,18 +62,13 @@ class _DiscoverState extends ConsumerState<Discover>
                     ),
                     colors: [purple, primaryWhite],
                   ),
-                  GestureDetector(
-                    onTap: () => showModalBottomSheet(
-                      context: context,
-                      useRootNavigator: true,
-                      builder: (context) => ProfileSheet(
-                        user: user,
-                      ),
+
+                  if (user != null) ...[
+                    UserAvatar(
+                      user: user,
                     ),
-                    child: const CircleAvatar(
-                      child: Icon(FontAwesomeIcons.user,size: 20,color: primaryBlack,),
-                    ),
-                  )
+                  ]
+
                 ],
               ),
               // const FeaturedSongs(),
