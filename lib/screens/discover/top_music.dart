@@ -44,7 +44,8 @@ class TopMusic extends ConsumerWidget {
         height: size.height * 0.5,
         width: size.width * 0.8,
         decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage('assets/topMusic.png'),fit: BoxFit.cover),
+          image: DecorationImage(
+              image: AssetImage('assets/topMusic.png'), fit: BoxFit.cover),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Padding(
@@ -126,7 +127,11 @@ class TopMusic extends ConsumerWidget {
                                     var a = await MusicService.getTrackURL(
                                       song.id!,
                                     );
+
                                     context.loaderOverlay.hide();
+                                    if (a == null) {
+                                      return;
+                                    }
 
                                     ref.read(trackProvider.notifier).state =
                                         song;
@@ -149,16 +154,16 @@ class TopMusic extends ConsumerWidget {
                                   color: Colors.transparent,
                                   child: Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Row(
                                         children: [
                                           ClipRRect(
                                             borderRadius:
-                                            BorderRadius.circular(8.0),
+                                                BorderRadius.circular(8.0),
                                             child: CachedNetworkImage(
                                               imageUrl: song.album?.cover?.first
-                                                  .url ??
+                                                      .url ??
                                                   song.album!.images!.first.url,
                                               height: 50,
                                               width: 50,
@@ -172,12 +177,12 @@ class TopMusic extends ConsumerWidget {
                                             width: 35.w,
                                             child: Column(
                                               crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 Text(
                                                   song.name ?? 'N/A',
                                                   overflow:
-                                                  TextOverflow.ellipsis,
+                                                      TextOverflow.ellipsis,
                                                   style: smallBold(
                                                     primaryWhite,
                                                   ),

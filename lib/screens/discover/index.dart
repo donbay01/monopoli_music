@@ -71,7 +71,11 @@ class _DiscoverState extends ConsumerState<Discover>
                       ),
                     ),
                     child: const CircleAvatar(
-                      child: Icon(FontAwesomeIcons.user,size: 20,color: primaryBlack,),
+                      child: Icon(
+                        FontAwesomeIcons.user,
+                        size: 20,
+                        color: primaryBlack,
+                      ),
                     ),
                   )
                 ],
@@ -97,7 +101,10 @@ class _DiscoverState extends ConsumerState<Discover>
                       width: width * 0.8,
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
-                          colors: [Color(0xFF475B47), Color(0xff494F51)],
+                          colors: [
+                            Color(0xFF475B47),
+                            Color(0xff494F51),
+                          ],
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                         ),
@@ -121,13 +128,17 @@ class _DiscoverState extends ConsumerState<Discover>
                                     onTap: () {},
                                     child: Container(
                                       decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                              color: primaryWhite, width: 1)),
+                                        borderRadius: BorderRadius.circular(20),
+                                        border: Border.all(
+                                          color: primaryWhite,
+                                          width: 1,
+                                        ),
+                                      ),
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 10.0, vertical: 5),
+                                          horizontal: 10.0,
+                                          vertical: 5,
+                                        ),
                                         child: Text(
                                           'View all',
                                           style: smallText(primaryWhite),
@@ -160,7 +171,13 @@ class _DiscoverState extends ConsumerState<Discover>
                     'Trending Album',
                     style: mediumSemiBold(primaryWhite),
                   ),
-                  TextButton(onPressed: (){}, child: Text('View all',style: medium(),))
+                  TextButton(
+                    onPressed: () {},
+                    child: Text(
+                      'View all',
+                      style: medium(),
+                    ),
+                  ),
                 ],
               ),
               if (t != null) ...[

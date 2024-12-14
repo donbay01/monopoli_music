@@ -94,10 +94,13 @@ class AppPlayerState extends State<AppPlayer> with WidgetsBindingObserver {
       home: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.close)),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.close,
+            ),
+          ),
         ),
         body: SafeArea(
           child: Column(
@@ -108,19 +111,19 @@ class AppPlayerState extends State<AppPlayer> with WidgetsBindingObserver {
               ControlButtons(_player),
               // Display seek bar. Using StreamBuilder, this widget rebuilds
               // each time the position, buffered position or duration changes.
-              StreamBuilder<PositionData>(
-                stream: _positionDataStream,
-                builder: (context, snapshot) {
-                  final positionData = snapshot.data;
-                  return SeekBar(
-                    duration: positionData?.duration ?? Duration.zero,
-                    position: positionData?.position ?? Duration.zero,
-                    bufferedPosition:
-                        positionData?.bufferedPosition ?? Duration.zero,
-                    onChangeEnd: _player.seek,
-                  );
-                },
-              ),
+              // StreamBuilder<PositionData>(
+              //   stream: _positionDataStream,
+              //   builder: (context, snapshot) {
+              //     final positionData = snapshot.data;
+              //     return SeekBar(
+              //       duration: positionData?.duration ?? Duration.zero,
+              //       position: positionData?.position ?? Duration.zero,
+              //       bufferedPosition:
+              //           positionData?.bufferedPosition ?? Duration.zero,
+              //       onChangeEnd: _player.seek,
+              //     );
+              //   },
+              // ),
             ],
           ),
         ),

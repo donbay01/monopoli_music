@@ -101,7 +101,10 @@ void showSongDetails(
                   onTap: () {
                     var p = ref.read(player);
                     final audioSource = AudioSource.uri(
-                      Uri.parse(audio!.youtubeVideo.audio.first.url),
+                      Uri.parse(
+                        audio!.downloadLink!,
+                        // audio!.youtubeVideo.audio.first.url,
+                      ),
                       tag: MediaItem(
                         id: track.id!,
                         album: track.album!.name,
@@ -138,7 +141,8 @@ void showSongDetails(
                   onTap: () async {
                     await Share.shareUri(
                       Uri.parse(
-                        audio!.youtubeVideo.audio.first.url,
+                        audio!.downloadLink!,
+                        // audio!.youtubeVideo.audio.first.url,
                       ),
                     );
                     UserService.updateSong(user!.uid, track.id!, {

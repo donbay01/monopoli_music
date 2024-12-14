@@ -74,6 +74,7 @@ class Spotify {
     );
 
     final body = json.decode(response.body);
+
     final p = body['playlists']['items']
         .map((a) => SpotifyPlaylist.fromJSON(a))
         .toList()

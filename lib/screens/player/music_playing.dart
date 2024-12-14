@@ -71,9 +71,9 @@ class _MusicPlayerPageState extends ConsumerState<MusicPlayerPage> {
   void initState() {
     // var u = ref.read(userProvider);
     // _isFavorited = u?.liked.contains(widget.track.id) ?? false;
-    totalTime = Duration(
-      milliseconds: widget.audio.youtubeVideo.audio.first.durationMs,
-    );
+    // totalTime = Duration(
+    //   milliseconds: widget.audio.youtubeVideo.audio.first.durationMs,
+    // );
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _audioPlayer = ref.read(player);
       isPlaying = _audioPlayer.playing;
@@ -247,17 +247,17 @@ class _MusicPlayerPageState extends ConsumerState<MusicPlayerPage> {
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Column(
                       children: [
-                        Slider(
-                          min: 0,
-                          max: totalTime.inSeconds.toDouble(),
-                          value: currentTime.inSeconds.toDouble(),
-                          onChanged: (value) {
-                            setState(() {
-                              currentTime = Duration(seconds: value.toInt());
-                              _audioPlayer.seek(currentTime);
-                            });
-                          },
-                        ),
+                        // Slider(
+                        //   min: 0,
+                        //   max: totalTime.inSeconds.toDouble(),
+                        //   value: currentTime.inSeconds.toDouble(),
+                        //   onChanged: (value) {
+                        //     setState(() {
+                        //       currentTime = Duration(seconds: value.toInt());
+                        //       _audioPlayer.seek(currentTime);
+                        //     });
+                        //   },
+                        // ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

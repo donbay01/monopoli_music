@@ -104,6 +104,10 @@ class HotReleases extends ConsumerWidget {
                                     );
                                     context.loaderOverlay.hide();
 
+                                    if (a == null) {
+                                      return;
+                                    }
+
                                     ref.read(trackProvider.notifier).state =
                                         song;
                                     ref.read(audioProvider.notifier).state = a;

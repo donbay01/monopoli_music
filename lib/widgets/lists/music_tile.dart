@@ -261,7 +261,10 @@ class MusicTile extends ConsumerWidget {
                       onTap: () {
                         var p = ref.read(player);
                         final audioSource = AudioSource.uri(
-                          Uri.parse(audio.youtubeVideo.audio.first.url),
+                          Uri.parse(
+                            audio.downloadLink!,
+                            // audio.youtubeVideo.audio.first.url,
+                          ),
                           tag: MediaItem(
                             id: track.id!,
                             album: track.album!.name,
@@ -304,7 +307,8 @@ class MusicTile extends ConsumerWidget {
                       Navigator.pop(context);
                       Share.shareUri(
                         Uri.parse(
-                          audio.youtubeVideo.audio.first.url,
+                          audio.downloadLink!,
+                          // audio.youtubeVideo.audio.first.url,
                         ),
                       );
                       UserService.updateSong(userId, track.id!, {

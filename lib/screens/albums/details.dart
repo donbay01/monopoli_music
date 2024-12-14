@@ -109,6 +109,12 @@ class _SongListScreenState extends ConsumerState<SongListScreen> {
                             var audio = await MusicService.getTrackURL(
                               track['id'],
                             );
+                            context.loaderOverlay.hide();
+
+                            if (audio == null) {
+                              return null;
+                            }
+
                             ref.read(audioProvider.notifier).state = audio;
                             ref.read(trackProvider.notifier).state = t;
                             UserService.addSong(
@@ -116,7 +122,6 @@ class _SongListScreenState extends ConsumerState<SongListScreen> {
                               t,
                               audio,
                             );
-                            context.loaderOverlay.hide();
 
                             ref.read(controller)?.forward();
                             ref.read(isExpanded.notifier).state = true;

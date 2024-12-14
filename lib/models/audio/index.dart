@@ -1,27 +1,51 @@
 class AudioApiResponse {
-  final bool status;
-  final String errorId;
-  final YoutubeVideo youtubeVideo;
+  final String? title;
+  final String? artist;
+  final String? album;
+  final String? cover;
+  final String? releaseDate;
+  final String? downloadLink;
+  // final bool status;
+  // final String errorId;
+  // final YoutubeVideo youtubeVideo;
 
   AudioApiResponse({
-    required this.status,
-    required this.errorId,
-    required this.youtubeVideo,
+    this.album,
+    this.artist,
+    this.cover,
+    this.downloadLink,
+    this.releaseDate,
+    this.title,
+    // required this.status,
+    // required this.errorId,
+    // required this.youtubeVideo,
   });
 
   factory AudioApiResponse.fromJson(Map<String, dynamic> json) {
     return AudioApiResponse(
-      status: json['status'],
-      errorId: json['errorId'],
-      youtubeVideo: YoutubeVideo.fromJson(json['youtubeVideo']),
+      album: json['album'],
+      artist: json['artist'],
+      cover: json['cover'],
+      downloadLink: json['downloadLink'],
+      title: json['title'],
+      releaseDate: json['releaseDate'],
+      // status: json['status'],
+      // errorId: json['errorId'],
+      // youtubeVideo: YoutubeVideo.fromJson(json['youtubeVideo']),
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'status': status,
-      'errorId': errorId,
-      'youtubeVideo': youtubeVideo.toJson(),
+      'title': title,
+      'artist': artist,
+      'album': album,
+      'cover': cover,
+      'releaseDate': releaseDate,
+      'downloadLink': downloadLink,
+      // 'status': status,
+      // 'errorId': errorId,
+      // 'youtubeVideo': youtubeVideo.toJson(),
     };
   }
 }

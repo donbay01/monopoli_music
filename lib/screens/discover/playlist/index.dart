@@ -78,6 +78,10 @@ class PlaylistScreen extends ConsumerWidget {
                     var audio = await MusicService.getTrackURL(a.shareUrl!);
                     context.loaderOverlay.hide();
 
+                    if (audio == null) {
+                      return;
+                    }
+
                     ref.read(trackProvider.notifier).state = track;
                     ref.read(audioProvider.notifier).state = audio;
 

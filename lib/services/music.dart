@@ -27,16 +27,46 @@ class MusicService {
     return ResponseData.fromJson(data);
   }
 
-  static Future<AudioApiResponse> getTrackURL(
+  static Future<AudioApiResponse?> getTrackURL(
     String trackId,
   ) async {
-    var res = await http.get(
-      Uri.parse('$baseURL/track/download?track=$trackId'),
-      headers: headers,
-    );
+    print(trackId);
+    // var res = await http.get(
+    //   Uri.parse('$baseURL/track/download?track=$trackId'),
+    //   headers: headers,
+    // );
 
-    var data = jsonDecode(res.body);
-    return AudioApiResponse.fromJson(data);
+    // var data = jsonDecode(res.body);
+    // print(data);
+    // return AudioApiResponse.fromJson(data);
+
+    // Define the endpoint and query parameters
+    final String baseUrl = 'https://spotify-downloader9.p.rapidapi.com';
+    final String endpoint = '/downloadSong';
+    final String songId = 'https%3A%2F%2Fopen.spotify.com%2Ftrack%2F${trackId}';
+
+    final Uri url = Uri.parse('$baseUrl$endpoint?songId=$songId');
+
+    final Map<String, String> headers = {
+      'X-Rapidapi-Key': '2f7b27745bmsh4c535726654ab8fp1cbecbjsnad90f63e6dda',
+      'X-Rapidapi-Host': 'spotify-downloader9.p.rapidapi.com',
+      'Host': 'spotify-downloader9.p.rapidapi.com',
+    };
+
+    final response = await http.get(url, headers: headers);
+
+    if (response.statusCode != 200) {
+      return null;
+    }
+
+    var data = jsonDecode(response.body);
+    print(data);
+
+    if (data['success'] == false) {
+      return null;
+    }
+
+    return AudioApiResponse.fromJson(data['data']);
   }
 
   static Future<HomeModel> getHome() async {

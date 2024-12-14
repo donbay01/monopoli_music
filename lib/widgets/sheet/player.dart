@@ -30,7 +30,8 @@ class _MusicPlayerSheetState extends ConsumerState<MusicPlayerSheet> {
           p.setAudioSource(
             AudioSource.uri(
               Uri.parse(
-                audio!.youtubeVideo.audio.first.url,
+                audio!.downloadLink!,
+                // audio!.youtubeVideo.audio.first.url,
               ),
               tag: MediaItem(
                 id: track.id!,
