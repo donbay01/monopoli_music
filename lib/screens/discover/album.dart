@@ -21,7 +21,7 @@ class Albums extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: Spotify.getTrendingAlbums(token),
+      future: Spotify.getTrendingAlbums(accessToken: token),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(

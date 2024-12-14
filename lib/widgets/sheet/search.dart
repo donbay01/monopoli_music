@@ -56,7 +56,7 @@ class _SearchSheetState extends ConsumerState<SearchSheet> {
             ),
           ),
           title: DebounceTextfield(
-            duration: const Duration(milliseconds: 600),
+            duration: const Duration(milliseconds: 1600),
             action: (enteredText) {
               search(enteredText);
             },

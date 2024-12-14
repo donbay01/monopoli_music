@@ -33,6 +33,24 @@ class SongListScreen extends ConsumerStatefulWidget {
 }
 
 class _SongListScreenState extends ConsumerState<SongListScreen> {
+  int index = 1;
+  List data = [];
+
+  @override
+  void initState() {
+    load();
+    super.initState();
+  }
+
+  load() async {
+    data = await Spotify.getAlbumTracks(
+      widget.token,
+      widget.id,
+    );
+
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -73,31 +91,17 @@ class _SongListScreenState extends ConsumerState<SongListScreen> {
               const SizedBox(
                 height: 30,
               ),
-              FutureBuilder(
-                future: Spotify.getAlbumTracks(
-                  widget.token,
-                  widget.id,
+              if (data.isEmpty) ...[
+                Center(
+                  child: CircularProgressIndicator(),
                 ),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }
+              ] else ...[
+                Column(
+                  children: List.generate(
+                    data.length,
+                    (index) {
+                      var track = data[index];
 
-                  if (snapshot.hasError) {
-                    return Text(
-                      snapshot.error.toString(),
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    );
-                  }
-
-                  var data = snapshot.data!;
-
-                  return Column(
-                    children: data.map((track) {
                       return GestureDetector(
                         onTap: () async {
                           try {
@@ -126,7 +130,6 @@ class _SongListScreenState extends ConsumerState<SongListScreen> {
                             ref.read(controller)?.forward();
                             ref.read(isExpanded.notifier).state = true;
                           } catch (e) {
-                            print(e);
                             context.loaderOverlay.hide();
                             Fluttertoast.showToast(
                               msg: 'An error occurred. Try again later',
@@ -134,6 +137,10 @@ class _SongListScreenState extends ConsumerState<SongListScreen> {
                           }
                         },
                         child: ListTile(
+                          leading: Text(
+                            '${index + 1}',
+                            style: smallBold(primaryWhite),
+                          ),
                           // leading: ClipRRect(
                           //   borderRadius: BorderRadius.circular(8),
                           //   child: CachedNetworkImage(
@@ -159,10 +166,10 @@ class _SongListScreenState extends ConsumerState<SongListScreen> {
                           ),
                         ),
                       );
-                    }).toList(),
-                  );
-                },
-              ),
+                    },
+                  ),
+                ),
+              ],
               const SizedBox(
                 height: 200,
               ),

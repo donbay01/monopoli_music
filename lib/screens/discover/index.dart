@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:monopoli/providers/spotify.dart';
 import 'package:monopoli/screens/albums/index.dart';
 import 'package:monopoli/screens/discover/album.dart';
+import 'package:monopoli/screens/discover/all_album.dart';
 import 'package:monopoli/screens/discover/hot_releases.dart';
 import 'package:monopoli/screens/discover/top_music.dart';
 import 'package:monopoli/screens/player/music_playing.dart';
@@ -12,6 +13,7 @@ import 'package:monopoli/theme/colors.dart';
 import 'package:monopoli/theme/text_style.dart';
 import 'package:monopoli/widgets/sheet/player.dart';
 import 'package:monopoli/widgets/user/avatar.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:zap_sizer/zap_sizer.dart';
 import '../../../providers/user_provider.dart';
@@ -156,11 +158,17 @@ class _DiscoverState extends ConsumerState<Discover>
                     style: mediumSemiBold(primaryWhite),
                   ),
                   TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        'View all',
-                        style: mediumBold(purple),
-                      ))
+                    onPressed: () => pushScreen(
+                      context,
+                      screen: AllAlbum(
+                        token: t!,
+                      ),
+                    ),
+                    child: Text(
+                      'View all',
+                      style: mediumBold(purple),
+                    ),
+                  ),
                 ],
               ),
               if (t != null) ...[

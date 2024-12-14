@@ -105,11 +105,18 @@ class Spotify {
     return t;
   }
 
-  static Future<Albums> getTrendingAlbums(
-    String accessToken,
-  ) async {
+  static Future<Albums> getTrendingAlbums({
+    required String accessToken,
+    int limit = 25,
+    int offset = 0,
+  }) async {
+    var uri = 'https://api.spotify.com/v1/browse/new-releases';
+    if (offset > 0) {
+      uri = '$uri?limit=$limit&offset=$offset';
+    }
+
     final url = Uri.parse(
-      'https://api.spotify.com/v1/browse/new-releases',
+      uri,
     );
     final headers = {
       'Authorization': 'Bearer $accessToken',
