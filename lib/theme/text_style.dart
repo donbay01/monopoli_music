@@ -22,7 +22,7 @@ TextStyle tiny(Color colors) => TextStyle(
   fontSize: Tiny,
   fontFamily: font,
   height: 1.5,
-  fontWeight: FontWeight.w600,
+  fontWeight: FontWeight.w400,
 );
 
 TextStyle small() => TextStyle(

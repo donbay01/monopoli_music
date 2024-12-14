@@ -62,27 +62,16 @@ class _DiscoverState extends ConsumerState<Discover>
                     ),
                     colors: [purple, primaryWhite],
                   ),
-                  GestureDetector(
-                    onTap: () => showModalBottomSheet(
-                      context: context,
-                      useRootNavigator: true,
-                      builder: (context) => ProfileSheet(
-                        user: user,
-                      ),
+                  if (user != null) ...[
+                    UserAvatar(
+                      user: user,
                     ),
-                    child: const CircleAvatar(
-                      child: Icon(
-                        FontAwesomeIcons.user,
-                        size: 20,
-                        color: primaryBlack,
-                      ),
-                    ),
-                  )
+                  ]
                 ],
               ),
               // const FeaturedSongs(),
               SizedBox(
-                height: 40,
+                height: 30,
               ),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -100,15 +89,10 @@ class _DiscoverState extends ConsumerState<Discover>
                       height: height * 0.5,
                       width: width * 0.8,
                       decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Color(0xFF475B47),
-                            Color(0xff494F51),
-                          ],
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                        ),
-                        borderRadius: BorderRadius.circular(20),
+                        image: DecorationImage(
+                            image: AssetImage('assets/hotRelease.png'),
+                            fit: BoxFit.cover),
+                        borderRadius: BorderRadius.circular(10),
                       ),
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
@@ -172,12 +156,11 @@ class _DiscoverState extends ConsumerState<Discover>
                     style: mediumSemiBold(primaryWhite),
                   ),
                   TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      'View all',
-                      style: medium(),
-                    ),
-                  ),
+                      onPressed: () {},
+                      child: Text(
+                        'View all',
+                        style: mediumBold(purple),
+                      ))
                 ],
               ),
               if (t != null) ...[

@@ -58,7 +58,7 @@ class Albums extends StatelessWidget {
             childAspectRatio: 0.8,
           ),
           // itemCount: snap.items.length,
-          itemCount: 6,
+          itemCount: 4,
           itemBuilder: (context, index) {
             final album = snap.items[index];
 

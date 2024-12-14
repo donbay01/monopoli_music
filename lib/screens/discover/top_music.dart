@@ -46,7 +46,7 @@ class TopMusic extends ConsumerWidget {
         decoration: BoxDecoration(
           image: DecorationImage(
               image: AssetImage('assets/topMusic.png'), fit: BoxFit.cover),
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(10),
         ),
         child: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -77,9 +77,6 @@ class TopMusic extends ConsumerWidget {
                     ),
                   ),
                 ],
-              ),
-              SizedBox(
-                height: 10,
               ),
               FutureBuilder(
                 future: Spotify.getMultipleTracks(token, trackIds),
