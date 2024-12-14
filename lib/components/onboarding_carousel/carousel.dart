@@ -25,10 +25,12 @@ class _CarouselState extends State<Carousel> {
         slideIndicator: CircularSlideIndicator(),
         viewportFraction: 1,
         autoPlay: true,
+        enableInfiniteScroll: true
       ),
       items: const [
         Slider1(),
         Slider2(),
+        Slider3(),
       ],
     );
   }
