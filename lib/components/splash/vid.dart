@@ -4,6 +4,8 @@ import 'package:monopoli/providers/player.dart';
 import 'package:monopoli/screens/splashscreen/splash_screen.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../screens/onboard/onboard.dart';
+
 class SplashVideo extends StatefulWidget {
   const SplashVideo({super.key});
 
@@ -34,7 +36,7 @@ class _SplashVideoState extends State<SplashVideo> {
         !_controller.value.isPlaying) {
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
-          builder: (_) => const SplashScreen(),
+          builder: (_) => const OnboardingCarousel(),
         ),
         (route) => false,
       );

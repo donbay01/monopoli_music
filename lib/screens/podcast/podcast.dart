@@ -58,7 +58,7 @@ class PodcastPage extends StatelessWidget {
               child: Row(
                 children: [
                   Container(
-                    height: height * 0.3,
+                    height: height * 0.35,
                     width: width * 0.45,
                     decoration: BoxDecoration(
                       color: Color(0xFF524127),
@@ -72,7 +72,7 @@ class PodcastPage extends StatelessWidget {
                         children: [
                           Center(
                             child: Container(
-                                height: height * 0.14,
+                                height: height * 0.15,
                                 width: width * 0.35,
                                 child: Image(image: AssetImage('assets/soul.png'),fit: BoxFit.contain,)),
                           ),
@@ -103,7 +103,7 @@ class PodcastPage extends StatelessWidget {
                   ),
                   SizedBox(width: 20,),
                   Container(
-                    height: height * 0.3,
+                    height: height * 0.35,
                     width: width * 0.45,
                     decoration: BoxDecoration(
                         color: Color(0xFF5F172B),
@@ -117,7 +117,7 @@ class PodcastPage extends StatelessWidget {
                         children: [
                           Center(
                             child: Container(
-                                height: height * 0.14,
+                                height: height * 0.15,
                                 width: width * 0.35,
                                 child: Image(image: AssetImage('assets/randb.png'),fit: BoxFit.contain,)),
                           ),
@@ -167,7 +167,7 @@ class PodcastPage extends StatelessWidget {
               child: Row(
                 children: [
                   Container(
-                    height: height * 0.3,
+                    height: height * 0.35,
                     width: width * 0.45,
                     decoration: BoxDecoration(
                         color: Colors.grey,
@@ -181,7 +181,7 @@ class PodcastPage extends StatelessWidget {
                         children: [
                           Center(
                             child: Container(
-                                height: height * 0.14,
+                                height: height * 0.15,
                                 width: width * 0.35,
                                 child: Image(image: AssetImage('assets/hiphop.png'),fit: BoxFit.contain,)),
                           ),
@@ -212,7 +212,7 @@ class PodcastPage extends StatelessWidget {
                   ),
                   SizedBox(width: 20,),
                   Container(
-                    height: height * 0.3,
+                    height: height * 0.35,
                     width: width * 0.45,
                     decoration: BoxDecoration(
                         color: Colors.yellow,
@@ -226,7 +226,7 @@ class PodcastPage extends StatelessWidget {
                         children: [
                           Center(
                             child: Container(
-                                height: height * 0.14,
+                                height: height * 0.15,
                                 width: width * 0.35,
                                 child: Image(image: AssetImage('assets/jazz.png'),fit: BoxFit.contain,)),
                           ),
@@ -255,12 +255,11 @@ class PodcastPage extends StatelessWidget {
                       ),
                     ),
                   ),
-
                 ],
               ),
             ),
             SizedBox(
-              height: 100,
+              height: 150,
             ),
           ],
         ),
