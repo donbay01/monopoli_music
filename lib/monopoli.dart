@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:loader_overlay/loader_overlay.dart';
+import 'package:monopoli/components/splash/vid.dart';
 import 'package:monopoli/models/user/user_model.dart';
 import 'package:monopoli/providers/player.dart';
 import 'package:monopoli/providers/spotify.dart';
@@ -71,7 +72,7 @@ class _MonopoliState extends ConsumerState<Monopoli> {
             ),
             home: Stack(
               children: [
-                user == null ? const SplashScreen() : const Dashboard(),
+                user == null ? const SplashVideo() : const Dashboard(),
                 const AuthPlayer(),
               ],
             ),
