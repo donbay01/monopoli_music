@@ -159,6 +159,109 @@ class PodcastPage extends StatelessWidget {
                 Icon(Icons.arrow_forward_ios,size: 16,color: purple,)
               ],
             ),
+            SizedBox(
+              height: 20,
+            ),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  Container(
+                    height: height * 0.3,
+                    width: width * 0.45,
+                    decoration: BoxDecoration(
+                        color: Colors.grey,
+                        borderRadius: BorderRadius.circular(20)
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Center(
+                            child: Container(
+                                height: height * 0.14,
+                                width: width * 0.35,
+                                child: Image(image: AssetImage('assets/hiphop.png'),fit: BoxFit.contain,)),
+                          ),
+                          SizedBox(height: 5,),
+                          Text('Recap of the First Four',style: smallBold(primaryWhite),),
+                          SizedBox(height: 5,),
+                          Text('In this episode, we revisited the first four topics to refresh your memory on what we...',style: tiny(primaryWhite),),
+                          SizedBox(height: 10,),
+                          Container(
+                            height: height * 0.03,
+                            width: width * 0.15,
+                            decoration: BoxDecoration(
+                                color: primaryWhite,
+                                borderRadius: BorderRadius.circular(20)
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.play_arrow,color: primaryBlack,size: 18,),
+                                SizedBox(width: 2,),
+                                Text('46m',style: tiny(primaryBlack),)
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  SizedBox(width: 20,),
+                  Container(
+                    height: height * 0.3,
+                    width: width * 0.45,
+                    decoration: BoxDecoration(
+                        color: Colors.yellow,
+                        borderRadius: BorderRadius.circular(20)
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Center(
+                            child: Container(
+                                height: height * 0.14,
+                                width: width * 0.35,
+                                child: Image(image: AssetImage('assets/jazz.png'),fit: BoxFit.contain,)),
+                          ),
+                          SizedBox(height: 5,),
+                          Text('Recap of the First Four',style: smallBold(primaryBlack),),
+                          SizedBox(height: 5,),
+                          Text('In this episode, we revisited the first four topics to refresh your memory on what we...',style: tiny(primaryBlack),),
+                          SizedBox(height: 10,),
+                          Container(
+                            height: height * 0.03,
+                            width: width * 0.15,
+                            decoration: BoxDecoration(
+                                color: primaryWhite,
+                                borderRadius: BorderRadius.circular(20)
+                            ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.play_arrow,color: primaryBlack,size: 18,),
+                                SizedBox(width: 2,),
+                                Text('46m',style: tiny(primaryBlack),)
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 100,
+            ),
           ],
         ),
       ),
