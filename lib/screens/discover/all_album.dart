@@ -43,6 +43,8 @@ class _AllAlbumState extends State<AllAlbum> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: scaffoldBlack,
       appBar: AppBar(
@@ -84,9 +86,13 @@ class _AllAlbumState extends State<AllAlbum> {
                   SizedBox(
                     width: 10,
                   ),
-                  Text(
-                    item.name ?? 'N/A',
-                    style: mediumText(primaryWhite),
+                  SizedBox(
+                    width: size.width * 0.63,
+                    child: Text(
+                      item.name ?? 'N/A',
+                      style: mediumText(primaryWhite),
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ],
               ),
