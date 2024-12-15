@@ -1,8 +1,11 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:monopoli/providers/player.dart';
 import 'package:monopoli/screens/auth/login.dart';
+import 'package:monopoli/widgets/player/auth.dart';
 import 'package:zap_sizer/zap_sizer.dart';
 import 'package:monopoli/monopoli.dart';
 import 'package:monopoli/screens/onboard/getStarted.dart';
@@ -10,6 +13,7 @@ import 'package:monopoli/theme/text_style.dart';
 import 'package:zap_sizer/main.dart';
 import '../../../theme/colors.dart';
 import '../../components/onboarding_carousel/carousel.dart';
+import '../../services/config.dart';
 
 class OnboardingCarousel extends ConsumerStatefulWidget {
   const OnboardingCarousel({super.key});
@@ -19,6 +23,16 @@ class OnboardingCarousel extends ConsumerStatefulWidget {
 }
 
 class _OnboardingCarouselState extends ConsumerState<OnboardingCarousel> {
+  play() async {
+    await ref.read(player).play();
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const Login(),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,15 +76,7 @@ class _OnboardingCarouselState extends ConsumerState<OnboardingCarousel> {
                 from: 100.h,
                 delay: const Duration(milliseconds: 300),
                 child: ElevatedButton(
-                  onPressed: () {
-                    ref.read(player).play();
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const Login(),
-                      ),
-                    );
-                  },
+                  onPressed: play,
                   child: Text(
                     'Get Started',
                     style: mediumBold(primaryBlack),

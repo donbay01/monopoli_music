@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_infinite_pagination/easy_infinite_pagination.dart';
 import 'package:flutter/material.dart';
 import 'package:monopoli/models/audio/album.dart';
@@ -27,8 +28,6 @@ class _AllAlbumState extends State<AllAlbum> {
       _isLoading = true;
     });
 
-    print(offset);
-
     var albums = await Spotify.getTrendingAlbums(
       accessToken: widget.token,
       offset: offset,
@@ -48,17 +47,51 @@ class _AllAlbumState extends State<AllAlbum> {
       backgroundColor: scaffoldBlack,
       appBar: AppBar(
         backgroundColor: scaffoldBlack,
-        title: Text("Trending Album",style: mediumSemiBold(primaryWhite),),
-        leading: IconButton(onPressed: (){
-          Navigator.pop(context);
-        }, icon: Icon(Icons.arrow_back,color: primaryWhite,)),
+        title: Text(
+          "Trending Album",
+          style: mediumSemiBold(primaryWhite),
+        ),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              color: primaryWhite,
+            )),
       ),
       body: InfiniteListView(
         delegate: PaginationDelegate(
           itemCount: _items.length,
-          itemBuilder: (_, index) => ListTile(
-            title: Text(_items[index].name ?? 'N/A',style: mediumText(primaryWhite),),
-          ),
+          itemBuilder: (_, index) {
+            var item = _items[index];
+
+            return ListTile(
+              leading: Text(
+                '${index + 1}',
+                style: mediumText(primaryWhite),
+              ),
+              title: Row(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(46),
+                    child: CachedNetworkImage(
+                      imageUrl: item.cover?.first.url ?? item.images!.first.url,
+                      width: 46,
+                      height: 46,
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    item.name ?? 'N/A',
+                    style: mediumText(primaryWhite),
+                  ),
+                ],
+              ),
+            );
+          },
           isLoading: _isLoading,
           onFetchData: _fetchData,
         ),

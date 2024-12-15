@@ -4,8 +4,6 @@ import 'package:monopoli/providers/player.dart';
 import 'package:monopoli/screens/splashscreen/splash_screen.dart';
 import 'package:video_player/video_player.dart';
 
-import '../../screens/onboard/onboard.dart';
-
 class SplashVideo extends StatefulWidget {
   const SplashVideo({super.key});
 
@@ -34,18 +32,17 @@ class _SplashVideoState extends State<SplashVideo> {
   void _checkVideoProgress() {
     if (_controller.value.position >= _controller.value.duration &&
         !_controller.value.isPlaying) {
-      Navigator.of(context).pushAndRemoveUntil(
+      Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (_) => const OnboardingCarousel(),
+          builder: (_) => const SplashScreen(),
         ),
-        (route) => false,
       );
     }
   }
 
   @override
   void dispose() {
-    _controller.removeListener(_checkVideoProgress);
+    _controller.removeListener(() {});
     _controller.dispose();
     super.dispose();
   }
