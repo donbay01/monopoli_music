@@ -24,25 +24,20 @@ class _SplashVideoState extends State<SplashVideo> {
         await Future.delayed(const Duration(milliseconds: 1200));
         await _controller.play();
         setState(() {});
-      })
-      ..addListener(_checkVideoProgress)
-      ..setLooping(false);
-  }
 
-  void _checkVideoProgress() {
-    if (_controller.value.position >= _controller.value.duration &&
-        !_controller.value.isPlaying) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (_) => const SplashScreen(),
-        ),
-      );
-    }
+        await Future.delayed(const Duration(milliseconds: 3500), () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (_) => const SplashScreen(),
+            ),
+          );
+        });
+      })
+      ..setLooping(false);
   }
 
   @override
   void dispose() {
-    _controller.removeListener(() {});
     _controller.dispose();
     super.dispose();
   }

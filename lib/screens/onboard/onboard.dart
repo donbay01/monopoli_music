@@ -24,7 +24,7 @@ class OnboardingCarousel extends ConsumerStatefulWidget {
 
 class _OnboardingCarouselState extends ConsumerState<OnboardingCarousel> {
   play() async {
-    await ref.read(player).play();
+    ref.read(player).play();
     Navigator.push(
       context,
       MaterialPageRoute(
@@ -76,7 +76,7 @@ class _OnboardingCarouselState extends ConsumerState<OnboardingCarousel> {
                 from: 100.h,
                 delay: const Duration(milliseconds: 300),
                 child: ElevatedButton(
-                  onPressed: play,
+                  onPressed: () => play(),
                   child: Text(
                     'Get Started',
                     style: mediumBold(primaryBlack),
