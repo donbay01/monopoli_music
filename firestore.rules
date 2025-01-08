@@ -16,6 +16,16 @@ service cloud.firestore {
       allow list, read; 
       allow update: if isAssigned(userId);
 
+      match /albums/{albumId} {
+        allow write: if isAssigned(userId);
+        allow read: if isSignedIn();
+      }
+
+      match /songs/{songId} {
+        allow write: if isAssigned(userId);
+        allow read: if isSignedIn();
+      }
+
       match /tracks/{trackId} {
         allow write, read: if isAssigned(userId);
       }

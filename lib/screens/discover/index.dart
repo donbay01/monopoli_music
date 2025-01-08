@@ -8,6 +8,7 @@ import 'package:monopoli/screens/discover/all_album.dart';
 import 'package:monopoli/screens/discover/hot_releases.dart';
 import 'package:monopoli/screens/discover/top_music.dart';
 import 'package:monopoli/screens/player/music_playing.dart';
+import 'package:monopoli/screens/song/index.dart';
 import 'package:monopoli/services/spotify.dart';
 import 'package:monopoli/theme/colors.dart';
 import 'package:monopoli/theme/text_style.dart';
@@ -65,8 +66,23 @@ class _DiscoverState extends ConsumerState<Discover>
                     colors: [purple, primaryWhite],
                   ),
                   if (user != null) ...[
-                    UserAvatar(
-                      user: user,
+                    Row(
+                      children: [
+                        if (user.type == 'Artist') ...[
+                          TextButton(
+                            onPressed: () => showModalBottomSheet(
+                              context: context,
+                              useRootNavigator: true,
+                              showDragHandle: true,
+                              builder: (ctx) => const SongUpload(),
+                            ),
+                            child: const Text('Upload music'),
+                          ),
+                        ],
+                        UserAvatar(
+                          user: user,
+                        ),
+                      ],
                     ),
                   ]
                 ],

@@ -1,0 +1,35 @@
+rules_version = '2';
+
+// Craft rules based on data in your Firestore database
+// allow write: if firestore.get(
+//    /databases/(default)/documents/users/$(request.auth.uid)).data.isAdmin;
+service firebase.storage {
+  match /b/{bucket}/o {
+    function isSignedIn() {
+      return request.auth.uid != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && firestore.exists(/databases/(default)/documents/admins/$(request.auth.uid));
+    }
+
+    function isUserKeyRole(uid, key, value) {
+      return isSignedIn() && firestore.get(/databases/(default)/documents/users/$(uid))[key] == value;
+    }
+
+    match /users/{userId} {
+      allow write: if request.auth.uid == userId;
+      allow read: if isSignedIn();
+
+      match /albums/{albumId} {
+        allow write: if request.auth.uid == userId;
+        allow read: if isSignedIn();
+      }
+
+      match /songs/{songId} {
+        allow write: if request.auth.uid == userId;
+        allow read: if isSignedIn();
+      }
+    }
+  }
+}

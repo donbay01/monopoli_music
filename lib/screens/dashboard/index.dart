@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:monopoli/constants/tabs.dart';
 import 'package:monopoli/providers/nav.dart';
 import 'package:monopoli/providers/player.dart';
+import 'package:monopoli/providers/user_provider.dart';
 import 'package:monopoli/screens/discover/index.dart';
 import 'package:monopoli/screens/library/myLibrary.dart';
 import 'package:monopoli/screens/podcast/podcast.dart';
@@ -29,71 +31,26 @@ class _DashboardState extends ConsumerState<Dashboard> {
 
     return Stack(
       children: [
-        PersistentTabView(
-          // navBarHeight: showNav ? 65 : 0,
-          backgroundColor: primaryBlack,
-          // hideNavigationBar: !showNav,
-          tabs: [
-            PersistentTabConfig(
-              screen: Discover(),
-              item: ItemConfig(
-                icon: const Icon(
-                  Icons.broadcast_on_personal_rounded,
-                  size: 25,
-                ),
-                title: "Discover",
-                textStyle: small(),
-                activeForegroundColor: purple,
-              ),
+        Consumer(builder: (context, ref, _) {
+          var user = ref.watch(userProvider);
+
+          return PersistentTabView(
+            // navBarHeight: showNav ? 65 : 0,
+            backgroundColor: primaryBlack,
+            // hideNavigationBar: !showNav,
+            tabs: user?.type == 'Artist' ? artistTab : streamerTab,
+            margin: EdgeInsets.zero,
+            avoidBottomPadding: true,
+            resizeToAvoidBottomInset: false,
+            // floatingActionButtonLocation:
+            //     FloatingActionButtonLocation.centerFloat,
+            // floatingActionButton: const MusicPlayerSheet(),
+            navBarBuilder: (navBarConfig) => Style7BottomNavBar(
+              navBarConfig: navBarConfig,
+              navBarDecoration: const NavBarDecoration(color: primaryBlack),
             ),
-            PersistentTabConfig(
-              screen: SearchScreen(),
-              item: ItemConfig(
-                icon: const Icon(
-                  FontAwesomeIcons.search,
-                  size: 20,
-                ),
-                title: "Search",
-                textStyle: small(),
-                activeForegroundColor: purple,
-              ),
-            ),
-            PersistentTabConfig(
-              screen: PodcastPage(),
-              item: ItemConfig(
-                icon: const Icon(
-                  FontAwesomeIcons.podcast,
-                  size: 20,
-                ),
-                title: "Podcast",
-                textStyle: small(),
-                activeForegroundColor: purple,
-              ),
-            ),
-            PersistentTabConfig(
-              screen: const Mylibrary(),
-              item: ItemConfig(
-                icon: const Icon(
-                  Icons.library_music,
-                  size: 20,
-                ),
-                title: "Library",
-                textStyle: small(),
-                activeForegroundColor: purple,
-              ),
-            ),
-          ],
-          margin: EdgeInsets.zero,
-          avoidBottomPadding: true,
-          resizeToAvoidBottomInset: false,
-          // floatingActionButtonLocation:
-          //     FloatingActionButtonLocation.centerFloat,
-          // floatingActionButton: const MusicPlayerSheet(),
-          navBarBuilder: (navBarConfig) => Style7BottomNavBar(
-            navBarConfig: navBarConfig,
-            navBarDecoration: const NavBarDecoration(color: primaryBlack),
-          ),
-        ),
+          );
+        }),
         Positioned(
           left: 0,
           right: 0,

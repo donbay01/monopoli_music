@@ -27,6 +27,8 @@ class _RegisterState extends State<Register> {
   TextEditingController phoneController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  String? type;
+
   bool termsAndCondition = false;
   var key = GlobalKey<FormState>();
 
@@ -82,6 +84,7 @@ class _RegisterState extends State<Register> {
         user: cred.user!,
         phone: phoneController.text,
         username: userNameController.text,
+        type: type,
       );
 
       context.loaderOverlay.hide();
@@ -112,8 +115,9 @@ class _RegisterState extends State<Register> {
             height: 100.h,
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage('assets/onboarding.png'),
-                  fit: BoxFit.cover),
+                image: AssetImage('assets/onboarding.png'),
+                fit: BoxFit.cover,
+              ),
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -203,6 +207,28 @@ class _RegisterState extends State<Register> {
                     const SizedBox(
                       height: 20,
                     ),
+                    DropdownButton(
+                      value: type,
+                      style: smallText(Colors.white),
+                      hint: Text(
+                        'Select User type',
+                        style: smallText(primaryWhite),
+                      ),
+                      items: ['Streamer', 'Artist']
+                          .map(
+                            (a) => DropdownMenuItem(
+                              value: a,
+                              child: Text(
+                                a,
+                                style: smallText(Colors.black),
+                              ),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (v) => setState(() {
+                        type = v;
+                      }),
+                    ),
                     CheckboxListTile(
                       activeColor: purple,
                       checkColor: primaryBlack,
@@ -210,9 +236,10 @@ class _RegisterState extends State<Register> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       title: Wrap(
+                        spacing: 3,
                         children: [
                           Text(
-                            'By continuing you agree to Yeba',
+                            "By continuing you agree to Desthim's",
                             style: smallText(primaryWhite),
                           ),
                           GestureDetector(
@@ -223,7 +250,7 @@ class _RegisterState extends State<Register> {
                             ),
                           ),
                           Text(
-                            ' and ',
+                            'and',
                             style: smallText(primaryWhite),
                           ),
                           GestureDetector(

@@ -109,12 +109,14 @@ class AuthService {
     required User user,
     String? username,
     String? phone,
+    String? type,
   }) {
     return db.collection('users').doc(user.uid).set({
       'id': user.uid,
       'username': username,
       'email': user.email,
       'phone': phone,
+      'type': type,
     });
   }
 

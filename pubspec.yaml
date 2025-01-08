@@ -47,6 +47,7 @@ dependencies:
   firebase_auth: ^5.3.1
   cloud_firestore: ^5.4.4
   google_sign_in: ^6.2.1
+  firebase_storage: ^12.4.0
   flutter_facebook_auth: ^7.1.1
   twitter_login: ^4.4.2
   lottie: ^3.1.2
@@ -63,6 +64,8 @@ dependencies:
   json_annotation: ^4.9.0
   debounce_textfield: ^0.0.1
   flutter_carousel_widget: ^3.1.0
+
+  file_picker: ^8.1.7
 
   easy_infinite_pagination: ^0.0.6
   video_player: ^2.9.2

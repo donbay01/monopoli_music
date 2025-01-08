@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:monopoli/screens/library/albums.dart';
 import 'package:monopoli/screens/library/downloaded.dart';
 import 'package:monopoli/screens/library/liked.dart';
 import 'package:monopoli/screens/library/shared.dart';
+import 'package:monopoli/screens/library/song.dart';
+import 'package:monopoli/screens/song/index.dart';
 import 'package:monopoli/theme/colors.dart';
+import 'package:monopoli/widgets/sheet/add_album.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:zap_sizer/zap_sizer.dart';
 import './playlist.dart';
@@ -22,12 +26,19 @@ class Mylibrary extends ConsumerStatefulWidget {
 
 class _MylibraryState extends ConsumerState<Mylibrary> {
   String selectedText = 'Playlist';
-  final List<String> items = [
-    'Playlist',
-    'Liked Songs',
-    'Downloaded',
-    'Shared'
-  ];
+  List<String> items = ['Playlist', 'Liked Songs', 'Downloaded', 'Shared'];
+
+  @override
+  void initState() {
+    Future.delayed(const Duration(seconds: 2), () {
+      var user = ref.read(userProvider);
+      if (user?.type == 'Artist') {
+        items.addAll(['Albums', 'Songs']);
+        setState(() {});
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +104,10 @@ class _MylibraryState extends ConsumerState<Mylibrary> {
                 },
               ),
             ),
-            Text(selectedText,style: mediumSemiBold(primaryWhite),),
+            Text(
+              selectedText,
+              style: mediumSemiBold(primaryWhite),
+            ),
             const SizedBox(
               height: 50,
             ),
@@ -108,6 +122,21 @@ class _MylibraryState extends ConsumerState<Mylibrary> {
             ],
             if (selectedText == 'Shared') ...[
               const Shared(),
+            ],
+            if (selectedText == 'Albums') ...[
+              TextButton(
+                onPressed: () => showModalBottomSheet(
+                  context: context,
+                  builder: (context) => const AddAlbum(),
+                  useRootNavigator: true,
+                  showDragHandle: true,
+                ),
+                child: Text('Add Album'),
+              ),
+              const MyAlbums(),
+            ],
+            if (selectedText == 'Songs') ...[
+              const MySongs(),
             ],
           ],
         ),

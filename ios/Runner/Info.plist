@@ -47,10 +47,17 @@
 		<string>Need microphone access for uploading audio</string>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true/>
+		<key>NSAppleMusicUsageDescription</key>
+		<string>Desthim wants to access your music to select a song</string>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>Desthim wants to select an image from your photo library</string>
+		<key>LSSupportsOpeningDocumentsInPlace</key>
+		<true/>
 		<key>UIBackgroundModes</key>
 		<array>
 			<string>audio</string>
 			<string>processing</string>
+			<string>fetch</string>
 			<string>remote-notification</string>
 		</array>
 		<key>UILaunchStoryboardName</key>

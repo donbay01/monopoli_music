@@ -1,7 +1,7 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=/Users/donbay/flutter"
-export "FLUTTER_APPLICATION_PATH=/Users/donbay/StudioProjects/monopoli_music"
+export "FLUTTER_ROOT=/Users/samson/flutter"
+export "FLUTTER_APPLICATION_PATH=/Users/samson/Desktop/monopoli_music"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_BUILD_DIR=build"
 export "FLUTTER_BUILD_NAME=1.0.0"

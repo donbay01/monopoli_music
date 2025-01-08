@@ -3,6 +3,7 @@ class UserModel {
   final String id;
   final String? username;
   final List<String> liked;
+  final String type;
 
   Map<String, dynamic> toJson() {
     return {
@@ -10,6 +11,7 @@ class UserModel {
       'uid': id,
       'displayName': username,
       'liked': [],
+      'type': type,
     };
   }
 
@@ -17,6 +19,7 @@ class UserModel {
       : email = json['email'],
         id = json['id'],
         liked = json['liked'].cast<String>(),
+        type = json['type'] ?? 'Streamer',
         username = json['username'];
 
   UserModel({
@@ -24,5 +27,6 @@ class UserModel {
     required this.id,
     required this.username,
     this.liked = const [],
+    this.type = 'Streamer',
   });
 }
