@@ -68,17 +68,6 @@ class _DiscoverState extends ConsumerState<Discover>
                   if (user != null) ...[
                     Row(
                       children: [
-                        if (user.type == 'Artist') ...[
-                          TextButton(
-                            onPressed: () => showModalBottomSheet(
-                              context: context,
-                              useRootNavigator: true,
-                              showDragHandle: true,
-                              builder: (ctx) => const SongUpload(),
-                            ),
-                            child: const Text('Upload music'),
-                          ),
-                        ],
                         UserAvatar(
                           user: user,
                         ),

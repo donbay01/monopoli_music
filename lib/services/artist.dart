@@ -31,6 +31,13 @@ class ArtistService {
       .collection("songs")
       .orderBy("createdAt", descending: true);
 
+  static getMySongsInAlbum(String albumId) => db
+      .collection("users")
+      .doc(user?.uid)
+      .collection("songs")
+      .where("albumId", isEqualTo: albumId)
+      .orderBy("createdAt", descending: true);
+
   static Future createSong({
     required String name,
     String? albumId,
