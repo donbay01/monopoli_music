@@ -31,26 +31,32 @@ class _DashboardState extends ConsumerState<Dashboard> {
 
     return Stack(
       children: [
-        Consumer(builder: (context, ref, _) {
-          var user = ref.watch(userProvider);
+        Consumer(
+          builder: (context, ref, _) {
+            var user = ref.watch(userProvider);
 
-          return PersistentTabView(
-            // navBarHeight: showNav ? 65 : 0,
-            backgroundColor: primaryBlack,
-            // hideNavigationBar: !showNav,
-            tabs: user?.type == 'Artist' ? artistTab : streamerTab,
-            margin: EdgeInsets.zero,
-            avoidBottomPadding: true,
-            resizeToAvoidBottomInset: false,
-            // floatingActionButtonLocation:
-            //     FloatingActionButtonLocation.centerFloat,
-            // floatingActionButton: const MusicPlayerSheet(),
-            navBarBuilder: (navBarConfig) => Style7BottomNavBar(
-              navBarConfig: navBarConfig,
-              navBarDecoration: const NavBarDecoration(color: primaryBlack),
-            ),
-          );
-        }),
+            if (user == null) {
+              return const SizedBox.shrink();
+            }
+
+            return PersistentTabView(
+              // navBarHeight: showNav ? 65 : 0,
+              backgroundColor: primaryBlack,
+              // hideNavigationBar: !showNav,
+              tabs: user.type == 'Artist' ? artistTab : streamerTab,
+              margin: EdgeInsets.zero,
+              avoidBottomPadding: true,
+              resizeToAvoidBottomInset: false,
+              // floatingActionButtonLocation:
+              //     FloatingActionButtonLocation.centerFloat,
+              // floatingActionButton: const MusicPlayerSheet(),
+              navBarBuilder: (navBarConfig) => Style7BottomNavBar(
+                navBarConfig: navBarConfig,
+                navBarDecoration: const NavBarDecoration(color: primaryBlack),
+              ),
+            );
+          },
+        ),
         Positioned(
           left: 0,
           right: 0,

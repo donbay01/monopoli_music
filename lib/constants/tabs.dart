@@ -62,16 +62,16 @@ var streamerTab = [
 
 var artistTab = [
   ...streamerTab,
-  // PersistentTabConfig(
-  //   screen: Container(),
-  //   item: ItemConfig(
-  //     icon: const Icon(
-  //       Icons.music_note,
-  //       size: 20,
-  //     ),
-  //     title: "My songs",
-  //     textStyle: small(),
-  //     activeForegroundColor: purple,
-  //   ),
-  // ),
+  PersistentTabConfig(
+    screen: Container(),
+    item: ItemConfig(
+      icon: const Icon(
+        Icons.music_note,
+        size: 20,
+      ),
+      title: "My songs",
+      textStyle: small(),
+      activeForegroundColor: purple,
+    ),
+  ),
 ];
